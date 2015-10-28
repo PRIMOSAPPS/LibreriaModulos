@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BuzonCiudadanoLibreria</string>
+    <string name="title_activity_buzon_ciudadano">BuzonCiudadanoActivity</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="comentario">Comentario</string>
+</resources>

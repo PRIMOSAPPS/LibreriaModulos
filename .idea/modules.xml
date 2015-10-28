@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LibreriaModulos.iml" filepath="$PROJECT_DIR$/LibreriaModulos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buzonciudadanolibreria/buzonciudadanolibreria.iml" filepath="$PROJECT_DIR$/buzonciudadanolibreria/buzonciudadanolibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dimepoblacioneslibreria/dimepoblacioneslibreria.iml" filepath="$PROJECT_DIR$/dimepoblacioneslibreria/dimepoblacioneslibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/listadodetallelibreria/listadodetallelibreria.iml" filepath="$PROJECT_DIR$/listadodetallelibreria/listadodetallelibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapalibreria/mapalibreria.iml" filepath="$PROJECT_DIR$/mapalibreria/mapalibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parselibreria/parselibreria.iml" filepath="$PROJECT_DIR$/parselibreria/parselibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/radiolibreria/radiolibreria.iml" filepath="$PROJECT_DIR$/radiolibreria/radiolibreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utilidadeslibreria/utilidadeslibreria.iml" filepath="$PROJECT_DIR$/utilidadeslibreria/utilidadeslibreria.iml" />
+    </modules>
+  </component>
+</project>
