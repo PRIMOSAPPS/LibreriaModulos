@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+//
 //    public void verMisMapa(View view) {
 //        Intent i = new Intent(this, MapsActivity.class);
 //        startActivity(i);
