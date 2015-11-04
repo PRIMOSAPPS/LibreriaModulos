@@ -21,6 +21,14 @@
             android:name=".actividades.detalle.DetalleSitioActivity"
             android:label="@string/title_activity_detalle_sitio" >
         </activity>
+        <activity
+            android:name=".actividades.ListaNotificacionesActivity"
+            android:label="@string/title_activity_lista_notificaciones" >
+        </activity>
+        <activity
+            android:name=".actividades.detalle.DetalleNotificacionActivity"
+            android:label="@string/title_activity_detalle_notificacion" >
+        </activity>
     </application>
 
 </manifest>

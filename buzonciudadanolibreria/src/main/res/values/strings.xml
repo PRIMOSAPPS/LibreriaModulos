@@ -4,4 +4,5 @@
 
     <string name="action_settings">Settings</string>
     <string name="comentario">Comentario</string>
+    <string name="lblTelefono">Teléfono</string>
 </resources>

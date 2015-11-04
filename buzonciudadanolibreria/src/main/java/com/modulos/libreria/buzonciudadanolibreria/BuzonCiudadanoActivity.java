@@ -2,6 +2,7 @@ package com.modulos.libreria.buzonciudadanolibreria;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -10,19 +11,20 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.modulos.libreria.buzonciudadanolibreria.adaptador.GalleryPagerAdapter;
-import com.modulos.libreria.buzonciudadanolibreria.mail.AsyncTaskMailSender;
-import com.modulos.libreria.buzonciudadanolibreria.mail.GMailSender;
 import com.modulos.libreria.utilidadeslibreria.gps.Gps;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
 
@@ -254,7 +256,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
     @Override
     public void actualizacionPosicion(Location locationActual) {
-        TextView tv = (TextView) findViewById(R.id.libCiuTextDireccion);
+        TextView tv = (TextView) findViewById(R.id.libCiuTextComentario);
         if (tv != null) {
             tv.setText("Nueva localizacion: " + locationActual.getLatitude() + ", " + locationActual.getLongitude());
         }
@@ -264,12 +266,13 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
     @Override
     public void direccionFromLocation(String direccion) {
-        TextView tv = (TextView) findViewById(R.id.libCiuTextDireccion);
+        TextView tv = (TextView) findViewById(R.id.libCiuTextComentario);
         if (tv != null) {
             tv.setText(direccion);
         }
     }
 
+    /*
     public void comentar(View view) {
 //        Preference acercaDe = (Preference) findPreference(PREFERENCIA_ACERCA_DE);
 //        acercaDe.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -283,12 +286,47 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 //            }
 //        });
     }
+    */
 
     public void enviar(View view) {
         Log.d(TAG, "Se realiza el envio del correo.");
+
+        TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String mPhoneNumber = tMgr.getLine1Number();
+
+        final Dialog myDialog = new Dialog(BuzonCiudadanoActivity.this);
+        myDialog.setContentView(R.layout.mostrar_envio_correo);
+        Button btnAceptar = (Button)myDialog.findViewById(R.id.libCiuDialogBtnAceptar);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.hide();
+            }
+        });
+        Button btnCancelar = (Button)myDialog.findViewById(R.id.libCiuDialogBtnCancelar);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.hide();
+            }
+        });
+
+        myDialog.setTitle(R.string.comentario);
+//        TextView libCiuMostrarEnvioTitulo = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTitulo);
+        TextView libCiuMostrarEnvioTxtTelefono = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtTelefono);
+        libCiuMostrarEnvioTxtTelefono.setText(mPhoneNumber);
+        TextView libCiuMostrarEnvioComentario = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioComentario);
+        EditText editComentario = (EditText)findViewById(R.id.libCiuTextComentario);
+        libCiuMostrarEnvioComentario.setText(editComentario.getText());
+        myDialog.show();
+
+
+
+        /*
         GMailSender sender = new GMailSender("primos.apps@gmail.com", "cacharreando2014");
         AsyncTaskMailSender taskMAilSender = new AsyncTaskMailSender(sender);
         taskMAilSender.execute((Void) null);
+        */
 
 //        try {
 //            sender.sendMail("This is Subject",

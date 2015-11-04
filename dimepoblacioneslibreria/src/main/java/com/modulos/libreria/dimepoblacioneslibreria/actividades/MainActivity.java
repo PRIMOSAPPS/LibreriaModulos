@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
+import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
 
@@ -59,27 +60,40 @@ public class MainActivity extends AppCompatActivity {
 //        Intent i = new Intent(Intent.ACTION_VIEW, gmmIntentURi);
 //        i.setPackage(paqueteMapa);
         GoogleMaps gm = new GoogleMaps();
-        startActivity(gm.getUrlMapsApps(38.0891004, -6.2775499, 13));
+        UtilPropiedades utilProp = UtilPropiedades.getInstance();
+        String strLatitud = utilProp.getProperty(UtilPropiedades.PROP_LATITUD_PUEBLO);
+        String strLongtitud = utilProp.getProperty(UtilPropiedades.PROP_LONGITUD_PUEBLO);
+        double doubleLatitud = Double.parseDouble(strLatitud);
+        double doubleLongitud = Double.parseDouble(strLongtitud);
+        startActivity(gm.getUrlMapsApps(doubleLatitud, doubleLongitud, 13));
     }
 
-    public void verMiGoogleMapa(View view) {
-        String paqueteMapa = "com.google.android.apps.maps";
-        //Uri gmmIntentURi = Uri.parse("https://www.google.com/maps/d/edit?mid=zrLnu9NSuviA.kp0vd2lJTAJg&usp=sharing");
-        Uri gmmIntentURi = Uri.parse("geo:38.0891004,-6.2775499?z=13&mid=zrLnu9NSuviA.kp0vd2lJTAJg");
-
-        Intent i = new Intent(Intent.ACTION_VIEW, gmmIntentURi);
-        i.setPackage(paqueteMapa);
-        startActivity(i);
-    }
+//    public void verMiGoogleMapa(View view) {
+//        String paqueteMapa = "com.google.android.apps.maps";
+//        //Uri gmmIntentURi = Uri.parse("https://www.google.com/maps/d/edit?mid=zrLnu9NSuviA.kp0vd2lJTAJg&usp=sharing");
+//        Uri gmmIntentURi = Uri.parse("geo:38.0891004,-6.2775499?z=13&mid=zrLnu9NSuviA.kp0vd2lJTAJg");
+//
+//        Intent i = new Intent(Intent.ACTION_VIEW, gmmIntentURi);
+//        i.setPackage(paqueteMapa);
+//        startActivity(i);
+//    }
 
     public void iniciarRadio(View view) {
         Intent i = new Intent(this, StreamPlayerActivity.class);
+        String urlRadio = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_RADIO);
+        i.putExtra(StreamPlayerActivity.URL_RADIO, urlRadio);
         startActivity(i);
     }
 
     public void irBuzonCiudadano(View view) {
         Intent i = new Intent(this, BuzonCiudadanoActivity.class);
         i.putExtra(BuzonCiudadanoActivity.DIRECTORIO, Environment.DIRECTORY_PICTURES);
+        startActivity(i);
+    }
+
+    public void irNotificaciones(View view) {
+        Intent i = new Intent(this, ListaNotificacionesActivity.class);
+//        i.putExtra(ListaNotificacionesActivity.ID_CATEGORIA, );
         startActivity(i);
     }
 

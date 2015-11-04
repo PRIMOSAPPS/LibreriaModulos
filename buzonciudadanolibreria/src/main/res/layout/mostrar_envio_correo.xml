@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/libCiuMostrarEnvioTitulo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lblTelefono"
+        android:id="@+id/libCiuMostrarEnvioLblTelefono"
+        android:layout_below="@+id/libCiuMostrarEnvioTitulo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/libCiuMostrarEnvioTxtTelefono"
+        android:layout_below="@+id/libCiuMostrarEnvioTitulo"
+        android:layout_toRightOf="@+id/libCiuMostrarEnvioLblTelefono"
+        android:layout_toEndOf="@+id/libCiuMostrarEnvioLblTelefono"
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/libCiuMostrarEnvioComentario"
+        android:layout_below="@+id/libCiuMostrarEnvioLblTelefono"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/libCiuDialogBtnAceptar" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:id="@+id/libCiuDialogBtnAceptar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="aceptar" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/libCiuDialogBtnCancelar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/libCiuMostrarEnvioTxtTelefono"
+        android:layout_alignStart="@+id/libCiuMostrarEnvioTxtTelefono"
+        android:onClick="cancelar" />
+
+</RelativeLayout>

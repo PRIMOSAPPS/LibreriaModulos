@@ -29,9 +29,9 @@ public class ListaSitiosActivity extends AppCompatActivity {
         dataSource.open();
 
         categoriaSeleccionada = (String) getIntent().getExtras().get("categoria");
-        String favoritos = (String) getIntent().getExtras().get("favoritos");
+//        String favoritos = (String) getIntent().getExtras().get("favoritos");
 
-        String strParaTitulo = categoriaSeleccionada;
+//        String strParaTitulo = categoriaSeleccionada;
         // Se asigna el titulo del action bar
 //        setTitulo(strParaTitulo);
 

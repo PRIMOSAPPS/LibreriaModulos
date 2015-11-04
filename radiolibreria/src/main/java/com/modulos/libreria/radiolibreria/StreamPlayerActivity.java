@@ -15,19 +15,17 @@ import android.widget.ToggleButton;
 
 import java.io.IOException;
 
-/**
- * TODO Recibir como parametro la URL de la radio.
- * TODO MAndar a strings.xml los textos.
- */
 
 public class StreamPlayerActivity extends AppCompatActivity {
     private final static String TAG = "StreamPlayerActivity";
     //private final static String STR_URL = "http://94.75.206.136/start/radiomonesterio/";//"http://94.75.206.136:8040/";
     private final static String STR_URL = "http://94.75.206.136:8040";
+    public final static String URL_RADIO = "urlRadio";
     private final static float MAX_VOLUMEN = 1.0f;
     private final static float MIN_VOLUMEN = 0.0f;
     private final static float DEFAULT_VOLUMEN = 0.5f;
     private final static float INCREMENTO_VOLUMEN = 0.01f;
+    private String urlRadio;
     private MediaPlayer mediaPlayer;
     private float volumenActual = DEFAULT_VOLUMEN;
 
@@ -36,8 +34,14 @@ public class StreamPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream_player);
 
+        urlRadio = null;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            urlRadio = (String) extras.get(URL_RADIO);
+        }
+
         TextView tv = (TextView)findViewById(R.id.editText);
-        tv.setText(STR_URL);
+        tv.setText(urlRadio);
 
         SeekBar seekBarVolumen = (SeekBar)findViewById(R.id.libRadioSeekBarVolumen);
         seekBarVolumen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -82,7 +86,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
             Log.d(TAG, "Error al preparar media player", e);
             Log.e(TAG, "Error inicializando MediaPlayer para la radio.", e);
             TextView textoAviso = (TextView)findViewById(R.id.libRadioTextoAviso);
-            textoAviso.setText("No ha sido posible conectar con la emision de la radio.");
+            textoAviso.setText(R.string.lib_radio_error_conexion);
         }
     }
 
@@ -137,7 +141,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
 
     public void playPause(View view) {
         ToggleButton playPauseButton = (ToggleButton)findViewById(R.id.libRadioPlayPauseButton);
-        if(playPauseButton.isChecked()) {
+        if(!playPauseButton.isChecked()) {
             pause();
         } else {
             play();

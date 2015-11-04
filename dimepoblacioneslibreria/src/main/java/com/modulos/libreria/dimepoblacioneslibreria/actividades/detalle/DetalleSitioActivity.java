@@ -2,6 +2,7 @@ package com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -199,14 +200,13 @@ public class DetalleSitioActivity extends AppCompatActivity implements
                 startActivity(intent);
             } else {
                 // si el sitio no tiene WEB
-
-                Toast.makeText(getBaseContext(), "NO DISPONIBLE",
+                Toast.makeText(getBaseContext(), R.string.lib_dime_no_disponible,
                         Toast.LENGTH_SHORT).show();
             }
 
         } catch (ActivityNotFoundException activityException) {
             // si se produce un error, se muestra en el LOGCAT
-            Toast.makeText(getBaseContext(), "No se pudo acceder a la WEB",
+            Toast.makeText(getBaseContext(), R.string.lib_dime_no_acceso_web,
                     Toast.LENGTH_SHORT).show();
 
         }
@@ -226,13 +226,13 @@ public class DetalleSitioActivity extends AppCompatActivity implements
                 startActivity(intent);
             } else {
                 // si el sitio no tiene Twiter
-                Toast.makeText(getBaseContext(), "Sin Twiter Asociado",
+                Toast.makeText(getBaseContext(), R.string.lib_dime_twiter_no_disponible,
                         Toast.LENGTH_SHORT).show();
             }
 
         } catch (ActivityNotFoundException activityException) {
             // si se produce un error, se muestra en el LOGCAT
-            Toast.makeText(getBaseContext(), "No se pudo acceder a Twiter",
+            Toast.makeText(getBaseContext(), R.string.lib_dime_no_acceso_twiter,
                     Toast.LENGTH_SHORT).show();
             // Log.e("ET", "No se pudo realizar la llamada.",
             // activityException);
@@ -274,13 +274,13 @@ public class DetalleSitioActivity extends AppCompatActivity implements
                 startActivity(intent);
             } else {
                 // si el sitio no tiene facebook
-                Toast.makeText(getBaseContext(), "Sin Facebook Asociado",
+                Toast.makeText(getBaseContext(), R.string.lib_dime_facebook_no_disponible,
                         Toast.LENGTH_SHORT).show();
             }
 
         } catch (ActivityNotFoundException activityException) {
             // si se produce un error, se muestra en el LOGCAT
-            Toast.makeText(getBaseContext(), "No se pudo acceder a Facebook",
+            Toast.makeText(getBaseContext(), R.string.lib_dime_no_acceso_facebook,
                     Toast.LENGTH_SHORT).show();
             // Log.e("ET", "No se pudo realizar la llamada.",
             // activityException);
@@ -328,9 +328,10 @@ public class DetalleSitioActivity extends AppCompatActivity implements
 
         String[] destinatarios = {correo};
         intent.putExtra(Intent.EXTRA_EMAIL, destinatarios);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Aplicacion Conoce Moraleja");// Asunto del mensaje
+        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.lib_dime_asunto_correo);// Asunto del mensaje
         //intent.putExtra(Intent.EXTRA_TEXT, "cuerpo del mensaje");// Cuerpo del Mensaje
-        startActivity(Intent.createChooser(intent,"Seleccionar Aplicaci�n de Correo"));
+        String strTexto = Resources.getSystem().getString(R.string.lib_dime_selec_app_correo);
+        startActivity(Intent.createChooser(intent, strTexto));
         //      this.getString(R.string.titulo_compartir)));
 
     }
@@ -361,7 +362,7 @@ public class DetalleSitioActivity extends AppCompatActivity implements
 
         } catch (ActivityNotFoundException activityException) {
             // si se produce un error, se muestra en el LOGCAT
-            Toast.makeText(getBaseContext(), "No se pudo realizar la llamada",
+            Toast.makeText(getBaseContext(), R.string.lib_dime_no_pudo_llamar,
                     Toast.LENGTH_SHORT).show();
             // Log.e("ET", "No se pudo realizar la llamada.",
             // activityException);

@@ -57,6 +57,18 @@ public class UtilPropiedades {
 	 * Direccion de correo para la aplicacion.
 	 */
 	public static final String PROP_CORREO_APLICACION = "CorreoAplicacion";
+	/**
+	 * Direccion para escuchar la radio en la aplicacion.
+	 */
+	public static final String PROP_URL_RADIO = "urlRadio";
+	/**
+	 * Latitud en la que se abre el mapa.
+	 */
+	public static final String PROP_LATITUD_PUEBLO = "latitudPueblo";
+	/**
+	 * Longitud en la que se abre el mapa
+	 */
+	public static final String PROP_LONGITUD_PUEBLO = "longitudPueblo";
 
 	private static UtilPropiedades instancia = null;
 	

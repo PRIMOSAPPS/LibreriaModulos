@@ -4,4 +4,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="lib_radio_error_conexion">No ha sido posible conectar con la emisión de la radio.</string>
 </resources>

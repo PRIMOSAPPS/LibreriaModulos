@@ -36,14 +36,15 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/libCiuTextDireccion"
+        android:id="@+id/libCiuTextComentario"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:background="@android:color/holo_orange_light"
         android:editable="true"
-        android:text=""
         android:layout_above="@+id/horizontalScrollView"
-        android:layout_below="@+id/libCiuLayoutBotones" />
+        android:layout_below="@+id/libCiuLayoutBotones"
+        android:text="ffh"
+        android:gravity="top|left" />
 
 
     <HorizontalScrollView
