@@ -1,14 +1,17 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
@@ -19,11 +22,52 @@ import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
 
+    private DrawerLayout drawerLayout;
+    private ListView listView;
+    private String[] opciones = {"Sitios", "Google maps", "Radio", "Buzon ciudadano", "Notificaciones", "Preferencias"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "iniciar()");
+
+        listView = (ListView) findViewById(R.id.listMenuLateral);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        listView.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1,
+                opciones));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+//                Toast.makeText(MainActivity.this, "Item: " + opciones[arg2],
+//                        Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawers();
+                switch (arg2) {
+                    case 0:
+                        irSitios(null);
+                        break;
+                    case 1:
+                        verGoogleMapa(null);
+                        break;
+                    case 2:
+                        iniciarRadio(null);
+                        break;
+                    case 3:
+                        irBuzonCiudadano(null);
+                        break;
+                    case 4:
+                        irNotificaciones(null);
+                        break;
+                    case 5:
+                        irPreferencias();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -42,11 +86,24 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            irPreferencias();
             return true;
+        } else if (id == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(listView)) {
+                drawerLayout.closeDrawers();
+            } else {
+                drawerLayout.openDrawer(listView);
+            }
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void irPreferencias() {
+        Intent i = new Intent(this, PreferenciasActivity.class);
+        startActivity(i);
+    }
+
 //
 //    public void verMisMapa(View view) {
 //        Intent i = new Intent(this, MapsActivity.class);

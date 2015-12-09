@@ -13,6 +13,7 @@ public class Preferencias {
 	private final static String PRIMER_ARRANQUE = "primerArranque";
 	private final static String ALMACENAMIENTO_INTERNO = "almacenamientoInterno";
 	private final static String ALMACENAMIENTO_EXTERNO = "almacenamientoExterno";
+
 	private final static String TAG = Preferencias.class.getName();
 
 	protected Context contexto;

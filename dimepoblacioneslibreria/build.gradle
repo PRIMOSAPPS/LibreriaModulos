@@ -26,12 +26,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.0.1'
     compile project(':utilidadeslibreria')
     compile project(':parselibreria')
     compile project(':radiolibreria')
     compile project(':buzonciudadanolibreria')
     compile project(':listadodetallelibreria')
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:support-v4:23.0.1'
 }
 
 publishing {

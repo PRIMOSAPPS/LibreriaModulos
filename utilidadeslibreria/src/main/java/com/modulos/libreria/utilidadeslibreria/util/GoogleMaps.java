@@ -100,6 +100,7 @@ public class GoogleMaps {
         if(query != null && !query.equals("")) {
             parteUrl = parteUrl + "&" + query;
         }
+        parteUrl = "https://www.google.com/maps/d/viewer?mid=zUB3AjgrW0uo.k54AXa3v4U6I";
         Uri gmmIntentURi = Uri.parse(parteUrl);
 
         Intent resul = new Intent(Intent.ACTION_VIEW, gmmIntentURi);

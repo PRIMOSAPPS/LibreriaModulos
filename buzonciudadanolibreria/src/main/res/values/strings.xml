@@ -4,5 +4,13 @@
 
     <string name="action_settings">Settings</string>
     <string name="comentario">Comentario</string>
-    <string name="lblTelefono">Teléfono</string>
+    <string name="lblDialogoEnvioTelefono">Teléfono</string>
+    <string name="lblDialogoEnvioCorreo">Correo</string>
+    <string name="lblDialogoEnvioDireccion">Dirección</string>
+    <string name="lblTitDialogoEnvioCorreo">Se enviará un correo con la siguiente información al buzón del ciudadano.</string>
+    <string name="lblLibCiuOpcion1">Opción 1</string>
+    <string name="lblLibCiuOpcion2">Opción 2</string>
+    <string name="lblLibCiuOpcion3">Opción 3</string>
+    <string name="lblLibCiuOpcionOtras">Otras opciones</string>
+    <string name="txtLibCiuDireccionNocalculada">Dirección no calculada</string>
 </resources>

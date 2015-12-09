@@ -1,5 +1,7 @@
 package com.modulos.libreria.buzonciudadanolibreria;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,17 +24,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.modulos.libreria.buzonciudadanolibreria.adaptador.GalleryPagerAdapter;
+import com.modulos.libreria.buzonciudadanolibreria.mail.AsyncTaskMailSender;
+import com.modulos.libreria.buzonciudadanolibreria.mail.MailSender;
 import com.modulos.libreria.utilidadeslibreria.gps.Gps;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
+import com.modulos.libreria.utilidadeslibreria.util.TelefonoInfoUtil;
 
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.GpsListener, GoogleMaps.GoogleMapsGeocodeListener {
     private final static String TAG = "BuzonCiudadanoActivity";
@@ -51,6 +60,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     private View cell;
     private TextView text;
     private ViewPager viewPager;
+    private String direccionIncidencia;
 
 
     @Override
@@ -75,6 +85,21 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
         viewPager = (ViewPager) findViewById(R.id.libCiuViewPager);
         mainLayout = (LinearLayout) findViewById(R.id.libCiudLinearGallery);
+
+        final EditText editorComentario = (EditText)findViewById(R.id.libCiuTextComentario);
+        RadioGroup grupoOpciones = (RadioGroup)findViewById(R.id.libCiuRadioGroupOpciones);
+        grupoOpciones.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.libCiuOpcionOtras) {
+                    editorComentario.setVisibility(View.VISIBLE);
+                } else {
+                    editorComentario.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        direccionIncidencia = "...";
 
 //        pruebaGaleria();
     }
@@ -256,21 +281,20 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
     @Override
     public void actualizacionPosicion(Location locationActual) {
-        TextView tv = (TextView) findViewById(R.id.libCiuTextComentario);
-        if (tv != null) {
-            tv.setText("Nueva localizacion: " + locationActual.getLatitude() + ", " + locationActual.getLongitude());
-        }
+        TextView tv = (TextView) findViewById(R.id.libCiuDireccion);
+        tv.setText("Nueva localizacion: " + locationActual.getLatitude() + ", " + locationActual.getLongitude());
         GoogleMaps gm = new GoogleMaps();
         gm.conseguirDireccion(locationActual, this);
     }
 
     @Override
     public void direccionFromLocation(String direccion) {
-        TextView tv = (TextView) findViewById(R.id.libCiuTextComentario);
-        if (tv != null) {
-            tv.setText(direccion);
-        }
+        TextView tv = (TextView) findViewById(R.id.libCiuDireccion);
+        tv.setText(direccion);
+        Toast.makeText(this, "La direccion calculada es " + direccion, Toast.LENGTH_SHORT).show();
+        direccionIncidencia = direccion;
     }
+
 
     /*
     public void comentar(View view) {
@@ -291,7 +315,16 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     public void enviar(View view) {
         Log.d(TAG, "Se realiza el envio del correo.");
 
+        final MailSender mailSender = new MailSender();
+
+        mailSender.setLstUrisFotos(lstUrisFotos);
+
+//        TextView tv = (TextView) findViewById(R.id.libCiuDireccion);
+//        mailSender.setDireccion(tv.getText().toString());
+        mailSender.setDireccion(direccionIncidencia);
+
         TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        Pattern patronNumTelef = Patterns.PHONE;
         String mPhoneNumber = tMgr.getLine1Number();
 
         final Dialog myDialog = new Dialog(BuzonCiudadanoActivity.this);
@@ -300,6 +333,9 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AsyncTaskMailSender taskMailSender = new AsyncTaskMailSender(mailSender);
+                taskMailSender.execute((Void) null);
+
                 myDialog.hide();
             }
         });
@@ -311,13 +347,46 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
             }
         });
 
+        TextView libCiuMostrarEnvioTxtDireccion = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtDireccion);
+        libCiuMostrarEnvioTxtDireccion.setText(direccionIncidencia);
+
         myDialog.setTitle(R.string.comentario);
 //        TextView libCiuMostrarEnvioTitulo = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTitulo);
-        TextView libCiuMostrarEnvioTxtTelefono = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtTelefono);
-        libCiuMostrarEnvioTxtTelefono.setText(mPhoneNumber);
+
+        if (patronNumTelef.matcher(mPhoneNumber).matches()) {
+            TextView libCiuMostrarEnvioTxtTelefono = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtTelefono);
+            libCiuMostrarEnvioTxtTelefono.setText(mPhoneNumber);
+            mailSender.setTelefono(mPhoneNumber);
+        }
+
+        // Direciones de correo
+        Pattern patronDirCorreo = Patterns.EMAIL_ADDRESS;
+        Account[] accounts = AccountManager.get(this).getAccounts();
+        for (Account account : accounts) {
+            if (patronDirCorreo.matcher(account.name).matches()) {
+                String dirCorreo = account.name;
+                TextView libCiuMostrarEnvioTxtCorreo = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtCorreo);
+                libCiuMostrarEnvioTxtCorreo.setText(dirCorreo);
+                mailSender.setCorreo(dirCorreo);
+                break;
+            }
+        }
+
         TextView libCiuMostrarEnvioComentario = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioComentario);
         EditText editComentario = (EditText)findViewById(R.id.libCiuTextComentario);
         libCiuMostrarEnvioComentario.setText(editComentario.getText());
+
+        mailSender.setComentario(editComentario.getText().toString());
+
+        RadioGroup rgTipo = (RadioGroup)findViewById(R.id.libCiuRadioGroupOpciones);
+        int idTipoSeleccionado = rgTipo.getCheckedRadioButtonId();
+        if(idTipoSeleccionado > 0) {
+            RadioButton rbTipo = (RadioButton) findViewById(idTipoSeleccionado);
+            if(rbTipo != null) {
+                mailSender.setTipo(rbTipo.getText().toString());
+            }
+        }
+
         myDialog.show();
 
 

@@ -13,25 +13,17 @@ public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSend
 
     enum ResultadoEnvioMail {OK, KO};
 
-    private GMailSender gmailSender;
+    private MailSender mailSender;
 
-    public AsyncTaskMailSender(GMailSender gmailSender) {
-        this.gmailSender = gmailSender;
+    public AsyncTaskMailSender(MailSender gmailSender) {
+        this.mailSender = gmailSender;
     }
 
     @Override
     protected ResultadoEnvioMail doInBackground(Void... params) {
 //        GMailSender gmailSender = new GMailSender("primosapps@gmail.com", "cacharreando2014");
         Log.d(TAG, "Se realiza el envio de un correo");
-        try {
-            gmailSender.sendMail("This is Subject",
-                    "This is Body",
-                    "primosapps@gmail.com",
-                    "jfelixir@gmail.com");
-        } catch (MessagingException e) {
-            Log.e(TAG, "Error al enviar el correo", e);
-            return ResultadoEnvioMail.KO;
-        }
+        mailSender.enviar();
         Log.d(TAG, "Correo enviado, quizas correctamente.");
         return ResultadoEnvioMail.OK;
     }

@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:key="vibracion_notificacion"
+        android:title="@string/pref_title_vibracion_notificacion"
+        android:summary="@string/pref_description_vibracion_notificacion"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="sonido_notificacion"
+        android:title="@string/pref_title_sonido_notificacion"
+        android:summary="@string/pref_description_sonido_notificacion"
+        android:defaultValue="true" />
+
+</PreferenceScreen>

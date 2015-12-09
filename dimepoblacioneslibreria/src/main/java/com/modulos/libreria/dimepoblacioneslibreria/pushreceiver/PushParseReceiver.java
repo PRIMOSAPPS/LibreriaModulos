@@ -15,6 +15,7 @@ import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle.DetalleNotificacionActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
+import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasDime;
 import com.parse.ParsePushBroadcastReceiver;
 
 import org.json.JSONException;
@@ -174,9 +175,15 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
                     .setContentTitle("Titulo")
                     .setContentText("notificacion.getTexto()")
 					.setContentIntent(resultPendingIntent)
-                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                    .setVibrate(patronVibracion)
                     .setAutoCancel(true);
+            PreferenciasDime prefDime = new PreferenciasDime(context);
+            if(prefDime.isSonarVibracion()) {
+                mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            }
+            if(prefDime.isVibrarVibracion()) {
+                mBuilder.setVibrate(patronVibracion);
+            }
+
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////

@@ -6,49 +6,80 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".BuzonCiudadanoActivity">
+    tools:context=".BuzonCiudadanoActivity"
+    >
 
-    <LinearLayout
-        android:id="@+id/libCiuLayoutBotones"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true">
 
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/libCiuEnviar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="enviar"
-            android:text="Enviar" />
+            android:text="Enviar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/libCiuSacarFoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:onClick="sacarFoto"
-            android:text="Sacar foto" />
+            android:text="Sacar foto"
+            android:layout_toRightOf="@+id/libCiuEnviar" />
 
-    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/libCiuRadioGroupOpciones"
+        android:layout_below="@+id/libCiuEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblLibCiuOpcion1"
+            android:id="@+id/libCiuOpcion1"
+            android:height="20dp"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblLibCiuOpcion2"
+            android:id="@+id/libCiuOpcion2"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblLibCiuOpcion3"
+            android:id="@+id/libCiuOpcion3"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblLibCiuOpcionOtras"
+            android:id="@+id/libCiuOpcionOtras"
+            android:checked="true" />
+    </RadioGroup>
 
     <EditText
         android:id="@+id/libCiuTextComentario"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_orange_light"
         android:editable="true"
-        android:layout_above="@+id/horizontalScrollView"
-        android:layout_below="@+id/libCiuLayoutBotones"
+        android:layout_above="@+id/libCiuHorizontalScrollMiniaturas"
+        android:layout_below="@+id/libCiuRadioGroupOpciones"
         android:text="ffh"
         android:gravity="top|left" />
 
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:id="@+id/libCiuHorizontalScrollMiniaturas"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -73,5 +104,15 @@
         android:background="#7eff4f4d"
         android:visibility="gone" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/txtLibCiuDireccionNocalculada"
+        android:id="@+id/libCiuDireccion"
+        android:layout_below="@+id/libCiuTextComentario"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
