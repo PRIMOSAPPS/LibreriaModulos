@@ -162,26 +162,29 @@
         </RadioGroup>
     </ScrollView>
 
-    <EditText
-        android:id="@+id/libCiuTextComentario"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/libCiuDireccion"
-        android:background="@android:color/holo_orange_light"
-        android:editable="true"
-        android:gravity="top|left"
-        android:text="ffh" />
-
     <TextView
         android:id="@+id/libCiuDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/libCiuHorizontalScrollMiniaturas"
+        android:layout_above="@+id/libCiuTextComentario"
         android:layout_centerHorizontal="true"
         android:text="@string/txtLibCiuDireccionNocalculada"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/libCiuTextComentario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/libCiuHorizontalScrollMiniaturas"
+        android:background="@android:color/holo_orange_light"
+        android:singleLine="false"
+        android:lines="5"
+        android:editable="true"
+        android:gravity="top|left"
+        android:text="" />
+
 
     <HorizontalScrollView
         android:id="@+id/libCiuHorizontalScrollMiniaturas"
