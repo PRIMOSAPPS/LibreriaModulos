@@ -29,4 +29,12 @@
     <string name="lblCiuOpcMobiliarioUrbano">Moviliario Urbano</string>
     <string name="lblCiuOpcionOtras">Otras incidencias</string>
 
+    <string name="lblCiuSinDireccion">Sin dirección.</string>
+    <string name="lblCiuEscribirDireccion">No se ha podido calcular la localización. Por favor, escriba la dirección.</string>
+
+    <string name="txtCiuUsuarioNoIndicaDireccion">No se ha podido calcular la localización y el usuario no la ha indicado.</string>
+
+    <string name="lblCiuAceptar">Aceptar</string>
+    <string name="lblCiuCancelar">Cancelar</string>
+
 </resources>

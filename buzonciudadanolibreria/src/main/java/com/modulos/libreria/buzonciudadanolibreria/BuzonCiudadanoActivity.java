@@ -3,9 +3,12 @@ package com.modulos.libreria.buzonciudadanolibreria;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -104,7 +107,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
             }
         });
 
-        direccionIncidencia = "...";
+        direccionIncidencia = null;
 
 //        pruebaGaleria();
     }
@@ -317,7 +320,43 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     }
     */
 
-    public void enviar(View view) {
+    private void consultaDireccionUsuario() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(BuzonCiudadanoActivity.this);
+        alertDialog.setTitle(R.string.lblCiuSinDireccion);
+        alertDialog.setMessage(R.string.lblCiuEscribirDireccion);
+
+        final EditText input = new EditText(BuzonCiudadanoActivity.this);
+        input.setSingleLine(false);
+        input.setLines(4);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton(R.string.lblCiuAceptar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        direccionIncidencia = input.getText().toString();
+                        dialog.dismiss();
+                        enviar();
+                    }
+                });
+
+        alertDialog.setNegativeButton(R.string.lblCiuCancelar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Resources resources = BuzonCiudadanoActivity.this.getResources();
+                        direccionIncidencia = resources.getString(R.string.txtCiuUsuarioNoIndicaDireccion);
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+    }
+
+    private void enviar() {
         Log.d(TAG, "Se realiza el envio del correo.");
 
         final MailSender mailSender = new MailSender();
@@ -410,6 +449,16 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 //        } catch (MessagingException e) {
 //            Log.e(TAG, "Error al enviar el correo", e);
 //        }
+
+    }
+
+    public void enviar(View view) {
+
+        if(direccionIncidencia == null) {
+            consultaDireccionUsuario();
+        } else {
+            enviar();
+        }
     }
 
 
