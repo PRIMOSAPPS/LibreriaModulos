@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="iniciarRadio"
-            android:src="@drawable/radioMonesterio"
+            android:src="@drawable/radio_monesterio"
             android:layout_alignParentTop="true" />
 
         <ImageButton
@@ -33,7 +33,7 @@
             android:layout_alignStart="@+id/mainIniciarRadio"
             android:layout_below="@+id/mainIniciarRadio"
             android:onClick="irBuzonCiudadano"
-            android:src="@drawable/colaboracionCiudadana" />
+            android:src="@drawable/colaboracion_ciudadana" />
 
         <ImageButton
             android:id="@+id/mainSitios"
@@ -43,7 +43,7 @@
             android:layout_alignStart="@+id/mainIniciarRadio"
             android:layout_below="@+id/mainBuzonCiudadno"
             android:onClick="irSitios"
-            android:src="@drawable/puntosInteres" />
+            android:src="@drawable/puntos_interes" />
 
         <ImageButton
             android:id="@+id/mainNotificaciones"
