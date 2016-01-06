@@ -8,9 +8,25 @@
     <string name="lblDialogoEnvioCorreo">Correo</string>
     <string name="lblDialogoEnvioDireccion">Dirección</string>
     <string name="lblTitDialogoEnvioCorreo">Se enviará un correo con la siguiente información al buzón del ciudadano.</string>
-    <string name="lblLibCiuOpcion1">Opción 1</string>
-    <string name="lblLibCiuOpcion2">Opción 2</string>
-    <string name="lblLibCiuOpcion3">Opción 3</string>
-    <string name="lblLibCiuOpcionOtras">Otras opciones</string>
     <string name="txtLibCiuDireccionNocalculada">Dirección no calculada</string>
+
+
+    <string name="lblCiuOpcAlumbradoPublico">Alumbrado público</string>
+    <string name="lblCiuOpcRecogidaResiduos">Recogida de Residuos</string>
+
+    <string name="lblCiuOpcResiduosOrganicos">Residuos orgánicos</string>
+    <string name="lblCiuOpcPapelCarton">Papel / Cartón</string>
+    <string name="lblCiuOpcVidrio">Vidrio</string>
+    <string name="lblCiuOpcPlasticos">Plásticos</string>
+
+    <string name="lblCiuOpcParquesJardines">Parques y Jardines</string>
+    <string name="lblCiuOpcAlcantarillado">Alcantarillado</string>
+    <string name="lblCiuOpcAveriasAgua">Averías de Agua</string>
+    <string name="lblCiuOpcLimpiezaViaria">Limpieza viaria</string>
+    <string name="lblCiuOpcSenalizacionVial_Trafico">Señalización Vial / Tráfico</string>
+    <string name="lblCiuOpcAceradosPavimentos">Acerados / Pavimentos</string>
+    <string name="lblCiuOpcFachadasPintadas">Fachadas y pintadas</string>
+    <string name="lblCiuOpcMobiliarioUrbano">Moviliario Urbano</string>
+    <string name="lblCiuOpcionOtras">Otras incidencias</string>
+
 </resources>

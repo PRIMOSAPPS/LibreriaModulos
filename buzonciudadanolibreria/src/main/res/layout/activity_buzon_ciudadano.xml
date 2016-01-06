@@ -6,77 +6,182 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".BuzonCiudadanoActivity"
-    >
+    tools:context=".BuzonCiudadanoActivity">
 
 
+    <Button
+        android:id="@+id/libCiuEnviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="enviar"
+        android:text="Enviar" />
 
-        <Button
-            android:id="@+id/libCiuEnviar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="enviar"
-            android:text="Enviar"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+    <Button
+        android:id="@+id/libCiuSacarFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/libCiuEnviar"
+        android:onClick="sacarFoto"
+        android:text="Sacar foto" />
 
-        <Button
-            android:id="@+id/libCiuSacarFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="sacarFoto"
-            android:text="Sacar foto"
-            android:layout_toRightOf="@+id/libCiuEnviar" />
-
-
-    <RadioGroup
-        android:id="@+id/libCiuRadioGroupOpciones"
-        android:layout_below="@+id/libCiuEnviar"
+    <ScrollView
+        android:id="@+id/libCiuScrollViewOpciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-        <RadioButton
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblLibCiuOpcion1"
-            android:id="@+id/libCiuOpcion1"
-            android:height="20dp"
-            android:checked="false" />
+        android:layout_below="@+id/libCiuEnviar"
+        android:layout_above="@+id/libCiuTextComentario"
+        >
 
-        <RadioButton
-            android:layout_width="fill_parent"
+        <RadioGroup
+            android:id="@+id/libCiuRadioGroupOpciones"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lblLibCiuOpcion2"
-            android:id="@+id/libCiuOpcion2"
-            android:checked="false" />
+            android:layout_below="@+id/libCiuEnviar"
+            android:layout_centerHorizontal="true">
 
-        <RadioButton
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblLibCiuOpcion3"
-            android:id="@+id/libCiuOpcion3"
-            android:checked="false" />
+            <RadioButton
+                android:id="@+id/libCiuOpcAlumbradoPublico"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:checked="false"
+                android:text="@string/lblCiuOpcAlumbradoPublico" />
 
-        <RadioButton
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblLibCiuOpcionOtras"
-            android:id="@+id/libCiuOpcionOtras"
-            android:checked="true" />
-    </RadioGroup>
+
+            <RadioButton
+                android:id="@+id/libCiuOpcRecogidaResiduos"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcRecogidaResiduos" />
+
+            <RadioGroup
+                android:id="@+id/libCiuRadioGroupOpcionesRecogidaResiduos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/libCiuEnviar"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="20dp"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/libCiuOpcResiduosOrganicos"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/lblCiuOpcResiduosOrganicos" />
+
+                <RadioButton
+                    android:id="@+id/libCiuOpcPapelCarton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/lblCiuOpcPapelCarton" />
+
+                <RadioButton
+                    android:id="@+id/libCiuOpcVidrio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/lblCiuOpcVidrio" />
+
+                <RadioButton
+                    android:id="@+id/libCiuOpcPlasticos"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/lblCiuOpcPlasticos" />
+
+            </RadioGroup>
+
+            <RadioButton
+                android:id="@+id/libCiuOpcParquesJardines"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcParquesJardines" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcAlcantarillado"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcAlcantarillado" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcAveriasAgua"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcAveriasAgua" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcLimpiezaViaria"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcLimpiezaViaria" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcSenalizacionVial_Trafico"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcSenalizacionVial_Trafico" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcAceradosPavimentos"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcAceradosPavimentos" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcFachadasPintadas"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcFachadasPintadas" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcMobiliarioUrbano"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/lblCiuOpcMobiliarioUrbano" />
+
+            <RadioButton
+                android:id="@+id/libCiuOpcionOtras"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/lblCiuOpcionOtras" />
+        </RadioGroup>
+    </ScrollView>
 
     <EditText
         android:id="@+id/libCiuTextComentario"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/libCiuDireccion"
         android:background="@android:color/holo_orange_light"
         android:editable="true"
-        android:layout_above="@+id/libCiuHorizontalScrollMiniaturas"
-        android:layout_below="@+id/libCiuRadioGroupOpciones"
-        android:text="ffh"
-        android:gravity="top|left" />
+        android:gravity="top|left"
+        android:text="ffh" />
 
+    <TextView
+        android:id="@+id/libCiuDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/libCiuHorizontalScrollMiniaturas"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txtLibCiuDireccionNocalculada"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <HorizontalScrollView
         android:id="@+id/libCiuHorizontalScrollMiniaturas"
@@ -85,7 +190,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="120dp">
+        >
 
         <LinearLayout
             android:id="@+id/libCiudLinearGallery"
@@ -103,16 +208,5 @@
         android:layout_height="fill_parent"
         android:background="#7eff4f4d"
         android:visibility="gone" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/txtLibCiuDireccionNocalculada"
-        android:id="@+id/libCiuDireccion"
-        android:layout_below="@+id/libCiuTextComentario"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
