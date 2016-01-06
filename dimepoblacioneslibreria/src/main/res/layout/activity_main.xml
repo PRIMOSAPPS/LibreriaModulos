@@ -17,46 +17,43 @@
         tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity"
         android:background="#d8386dff">
 
-        <Button
-            android:id="@+id/mainVerMapa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mainSitios"
-            android:onClick="verGoogleMapa"
-            android:text="GoogleMaps" />
-
-        <Button
+        <ImageButton
             android:id="@+id/mainIniciarRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mainVerMapa"
             android:onClick="iniciarRadio"
-            android:text="Radio" />
+            android:src="@drawable/radioMonesterio"
+            android:layout_alignParentTop="true" />
 
-        <Button
+        <ImageButton
             android:id="@+id/mainBuzonCiudadno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:layout_alignStart="@+id/mainIniciarRadio"
             android:layout_below="@+id/mainIniciarRadio"
             android:onClick="irBuzonCiudadano"
-            android:text="Buzon ciudadano" />
+            android:src="@drawable/colaboracionCiudadana" />
 
-        <Button
+        <ImageButton
             android:id="@+id/mainSitios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:layout_alignStart="@+id/mainIniciarRadio"
+            android:layout_below="@+id/mainBuzonCiudadno"
             android:onClick="irSitios"
-            android:text="Sitios" />
+            android:src="@drawable/puntosInteres" />
 
-        <Button
+        <ImageButton
             android:id="@+id/mainNotificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mainBuzonCiudadno"
-            android:layout_alignStart="@+id/mainBuzonCiudadno"
-            android:layout_below="@+id/mainBuzonCiudadno"
+            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:layout_alignStart="@+id/mainIniciarRadio"
+            android:layout_below="@+id/mainSitios"
             android:onClick="irNotificaciones"
-            android:text="Notificaciones" />
+            android:src="@drawable/bandos"/>
 
     </RelativeLayout>
 
