@@ -19,7 +19,7 @@ import java.io.IOException;
 public class StreamPlayerActivity extends AppCompatActivity {
     private final static String TAG = "StreamPlayerActivity";
     //private final static String STR_URL = "http://94.75.206.136/start/radiomonesterio/";//"http://94.75.206.136:8040/";
-    private final static String STR_URL = "http://94.75.206.136:8040";
+    private final static String STR_URL = "http://emisoras.dip-badajoz.es:8040";//http://94.75.206.136:8040";
     public final static String URL_RADIO = "urlRadio";
     private final static float MAX_VOLUMEN = 1.0f;
     private final static float MIN_VOLUMEN = 0.0f;
