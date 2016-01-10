@@ -16,6 +16,7 @@ import com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle.DetalleN
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasDime;
+import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.parse.ParsePushBroadcastReceiver;
 
 import org.json.JSONException;
@@ -165,7 +166,8 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
-            mBuilder.setSmallIcon(R.drawable.ic_action_notificacion)
+            int idIconoNotificacion = SingletonDimePoblaciones.getInstance().getIdIconoNotificacion();
+            mBuilder.setSmallIcon(idIconoNotificacion)
                     .setContentTitle(notificacion.getTitulo())
                     .setContentText("El texto, hay que eliminar los tags HTML")
 					.setContentIntent(resultPendingIntent)

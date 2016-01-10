@@ -13,6 +13,7 @@ import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.almacenamiento.AlmacenamientoFactory;
 import com.modulos.libreria.dimepoblacioneslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
+import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.modulos.libreria.listadodetallelibreria.adaptadores.ListaAdaptador;
 
 import java.util.List;
@@ -41,11 +42,10 @@ public class SitioAdaptador extends ListaAdaptador<SitioDTO> {
 		textNombreSitio.setText(sitio.getNombre());
 		
 		ImageView imagen = (ImageView)view.findViewById(R.id.imagenListaEventos);
-		//TextView textDescripcionCorta = (TextView)view.findViewById(R.id.textDescripcion);
-		//textDescripcionCorta.setText(sitio.getTextoCorto1());
-		ItfAlmacenamiento almacenamiento = AlmacenamientoFactory.getAlmacenamiento(actividad);
-		Bitmap bitmap = almacenamiento.getImagenSitio(sitio.getId(), sitio.getNombreLogotipo());
-		imagen.setImageBitmap(bitmap);
+		imagen.setImageResource(SingletonDimePoblaciones.getInstance().getIdLogoPoblacion());
+//		ItfAlmacenamiento almacenamiento = AlmacenamientoFactory.getAlmacenamiento(actividad);
+//		Bitmap bitmap = almacenamiento.getImagenSitio(sitio.getId(), sitio.getNombreLogotipo());
+//		imagen.setImageBitmap(bitmap);
 		
 //		LayoutParams params = new LayoutParams(LayoutParams.fill_parent,
 //				15 + (position * 5));
