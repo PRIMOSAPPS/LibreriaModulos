@@ -28,6 +28,9 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
     private static final String TAG = "PushParseReceiver";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+    private final static String GRUPO_NOTIFICACIONES_DIME_MONESTERIO = "GRUPO_NOTIFICACIONES_DIME_MONESTERIO";
+    private static int idNotificaciones = 0;
+
 	/*
     @Override
 	public void onReceive(Context context, Intent intent) {
@@ -144,20 +147,11 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context);
 
-            NotificationCompat.InboxStyle inboxStyle =
-                    new NotificationCompat.InboxStyle();
-            inboxStyle.setBigContentTitle(notificacion.getTitulo());
-            Spanned spanTitulo = Html.fromHtml("<b>" + notificacion.getTitulo() + "</b>");
-            inboxStyle.addLine(spanTitulo);
-            Spanned spanTexto = Html.fromHtml("<i>" + notificacion.getTexto() + "</i>");
-            inboxStyle.addLine(spanTexto);
-
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
 
 //            inboxStyle.setSummaryText("setSummaryText");
-            mBuilder.setStyle(inboxStyle);
 
 //            mBuilder.setSmallIcon(R.drawable.ic_action_notificacion)
 //                .setContentTitle(notificacion.getTitulo())
@@ -172,9 +166,10 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             mBuilder.setSmallIcon(R.drawable.ic_action_notificacion)
-                    .setContentTitle("Titulo")
-                    .setContentText("notificacion.getTexto()")
+                    .setContentTitle(notificacion.getTitulo())
+                    .setContentText("El texto, hay que eliminar los tags HTML")
 					.setContentIntent(resultPendingIntent)
+                    .setGroup(GRUPO_NOTIFICACIONES_DIME_MONESTERIO)
                     .setAutoCancel(true);
             PreferenciasDime prefDime = new PreferenciasDime(context);
             if(prefDime.isSonarVibracion()) {
@@ -192,7 +187,11 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = mBuilder.build();
-            mNotificationManager.notify(1, notification);
+            if(idNotificaciones == Integer.MAX_VALUE) {
+                idNotificaciones = 0;
+            }
+            mNotificationManager.notify(idNotificaciones++, notification);
+
 
         } catch (JSONException e) {
             Log.e(TAG, "Error json al leer la notificacion.", e);
