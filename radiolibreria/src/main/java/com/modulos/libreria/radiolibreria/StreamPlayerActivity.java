@@ -81,7 +81,12 @@ public class StreamPlayerActivity extends AppCompatActivity {
             mediaPlayer.setDataSource(tv.getText().toString());
             //mediaPlayer.setDataSource(STR_URL);
             mediaPlayer.prepareAsync();
-            play();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    play();
+                }
+            });
         } catch (IOException e) {
             Log.d(TAG, "Error al preparar media player", e);
             Log.e(TAG, "Error inicializando MediaPlayer para la radio.", e);
