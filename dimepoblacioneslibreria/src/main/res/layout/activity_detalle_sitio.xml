@@ -117,59 +117,58 @@
                     android:gravity="center"
                     android:orientation="horizontal" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonTelefono"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-
-                        android:background="@mipmap/puntos_interes_telefono"
+                        android:background="@null"
+                        android:src="@mipmap/puntos_interes_telefono"
                         android:onClick="llamarTelefono"
                         android:layout_marginRight="20dp"
                         android:tag="SITIO" />
 
 
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonLocalizar"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginRight="10dp"
-
-                        android:background="@drawable/ic_localizar"
+                        android:background="@null"
+                        android:src="@drawable/ic_localizar"
                         android:onClick="localizarSitio"
                         android:paddingLeft="20dp"
                         android:tag="SITIO" />
 
 
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonCompartir"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-
-                        android:background="@drawable/ic_compartir"
+                        android:background="@null"
+                        android:src="@drawable/ic_compartir"
                         android:onClick="compartirLugar"
                         android:layout_marginRight="10dp"
                         android:paddingRight="20dp"
                         android:tag="SITIO" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonCorreo"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-
-                        android:background="@mipmap/puntos_interes_email"
+                        android:background="@null"
+                        android:src="@mipmap/puntos_interes_email"
                         android:onClick="enviarCorreo"
                         android:layout_marginRight="20dp"
                         android:tag="SITIO" />
-                    <Button
 
-
+                    <ImageButton
                         android:id="@+id/botonWeb"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-
-                        android:background="@mipmap/puntos_interes_web"
+                        android:background="@null"
+                        android:src="@mipmap/puntos_interes_web"
                         android:onClick="visitarWeb"
                         android:layout_marginRight="10dp"
                         android:paddingRight="20dp"
