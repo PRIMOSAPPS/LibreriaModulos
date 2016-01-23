@@ -156,6 +156,13 @@
                 android:text="@string/lblCiuOpcMobiliarioUrbano" />
 
             <RadioButton
+                android:id="@+id/libCiuOpcionFeriasFiestas"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/lblCiuOpcFeriasFiestas" />
+
+            <RadioButton
                 android:id="@+id/libCiuOpcionOtras"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

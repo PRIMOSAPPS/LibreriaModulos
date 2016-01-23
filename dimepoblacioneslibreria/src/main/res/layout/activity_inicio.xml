@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/imagen_fondo_sin_titulo"
     tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.InicioActivity">
 
     <TextView
@@ -17,7 +18,8 @@
         android:layout_alignParentTop="true"
         android:layout_above="@+id/mainBarraProgreso"
         android:elegantTextHeight="false"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:textColor="#fe010101" />
 
     <ProgressBar
         android:id="@+id/mainBarraProgreso"

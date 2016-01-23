@@ -27,6 +27,7 @@
     <string name="lblCiuOpcAceradosPavimentos">Acerados / Pavimentos</string>
     <string name="lblCiuOpcFachadasPintadas">Fachadas y pintadas</string>
     <string name="lblCiuOpcMobiliarioUrbano">Moviliario Urbano</string>
+    <string name="lblCiuOpcFeriasFiestas">Ferias y fiestas</string>
     <string name="lblCiuOpcionOtras">Otras incidencias</string>
 
     <string name="lblCiuSinDireccion">Sin dirección.</string>

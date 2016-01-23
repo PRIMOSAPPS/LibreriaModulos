@@ -168,9 +168,20 @@ public class MailSender {
     //private char[] getFileCharArray(String nombreFichero) throws IOException {
     private char[] getFileCharArray(Uri uriFoto) throws IOException {
 
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+
         File file = new File(uriFoto.getPath());
         FileInputStream fis = new FileInputStream(file);
-        Bitmap bm = BitmapFactory.decodeStream(fis);
+
+        Bitmap bm = BitmapFactory.decodeStream(fis, null, options);
+
+
+        options.inSampleSize = options.outHeight * options.outWidth * 2;
+        options.inJustDecodeBounds = false;
+        bm = BitmapFactory.decodeStream(fis, null, options);
+
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100 , baos);
         byte[] b = baos.toByteArray();
