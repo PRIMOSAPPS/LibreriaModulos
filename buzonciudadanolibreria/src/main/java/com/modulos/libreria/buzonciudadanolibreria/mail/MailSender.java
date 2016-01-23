@@ -163,8 +163,6 @@ public class MailSender {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Fin");
     }
 
     //private char[] getFileCharArray(String nombreFichero) throws IOException {

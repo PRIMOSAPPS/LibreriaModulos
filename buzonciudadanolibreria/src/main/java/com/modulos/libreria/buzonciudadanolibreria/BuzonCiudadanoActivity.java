@@ -61,7 +61,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     // mainLayout is the child of the HorizontalScrollView ...
     private LinearLayout mainLayout;
     private View cell;
-    private TextView text;
     private ViewPager viewPager;
     private String direccionIncidencia;
 
@@ -108,24 +107,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         });
 
         direccionIncidencia = null;
-
-//        pruebaGaleria();
     }
-
-//    private void pruebaGaleria() {
-//        File file = new File(Environment.getExternalStoragePublicDirectory(
-//                directorioFotos), "FotoBuzonCiudadano_0.jpg");
-//        fotoUri = Uri.fromFile(file);
-//        addFotoGaleria();
-//        file = new File(Environment.getExternalStoragePublicDirectory(
-//                directorioFotos), "FotoBuzonCiudadano_1.jpg");
-//        fotoUri = Uri.fromFile(file);
-//        addFotoGaleria();
-//        file = new File(Environment.getExternalStoragePublicDirectory(
-//                directorioFotos), "FotoBuzonCiudadano_2.jpg");
-//        fotoUri = Uri.fromFile(file);
-//        addFotoGaleria();
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -149,23 +131,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Devuelve el primer indice de foto libre.
-     *
-     * @return
-     */
-//    private int getIndiceFotoLibre() {
-//        int resul = -1;
-//        for (int i = 0; i < arrUrisFotos.length; i++) {
-//            if (arrUrisFotos[i] == null) {
-//                resul = i;
-//                break;
-//            }
-//        }
-//        Log.d(TAG, "El indice de foto libre es " + resul);
-//        return resul;
-//    }
-
     private boolean isSacarFotoPermitido() {
         return lstUrisFotos.size() < numFotosPermitidas;
     }
@@ -178,7 +143,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
     public void sacarFoto(View view) {
         if (!isSacarFotoPermitido()) {
-            Toast.makeText(this, "Numero maximo de fotos alcanzado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.numFotosMaxAlcanzado, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -190,8 +155,8 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
         lstUrisFotos.add(fotoUri);
 
-        Toast.makeText(this, "El directorio temporal es: " + getCacheDir().getAbsolutePath(), Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "El directorio temporal es: " + getCacheDir().getAbsolutePath(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
         startActivityForResult(i, FOTO_PARA_BUZON_CIUDADANO);
@@ -216,9 +181,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         Pair<View, Uri> celdaUri = new Pair<>(cell, fotoUri);
         imageViewBorrar.setTag(celdaUri);
 
-        text = (TextView) cell.findViewById(R.id.libCiudNombreImagen);
-        text.setText("Image#" + (fotoUri.toString()));
-
         imageView.setFitsSystemWindows(true);
         imageView.setImageURI(fotoUri);
 
@@ -239,13 +201,13 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         // If the request went well (OK) and the request was PICK_CONTACT_REQUEST
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == FOTO_PARA_BUZON_CIUDADANO) {
-                Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
                 addFotoGaleria();
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(this, "Accion cancelada por el usuario.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.acionCanceladaUsuario, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Error al capturar la foto.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.errorCapturaFoto, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -275,12 +237,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         }
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        //borrarFotos();
-//    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -302,23 +258,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         Toast.makeText(this, "La direccion calculada es " + direccion, Toast.LENGTH_SHORT).show();
         direccionIncidencia = direccion;
     }
-
-
-    /*
-    public void comentar(View view) {
-//        Preference acercaDe = (Preference) findPreference(PREFERENCIA_ACERCA_DE);
-//        acercaDe.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-//            @Override
-//            public boolean onPreferenceClick(Preference preference) {
-        Dialog myDialog = new Dialog(BuzonCiudadanoActivity.this);
-        myDialog.setContentView(R.layout.comentario_lib_ciu);
-        myDialog.setTitle(R.string.comentario);
-        myDialog.show();
-        TextView textComentario = (TextView) myDialog.findViewById(R.id.libCiuTextComentario);
-//            }
-//        });
-    }
-    */
 
     private void consultaDireccionUsuario() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(BuzonCiudadanoActivity.this);
@@ -363,8 +302,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
         mailSender.setLstUrisFotos(lstUrisFotos);
 
-//        TextView tv = (TextView) findViewById(R.id.libCiuDireccion);
-//        mailSender.setDireccion(tv.getText().toString());
         mailSender.setDireccion(direccionIncidencia);
 
         TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -395,7 +332,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         libCiuMostrarEnvioTxtDireccion.setText(direccionIncidencia);
 
         myDialog.setTitle(R.string.comentario);
-//        TextView libCiuMostrarEnvioTitulo = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTitulo);
 
         if (patronNumTelef.matcher(mPhoneNumber).matches()) {
             TextView libCiuMostrarEnvioTxtTelefono = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioTxtTelefono);
@@ -432,23 +368,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         }
 
         myDialog.show();
-
-
-
-        /*
-        GMailSender sender = new GMailSender("primos.apps@gmail.com", "cacharreando2014");
-        AsyncTaskMailSender taskMAilSender = new AsyncTaskMailSender(sender);
-        taskMAilSender.execute((Void) null);
-        */
-
-//        try {
-//            sender.sendMail("This is Subject",
-//                    "This is Body",
-//                    "user@gmail.com",
-//                    "user@yahoo.com");
-//        } catch (MessagingException e) {
-//            Log.e(TAG, "Error al enviar el correo", e);
-//        }
 
     }
 

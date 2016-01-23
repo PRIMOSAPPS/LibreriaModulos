@@ -14,54 +14,45 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
-        android:foreground="@android:drawable/ic_lock_silent_mode"
+        android:id="@+id/menosVolumen"
+        android:src="@mipmap/volumen_menos"
         android:onClick="menosVolumen"
-        android:layout_below="@+id/btnIniciar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp" />
+        android:layout_alignTop="@+id/libRadioPlayPauseButton"
+        />
 
-    <Button
+    <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:foreground="@android:drawable/ic_lock_silent_mode_off"
+        android:text="Play"
+        android:id="@+id/libRadioPlayPauseButton"
+        android:background="@drawable/play_pause"
+        android:layout_centerInParent="true"
+        android:checked="true"
+        android:onClick="playPause"
+        android:textOn=""
+        android:textOff=""
+         />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/masVolumen"
+        android:src="@mipmap/volumen_mas"
         android:onClick="masVolumen"
         android:layout_alignTop="@+id/libRadioPlayPauseButton"
-        android:layout_toRightOf="@+id/libRadioPlayPauseButton"
-        android:enabled="false" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:background="#7efff10a"
-        android:layout_alignParentRight="true"
-        android:height="150dp"
-        android:layout_below="@+id/libRadioTextoAviso" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Probar URL"
-        android:id="@+id/btnIniciar"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="reset" />
+        android:enabled="false"
+        android:layout_alignParentRight="true" />
 
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/libRadioSeekBarVolumen"
-        android:layout_below="@+id/imageButton3"
+        android:layout_below="@+id/menosVolumen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:max="100"
@@ -69,16 +60,5 @@
         android:progressDrawable="@drawable/progressbar"
         android:layout_alignParentRight="true" />
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/libRadioPlayPauseButton"
-        android:checked="true"
-        android:onClick="playPause"
-        android:textOn="Pause"
-        android:textOff="Play"
-        android:layout_alignTop="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3" />
 
 </RelativeLayout>

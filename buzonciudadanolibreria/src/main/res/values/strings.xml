@@ -36,5 +36,8 @@
 
     <string name="lblCiuAceptar">Aceptar</string>
     <string name="lblCiuCancelar">Cancelar</string>
+    <string name="acionCanceladaUsuario">Accion cancelada por el usuario.</string>
+    <string name="errorCapturaFoto">Error al capturar la foto.</string>
+    <string name="numFotosMaxAlcanzado">Numero maximo de fotos alcanzado.</string>
 
 </resources>

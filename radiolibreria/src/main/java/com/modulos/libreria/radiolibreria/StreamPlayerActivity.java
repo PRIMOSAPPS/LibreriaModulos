@@ -28,6 +28,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
     private String urlRadio;
     private MediaPlayer mediaPlayer;
     private float volumenActual = DEFAULT_VOLUMEN;
+    private SeekBar seekBarVolumen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
             urlRadio = (String) extras.get(URL_RADIO);
         }
 
-        TextView tv = (TextView)findViewById(R.id.editText);
-        tv.setText(urlRadio);
-
-        SeekBar seekBarVolumen = (SeekBar)findViewById(R.id.libRadioSeekBarVolumen);
+        seekBarVolumen = (SeekBar)findViewById(R.id.libRadioSeekBarVolumen);
         seekBarVolumen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
@@ -56,8 +54,6 @@ public class StreamPlayerActivity extends AppCompatActivity {
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(StreamPlayerActivity.this, "seek bar progress:" + volumenActual,
-                        Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Nuevo volumen: " + volumenActual);
             }
         });
@@ -77,9 +73,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setVolumen();
         try {
-            TextView tv = (TextView)findViewById(R.id.editText);
-            mediaPlayer.setDataSource(tv.getText().toString());
-            //mediaPlayer.setDataSource(STR_URL);
+            mediaPlayer.setDataSource(urlRadio);
             mediaPlayer.prepareAsync();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
@@ -124,7 +118,6 @@ public class StreamPlayerActivity extends AppCompatActivity {
     }
 
     private void setVolumen() {
-
         Log.d(TAG, "Asignando el volumen: " + volumenActual);
         mediaPlayer.setVolume(volumenActual, volumenActual);
     }
@@ -168,11 +161,17 @@ public class StreamPlayerActivity extends AppCompatActivity {
         stop();
     }
 
+    private void updateProgressBar() {
+        int progreso = (int)(volumenActual * 100);
+        seekBarVolumen.setProgress(progreso);
+    }
+
     public void masVolumen(View view) {
 
         if(volumenActual < MAX_VOLUMEN) {
             volumenActual += INCREMENTO_VOLUMEN;
             setVolumen();
+            updateProgressBar();
         }
     }
 
@@ -181,6 +180,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
         if(volumenActual > MIN_VOLUMEN) {
             volumenActual -= INCREMENTO_VOLUMEN;
             setVolumen();
+            updateProgressBar();
         }
     }
 }

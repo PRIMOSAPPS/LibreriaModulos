@@ -15,45 +15,58 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity"
-        android:background="#d8386dff">
+        >
+
+        <ImageButton
+            android:id="@+id/mainConoceMonesterio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_conoce_monesterio"
+            android:layout_alignParentTop="true"
+            android:layout_margin="20dp" />
+
+        <ImageButton
+            android:id="@+id/mainSitios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="irSitios"
+            android:src="@mipmap/home_puntos_interes"
+            android:layout_toRightOf="@+id/mainConoceMonesterio"
+            android:layout_alignTop="@+id/mainConoceMonesterio"
+            android:layout_marginLeft="20dp" />
 
         <ImageButton
             android:id="@+id/mainIniciarRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="iniciarRadio"
-            android:src="@drawable/radio_monesterio"
-            android:layout_alignParentTop="true" />
+            android:src="@mipmap/home_radio_monesterio"
+            android:layout_below="@+id/mainConoceMonesterio"
+            android:layout_alignLeft="@+id/mainConoceMonesterio"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp" />
 
         <ImageButton
             android:id="@+id/mainBuzonCiudadno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mainIniciarRadio"
             android:layout_alignStart="@+id/mainIniciarRadio"
-            android:layout_below="@+id/mainIniciarRadio"
             android:onClick="irBuzonCiudadano"
-            android:src="@drawable/colaboracion_ciudadana" />
-
-        <ImageButton
-            android:id="@+id/mainSitios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mainIniciarRadio"
-            android:layout_alignStart="@+id/mainIniciarRadio"
-            android:layout_below="@+id/mainBuzonCiudadno"
-            android:onClick="irSitios"
-            android:src="@drawable/puntos_interes" />
+            android:src="@mipmap/home_colaboracion_ciudadana"
+            android:layout_alignLeft="@+id/mainConoceMonesterio"
+            android:layout_below="@+id/mainIniciarRadio"
+            android:layout_marginTop="20dp" />
 
         <ImageButton
             android:id="@+id/mainNotificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:layout_alignLeft="@+id/mainSitios"
             android:layout_alignStart="@+id/mainIniciarRadio"
-            android:layout_below="@+id/mainSitios"
+            android:layout_below="@+id/mainBuzonCiudadno"
             android:onClick="irNotificaciones"
-            android:src="@drawable/bandos"/>
+            android:src="@mipmap/home_bandos_moviles"
+            android:layout_alignTop="@+id/mainIniciarRadio" />
 
     </RelativeLayout>
 

@@ -9,30 +9,32 @@
     tools:context=".BuzonCiudadanoActivity">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/libCiuEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="enviar"
-        android:text="Enviar" />
+        android:background="@null"
+        android:src="@mipmap/colaboracion_ciudadana_enviar" />
 
-    <Button
+    <ImageButton
         android:id="@+id/libCiuSacarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@+id/libCiuEnviar"
+        android:background="@null"
         android:onClick="sacarFoto"
-        android:text="Sacar foto" />
+        android:src="@mipmap/colaboracion_ciudadana_hacer_foto" />
 
     <ScrollView
         android:id="@+id/libCiuScrollViewOpciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/libCiuEnviar"
-        android:layout_above="@+id/libCiuDireccion"
+        android:layout_below="@+id/libCiuDireccion"
+        android:layout_above="@+id/libCiuTextComentario"
         >
 
         <RadioGroup
@@ -168,10 +170,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/libCiuTextComentario"
         android:layout_centerHorizontal="true"
         android:text="@string/txtLibCiuDireccionNocalculada"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@+id/libCiuEnviar" />
 
     <EditText
         android:id="@+id/libCiuTextComentario"
