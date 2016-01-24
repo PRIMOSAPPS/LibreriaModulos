@@ -183,5 +183,13 @@ public class StreamPlayerActivity extends AppCompatActivity {
             updateProgressBar();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ToggleButton playPauseButton = (ToggleButton)findViewById(R.id.libRadioPlayPauseButton);
+        playPauseButton.setChecked(false);
+    }
 }
 
