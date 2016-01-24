@@ -139,7 +139,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
 
     public void playPause(View view) {
         ToggleButton playPauseButton = (ToggleButton)findViewById(R.id.libRadioPlayPauseButton);
-        if(!playPauseButton.isChecked()) {
+        if(playPauseButton.isChecked()) {
             pause();
         } else {
             play();
