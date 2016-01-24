@@ -135,9 +135,8 @@
                         android:layout_height="48dp"
                         android:layout_marginRight="10dp"
                         android:background="@null"
-                        android:src="@drawable/ic_localizar"
+                        android:src="@mipmap/puntos_interes_localizar"
                         android:onClick="localizarSitio"
-                        android:paddingLeft="20dp"
                         android:tag="SITIO" />
 
 
@@ -147,10 +146,9 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@null"
-                        android:src="@drawable/ic_compartir"
+                        android:src="@mipmap/puntos_interes_compartir"
                         android:onClick="compartirLugar"
                         android:layout_marginRight="10dp"
-                        android:paddingRight="20dp"
                         android:tag="SITIO" />
 
                     <ImageButton
@@ -171,7 +169,6 @@
                         android:src="@mipmap/puntos_interes_web"
                         android:onClick="visitarWeb"
                         android:layout_marginRight="10dp"
-                        android:paddingRight="20dp"
                         android:tag="SITIO"/>
 
 
