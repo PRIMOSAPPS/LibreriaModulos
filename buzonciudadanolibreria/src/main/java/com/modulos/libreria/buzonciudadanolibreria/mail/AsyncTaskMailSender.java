@@ -22,10 +22,15 @@ public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSend
     @Override
     protected ResultadoEnvioMail doInBackground(Void... params) {
 //        GMailSender gmailSender = new GMailSender("primosapps@gmail.com", "cacharreando2014");
-        Log.d(TAG, "Se realiza el envio de un correo");
-        mailSender.enviar();
-        Log.d(TAG, "Correo enviado, quizas correctamente.");
-        return ResultadoEnvioMail.OK;
+        try {
+            Log.d(TAG, "Se realiza el envio de un correo");
+            mailSender.enviar();
+            Log.d(TAG, "Correo enviado, quizas correctamente.");
+            return ResultadoEnvioMail.OK;
+        } catch(Exception e) {
+            Log.e("[AsyncTaskMailSender]", "Error enviando el correo.", e);
+            return ResultadoEnvioMail.KO;
+        }
     }
 
     @Override

@@ -27,6 +27,18 @@
             android:layout_alignParentTop="true"
             android:layout_margin="20dp" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/lib_dime_lbl_poblacion"
+            android:id="@+id/textConocePoblacion"
+            android:layout_below="@+id/mainSitios"
+            android:layout_toLeftOf="@+id/mainSitios"
+            android:layout_toStartOf="@+id/mainSitios"
+            android:textColor="@color/texto_principal" />
+
         <ImageButton
             android:id="@+id/mainSitios"
             android:layout_width="wrap_content"
@@ -34,9 +46,19 @@
             android:onClick="irSitios"
             android:src="@mipmap/home_puntos_interes"
             android:background="@null"
-            android:layout_toRightOf="@+id/mainConoceMonesterio"
+            android:layout_marginLeft="20dp"
             android:layout_alignTop="@+id/mainConoceMonesterio"
-            android:layout_marginLeft="20dp" />
+            android:layout_toRightOf="@+id/mainConoceMonesterio" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/lib_dime_lbl_puntos_interes"
+            android:id="@+id/textPuntosInteres"
+            android:textColor="@color/texto_principal"
+            android:layout_alignTop="@+id/textConocePoblacion"
+            android:layout_toRightOf="@+id/textConocePoblacion" />
 
         <ImageButton
             android:id="@+id/mainIniciarRadio"
@@ -44,35 +66,64 @@
             android:layout_height="wrap_content"
             android:onClick="iniciarRadio"
             android:src="@mipmap/home_radio_monesterio"
-            android:layout_below="@+id/mainConoceMonesterio"
-            android:layout_alignLeft="@+id/mainConoceMonesterio"
             android:background="@null"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/textConocePoblacion"
+            android:layout_alignLeft="@+id/mainConoceMonesterio" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/lib_dime_lbl_radio"
+            android:id="@+id/textIniciarRadio"
+            android:layout_below="@+id/mainIniciarRadio"
+            android:textColor="@color/texto_principal"
+            android:layout_alignLeft="@+id/mainIniciarRadio" />
 
         <ImageButton
             android:id="@+id/mainBuzonCiudadno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/mainIniciarRadio"
             android:onClick="irBuzonCiudadano"
             android:src="@mipmap/home_colaboracion_ciudadana"
             android:background="@null"
-            android:layout_alignLeft="@+id/mainConoceMonesterio"
-            android:layout_below="@+id/mainIniciarRadio"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textIniciarRadio"
+            android:layout_alignLeft="@+id/mainConoceMonesterio" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/lib_dime_lbl_colaboracion_ciudadana"
+            android:id="@+id/textBuzonCiudadano"
+            android:layout_below="@+id/mainBuzonCiudadno"
+            android:layout_toLeftOf="@+id/mainSitios"
+            android:layout_toStartOf="@+id/mainSitios"
+            android:textColor="@color/texto_principal" />
 
         <ImageButton
             android:id="@+id/mainNotificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/mainSitios"
-            android:layout_alignStart="@+id/mainIniciarRadio"
-            android:layout_below="@+id/mainBuzonCiudadno"
             android:onClick="irNotificaciones"
             android:background="@null"
             android:src="@mipmap/home_bandos_moviles"
+            android:layout_toRightOf="@+id/mainIniciarRadio"
+            android:layout_alignLeft="@+id/mainSitios"
             android:layout_alignTop="@+id/mainIniciarRadio" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/lib_dime_lbl_bandos"
+            android:id="@+id/textBandos"
+            android:textColor="@color/texto_principal"
+            android:layout_alignTop="@+id/textIniciarRadio"
+            android:layout_alignLeft="@+id/mainNotificaciones" />
 
     </RelativeLayout>
 

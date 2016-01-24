@@ -2,8 +2,10 @@ package com.modulos.libreria.buzonciudadanolibreria.mail;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,6 +28,7 @@ import javax.mail.MessagingException;
  * Created by h on 12/10/15.
  */
 public class MailSender {
+    private final static String TAG = "[MailSender]";
 
     private List<Uri> lstUrisFotos;
     private String telefono;
@@ -45,7 +48,7 @@ public class MailSender {
 
 
     public void enviar() {
-        System.out.println("Inicio");
+        Log.d(TAG, "Inicio enviar correo");
 
         //String fichero = "/home/h/Imágenes/redim/El cubo de rubik.jpg";
 
@@ -141,8 +144,8 @@ public class MailSender {
             int respCode = urlConnection.getResponseCode();
             String respMess = urlConnection.getResponseMessage();
 
-            System.out.println("Response code: " + respCode);
-            System.out.println("Response message: " + respMess);
+            Log.d(TAG, "Response code: " + respCode);
+            Log.d(TAG, "Response message: " + respMess);
             InputStream is = urlConnection.getInputStream();
 
             InputStreamReader isr = new InputStreamReader(is);
@@ -156,19 +159,19 @@ public class MailSender {
                 read =br.readLine();
             }
 
-            System.out.println("Response: " + sb.toString());
+            Log.d(TAG, "Fin enviar correo, response: " + sb.toString());
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error enviando correo.", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error enviando correo.", e);
         }
     }
 
     //private char[] getFileCharArray(String nombreFichero) throws IOException {
     private char[] getFileCharArray(Uri uriFoto) throws IOException {
 
-        final BitmapFactory.Options options = new BitmapFactory.Options();
+        BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
         File file = new File(uriFoto.getPath());
@@ -176,12 +179,15 @@ public class MailSender {
 
         Bitmap bm = BitmapFactory.decodeStream(fis);
         /*
-        Bitmap bm = BitmapFactory.decodeStream(fis, null, options);
+        Bitmap bm1 = BitmapFactory.decodeStream(fis, null, options);
 
 
-        options.inSampleSize = options.outHeight * options.outWidth * 2;
+        int sampleSize = options.outHeight * options.outWidth;// * 2;
+        options = new BitmapFactory.Options();
+        options.inSampleSize = sampleSize;
         options.inJustDecodeBounds = false;
-        bm = BitmapFactory.decodeStream(fis, null, options);
+        fis = new FileInputStream(file);
+        Bitmap bm = BitmapFactory.decodeStream(fis, null, options);
         */
 
 
