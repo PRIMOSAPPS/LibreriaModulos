@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,14 +54,14 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         TextView textTelefono = (TextView) findViewById(R.id.textTelefono);
 
 
-        Button botonTelefono = (Button) findViewById(R.id.botonTelefono);
-        Button botonLocalizar = (Button) findViewById(R.id.botonLocalizar);
-        Button botonCompartir = (Button) findViewById(R.id.botonCompartir);
-        Button botonFacebook = (Button) findViewById(R.id.botonFacebook);
-        Button botonTwiter = (Button) findViewById(R.id.botonTwiter);
-        Button botonWeb = (Button) findViewById(R.id.botonWeb);
+        ImageButton botonTelefono = (ImageButton) findViewById(R.id.botonTelefono);
+        ImageButton botonLocalizar = (ImageButton) findViewById(R.id.botonLocalizar);
+        ImageButton botonCompartir = (ImageButton) findViewById(R.id.botonCompartir);
+        ImageButton botonFacebook = (ImageButton) findViewById(R.id.botonFacebook);
+        ImageButton botonTwiter = (ImageButton) findViewById(R.id.botonTwiter);
+        ImageButton botonWeb = (ImageButton) findViewById(R.id.botonWeb);
 
-        Button botonCorreo = (Button) findViewById(R.id.botonCorreo);
+        ImageButton botonCorreo = (ImageButton) findViewById(R.id.botonCorreo);
 
 
         //miBotonB.setVisibility(View.GONE);
@@ -133,15 +134,15 @@ public class DetalleSitioActivity extends AppCompatActivity implements
 
     }
 
-    private void mostrarOcultarIcono(Button boton, String texto) {
+    private void mostrarOcultarIcono(ImageButton boton, String texto) {
         mostrarOcultarIcono(boton, texto.trim().length()>0);
     }
 
-    private void mostrarOcultarIcono(Button boton, double valor) {
+    private void mostrarOcultarIcono(ImageButton boton, double valor) {
         mostrarOcultarIcono(boton, valor>0);
     }
 
-    private void mostrarOcultarIcono(Button boton, boolean mostrar) {
+    private void mostrarOcultarIcono(ImageButton boton, boolean mostrar) {
         if (mostrar) {
             boton.setOnClickListener(this);
         }else {
