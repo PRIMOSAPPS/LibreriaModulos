@@ -196,23 +196,23 @@
                     android:gravity="center"
                     android:orientation="horizontal" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonFacebook"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_margin="5dp"
-
-                        android:background="@mipmap/puntos_interes_facebook"
+                        android:background="@null"
+                        android:src="@mipmap/puntos_interes_facebook"
                         android:onClick="mostrarFacebook"
                         android:layout_marginRight="20dp"
                         android:tag="SITIO" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/botonTwiter"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-
-                        android:background="@mipmap/puntos_interes_twitter"
+                        android:background="@null"
+                        android:src="@mipmap/puntos_interes_twitter"
                         android:onClick="mostrarTwiter"
                         android:layout_marginLeft="20dp"
                         android:tag="SITIO" />

@@ -314,7 +314,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncTaskMailSender taskMailSender = new AsyncTaskMailSender(mailSender);
+                AsyncTaskMailSender taskMailSender = new AsyncTaskMailSender(BuzonCiudadanoActivity.this, mailSender);
                 taskMailSender.execute((Void) null);
 
                 myDialog.hide();
