@@ -1,7 +1,11 @@
 package com.modulos.libreria.buzonciudadanolibreria.mail;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.modulos.libreria.buzonciudadanolibreria.R;
 
 import javax.mail.MessagingException;
 
@@ -10,12 +14,14 @@ import javax.mail.MessagingException;
  */
 public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSender.ResultadoEnvioMail> {
     private final static String TAG = "AsyncTaskMailSender";
+    private Context contexto;
 
     enum ResultadoEnvioMail {OK, KO};
 
     private MailSender mailSender;
 
-    public AsyncTaskMailSender(MailSender gmailSender) {
+    public AsyncTaskMailSender(Context contexto, MailSender gmailSender) {
+        this.contexto = contexto;
         this.mailSender = gmailSender;
     }
 
@@ -35,6 +41,12 @@ public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSend
 
     @Override
     protected void onPostExecute(ResultadoEnvioMail result) {
+        int idMsj = R.string.txtCiuMsjOK;
+        if(result == ResultadoEnvioMail.KO) {
+            idMsj = R.string.txtCiuMsjKO;
+        }
+        Toast.makeText(contexto, idMsj, Toast.LENGTH_SHORT);
+
         Log.d(TAG, "Resultado del envio del correo: " + result);
     }
 

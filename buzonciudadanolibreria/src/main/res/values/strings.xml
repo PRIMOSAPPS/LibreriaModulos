@@ -41,4 +41,7 @@
     <string name="errorCapturaFoto">Error al capturar la foto.</string>
     <string name="numFotosMaxAlcanzado">Numero maximo de fotos alcanzado.</string>
 
+    <string name="txtCiuMsjOK">Mensaje enviado correctamente al buzón ciudadano.</string>
+    <string name="txtCiuMsjKO">Error enviando el mensaje al buzón ciudadano.</string>
+
 </resources>
