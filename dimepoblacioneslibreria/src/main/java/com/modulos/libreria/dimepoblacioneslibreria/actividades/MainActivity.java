@@ -1,6 +1,7 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
+import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
@@ -134,6 +136,16 @@ public class MainActivity extends AppCompatActivity {
 //        i.setPackage(paqueteMapa);
 //        startActivity(i);
 //    }
+
+    public void conocerPoblacion(View view) {
+        String strUrlVideoPromocion = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_VIDEO_PROMOCION);
+        Uri urlVideoPromocion = Uri.parse(strUrlVideoPromocion);
+        Intent intent = new Intent(Intent.ACTION_VIEW, urlVideoPromocion);
+        //Intent intent = new Intent(Intent.ACTION_VIEW, urlVideoPromocion);
+        //String urlVideoPromocion = SingletonDimePoblaciones.getInstance().getVideoPromocion();
+        //intent.setClassName("com.google.android.youtube", "com.google.android.youtube.WatchActivity");
+        startActivity(intent);
+    }
 
     public void iniciarRadio(View view) {
         Intent i = new Intent(this, StreamPlayerActivity.class);

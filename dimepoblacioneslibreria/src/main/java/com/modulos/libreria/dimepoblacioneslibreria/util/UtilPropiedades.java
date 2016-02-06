@@ -62,6 +62,10 @@ public class UtilPropiedades {
 	 */
 	public static final String PROP_URL_RADIO = "urlRadio";
 	/**
+	 * Direccion para escuchar la radio en la aplicacion.
+	 */
+	public static final String PROP_URL_VIDEO_PROMOCION = "urlVideoPromocion";
+	/**
 	 * Latitud en la que se abre el mapa.
 	 */
 	public static final String PROP_LATITUD_PUEBLO = "latitudPueblo";

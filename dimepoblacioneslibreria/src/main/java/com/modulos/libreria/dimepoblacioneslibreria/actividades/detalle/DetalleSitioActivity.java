@@ -265,8 +265,6 @@ public class DetalleSitioActivity extends AppCompatActivity implements
     // FACEBOOK, pero pienso que hay que
     // motivar a las empresas para que esten en las redes sociales.
     private void mostrarFacebook(String facebook) {
-        // TODO Auto-generated method stub
-
         try {
             if (facebook.length() > 0) {
                 // realiza la llamada
@@ -299,12 +297,8 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         String latitud = Double.toString(lat);
         String longitud = Double.toString(lon);
 
-        // TODO Auto-generated method stub
-//        frase1 = getString(R.string.compartir1);
-//        frase2 = getString(R.string.compartir2);
-
-        frase1 = "Frase 1 ";
-        frase2 = "frase 2 ";
+        frase1 = getString(R.string.compartir1);
+        frase2 = getString(R.string.compartir2);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -313,8 +307,8 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         // Toast.makeText(getBaseContext(),"2-"+latitud+"/"+longitud+"--"+lat+"///"+lon,Toast.LENGTH_SHORT).show();
         intent.putExtra(Intent.EXTRA_SUBJECT, titulo);// Encabezado del mensaje
         intent.putExtra(Intent.EXTRA_TEXT, url);// Direccion web
-//        startActivity(Intent.createChooser(intent,
-//                this.getString(R.string.titulo_compartir)));
+        startActivity(Intent.createChooser(intent,
+                this.getString(R.string.titulo_compartir)));
 
     }
 
@@ -331,7 +325,8 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         intent.putExtra(Intent.EXTRA_EMAIL, destinatarios);
         intent.putExtra(Intent.EXTRA_SUBJECT, R.string.lib_dime_asunto_correo);// Asunto del mensaje
         //intent.putExtra(Intent.EXTRA_TEXT, "cuerpo del mensaje");// Cuerpo del Mensaje
-        String strTexto = Resources.getSystem().getString(R.string.lib_dime_selec_app_correo);
+        //String strTexto = Resources.getSystem().getString(R.string.lib_dime_selec_app_correo);
+        String strTexto = "Seleccionar aplicación de correo";
         startActivity(Intent.createChooser(intent, strTexto));
         //      this.getString(R.string.titulo_compartir)));
 

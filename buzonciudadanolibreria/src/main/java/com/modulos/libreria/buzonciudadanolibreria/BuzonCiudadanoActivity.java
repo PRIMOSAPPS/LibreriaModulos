@@ -96,7 +96,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int visibilidadEditorComentario = View.GONE;
                 int visibilidadOpcionesRecogidaResiduos = View.GONE;
-                if(checkedId == R.id.libCiuOpcionOtras) {
+                if(checkedId == R.id.libCiuOpcionOtras || checkedId == R.id.libCiuOpcionFeriasFiestas) {
                     visibilidadEditorComentario = View.VISIBLE;
                 } else if(checkedId == R.id.libCiuOpcRecogidaResiduos) {
                     visibilidadOpcionesRecogidaResiduos = View.VISIBLE;
@@ -354,9 +354,10 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
         TextView libCiuMostrarEnvioComentario = (TextView) myDialog.findViewById(R.id.libCiuMostrarEnvioComentario);
         EditText editComentario = (EditText)findViewById(R.id.libCiuTextComentario);
-        libCiuMostrarEnvioComentario.setText(editComentario.getText());
-
-        mailSender.setComentario(editComentario.getText().toString());
+        if(editComentario.getVisibility() == View.VISIBLE) {
+            libCiuMostrarEnvioComentario.setText(editComentario.getText());
+            mailSender.setComentario(editComentario.getText().toString());
+        }
 
         RadioGroup rgTipo = (RadioGroup)findViewById(R.id.libCiuRadioGroupOpciones);
         int idTipoSeleccionado = rgTipo.getCheckedRadioButtonId();

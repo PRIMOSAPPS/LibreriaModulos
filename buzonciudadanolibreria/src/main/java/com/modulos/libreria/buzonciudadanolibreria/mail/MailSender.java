@@ -192,6 +192,12 @@ public class MailSender {
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if(bm.getWidth() > 800) {
+            float escala = ((float)(bm.getWidth()) / 800);
+            int ancho = (int)(bm.getWidth() / escala);
+            int alto = (int)(bm.getHeight() / escala);
+            bm = Bitmap.createScaledBitmap(bm, ancho, alto, false);
+        }
         bm.compress(Bitmap.CompressFormat.JPEG, 100 , baos);
         byte[] b = baos.toByteArray();
 

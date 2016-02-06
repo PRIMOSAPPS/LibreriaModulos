@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:onClick="conocerPoblacion"
             android:src="@mipmap/home_conoce_monesterio"
             android:layout_alignParentTop="true"
             android:layout_margin="20dp" />
@@ -37,7 +38,8 @@
             android:layout_below="@+id/mainSitios"
             android:layout_toLeftOf="@+id/mainSitios"
             android:layout_toStartOf="@+id/mainSitios"
-            android:textColor="@color/texto_principal" />
+            android:textColor="@color/texto_principal"
+            android:gravity="center_horizontal" />
 
         <ImageButton
             android:id="@+id/mainSitios"
@@ -58,7 +60,8 @@
             android:id="@+id/textPuntosInteres"
             android:textColor="@color/texto_principal"
             android:layout_alignTop="@+id/textConocePoblacion"
-            android:layout_toRightOf="@+id/textConocePoblacion" />
+            android:layout_toRightOf="@+id/textConocePoblacion"
+            android:gravity="center_horizontal"/>
 
         <ImageButton
             android:id="@+id/mainIniciarRadio"
@@ -80,7 +83,8 @@
             android:id="@+id/textIniciarRadio"
             android:layout_below="@+id/mainIniciarRadio"
             android:textColor="@color/texto_principal"
-            android:layout_alignLeft="@+id/mainIniciarRadio" />
+            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:gravity="center_horizontal"/>
 
         <ImageButton
             android:id="@+id/mainBuzonCiudadno"
@@ -102,7 +106,8 @@
             android:layout_below="@+id/mainBuzonCiudadno"
             android:layout_toLeftOf="@+id/mainSitios"
             android:layout_toStartOf="@+id/mainSitios"
-            android:textColor="@color/texto_principal" />
+            android:textColor="@color/texto_principal"
+            android:gravity="center_horizontal"/>
 
         <ImageButton
             android:id="@+id/mainNotificaciones"
@@ -123,7 +128,8 @@
             android:id="@+id/textBandos"
             android:textColor="@color/texto_principal"
             android:layout_alignTop="@+id/textIniciarRadio"
-            android:layout_alignLeft="@+id/mainNotificaciones" />
+            android:layout_alignLeft="@+id/mainNotificaciones"
+            android:gravity="center_horizontal"/>
 
     </RelativeLayout>
 

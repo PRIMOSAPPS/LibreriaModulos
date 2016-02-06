@@ -18,9 +18,13 @@
     <string name="lib_dime_no_acceso_twiter">No se pudo acceder a Twiter</string>
     <string name="lib_dime_facebook_no_disponible">Sin Facebook Asociado</string>
     <string name="lib_dime_no_acceso_facebook">No se pudo acceder a Facebook</string>
-    <string name="lib_dime_asunto_correo">Aplicación Conoce Moraleja</string>
-    <string name="lib_dime_selec_app_correo">Seleccionar Aplicación de Correo</string>
+    <string name="lib_dime_asunto_correo">Monesterio App</string>
+    <string name="lib_dime_selec_app_correo">Seleccionar aplicación de correo</string>
     <string name="lib_dime_no_pudo_llamar">No se pudo realizar la llamada</string>
+
+    <string name="compartir1">Estoy en </string>
+    <string name="compartir2">, haz clic en este enlace para localizarme.</string>
+    <string name="titulo_compartir">Compartir Lugar</string>
 
     <string name="lib_dime_lbl_poblacion">Información sobre Monesterio</string>
     <string name="lib_dime_lbl_puntos_interes">Puntos de interés</string>
