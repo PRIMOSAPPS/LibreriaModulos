@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         String strLongtitud = utilProp.getProperty(UtilPropiedades.PROP_LONGITUD_PUEBLO);
         double doubleLatitud = Double.parseDouble(strLatitud);
         double doubleLongitud = Double.parseDouble(strLongtitud);
-        startActivity(gm.getUrlMapsApps(doubleLatitud, doubleLongitud, 13));
+        startActivity(gm.getUrlMapsApps(doubleLatitud, doubleLongitud, "Monesterio", 13));
     }
 
 //    public void verMiGoogleMapa(View view) {

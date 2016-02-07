@@ -256,7 +256,7 @@ public class DetalleSitioActivity extends AppCompatActivity implements
 //        finish();
 
         GoogleMaps gm = new GoogleMaps();
-        startActivity(gm.getUrlMapsApps(latitud, longitud, 8));
+        startActivity(gm.getUrlMapsApps(latitud, longitud, lugar, 18));
     }
 
     // Abre Internet para ir al sitio Facebook del anunciante, si no lo tiene
