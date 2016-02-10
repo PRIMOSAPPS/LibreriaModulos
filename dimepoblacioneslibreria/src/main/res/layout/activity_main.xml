@@ -19,27 +19,26 @@
         >
 
         <ImageButton
-            android:id="@+id/mainConoceMonesterio"
+            android:id="@+id/mainIniciarRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="iniciarRadio"
+            android:src="@mipmap/home_radio_monesterio"
             android:background="@null"
-            android:onClick="conocerPoblacion"
-            android:src="@mipmap/home_conoce_monesterio"
             android:layout_alignParentTop="true"
-            android:layout_margin="20dp" />
-
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_poblacion"
-            android:id="@+id/textConocePoblacion"
-            android:layout_below="@+id/mainSitios"
-            android:layout_toLeftOf="@+id/mainSitios"
-            android:layout_toStartOf="@+id/mainSitios"
+            android:text="@string/lib_dime_lbl_radio"
+            android:id="@+id/textIniciarRadio"
             android:textColor="@color/texto_principal"
-            android:gravity="center_horizontal" />
+            android:layout_below="@+id/mainIniciarRadio"
+            android:layout_alignLeft="@+id/mainIniciarRadio"
+            android:gravity="center_horizontal"/>
 
         <ImageButton
             android:id="@+id/mainSitios"
@@ -48,9 +47,9 @@
             android:onClick="irSitios"
             android:src="@mipmap/home_puntos_interes"
             android:background="@null"
-            android:layout_marginLeft="20dp"
-            android:layout_alignTop="@+id/mainConoceMonesterio"
-            android:layout_toRightOf="@+id/mainConoceMonesterio" />
+            android:layout_marginLeft="40dp"
+            android:layout_alignTop="@+id/mainIniciarRadio"
+            android:layout_toRightOf="@+id/mainIniciarRadio" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,32 +58,9 @@
             android:text="@string/lib_dime_lbl_puntos_interes"
             android:id="@+id/textPuntosInteres"
             android:textColor="@color/texto_principal"
-            android:layout_alignTop="@+id/textConocePoblacion"
-            android:layout_toRightOf="@+id/textConocePoblacion"
-            android:gravity="center_horizontal"/>
-
-        <ImageButton
-            android:id="@+id/mainIniciarRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="iniciarRadio"
-            android:src="@mipmap/home_radio_monesterio"
-            android:background="@null"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_below="@+id/textConocePoblacion"
-            android:layout_alignLeft="@+id/mainConoceMonesterio" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_radio"
-            android:id="@+id/textIniciarRadio"
-            android:layout_below="@+id/mainIniciarRadio"
-            android:textColor="@color/texto_principal"
-            android:layout_alignLeft="@+id/mainIniciarRadio"
-            android:gravity="center_horizontal"/>
+            android:layout_alignTop="@+id/textIniciarRadio"
+            android:gravity="center_horizontal"
+            android:layout_alignLeft="@+id/mainSitios" />
 
         <ImageButton
             android:id="@+id/mainBuzonCiudadno"
@@ -95,7 +71,7 @@
             android:background="@null"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/textIniciarRadio"
-            android:layout_alignLeft="@+id/mainConoceMonesterio" />
+            android:layout_alignLeft="@+id/mainIniciarRadio" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -116,9 +92,9 @@
             android:onClick="irNotificaciones"
             android:background="@null"
             android:src="@mipmap/home_bandos_moviles"
-            android:layout_toRightOf="@+id/mainIniciarRadio"
+            android:layout_toRightOf="@+id/mainBuzonCiudadno"
             android:layout_alignLeft="@+id/mainSitios"
-            android:layout_alignTop="@+id/mainIniciarRadio" />
+            android:layout_alignTop="@+id/mainBuzonCiudadno" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,7 +103,7 @@
             android:text="@string/lib_dime_lbl_bandos"
             android:id="@+id/textBandos"
             android:textColor="@color/texto_principal"
-            android:layout_alignTop="@+id/textIniciarRadio"
+            android:layout_alignTop="@+id/textBuzonCiudadano"
             android:layout_alignLeft="@+id/mainNotificaciones"
             android:gravity="center_horizontal"/>
 

@@ -137,16 +137,6 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(i);
 //    }
 
-    public void conocerPoblacion(View view) {
-        String strUrlVideoPromocion = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_VIDEO_PROMOCION);
-        Uri urlVideoPromocion = Uri.parse(strUrlVideoPromocion);
-        Intent intent = new Intent(Intent.ACTION_VIEW, urlVideoPromocion);
-        //Intent intent = new Intent(Intent.ACTION_VIEW, urlVideoPromocion);
-        //String urlVideoPromocion = SingletonDimePoblaciones.getInstance().getVideoPromocion();
-        //intent.setClassName("com.google.android.youtube", "com.google.android.youtube.WatchActivity");
-        startActivity(intent);
-    }
-
     public void iniciarRadio(View view) {
         Intent i = new Intent(this, StreamPlayerActivity.class);
         String urlRadio = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_RADIO);
