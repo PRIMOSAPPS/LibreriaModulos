@@ -1,7 +1,6 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
-import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ListView listView;
-    private String[] opciones = {"Sitios", "Google maps", "Radio", "Buzon ciudadano", "Notificaciones", "Preferencias"};
+    private String[] opciones = {"Radio", "Puntos de interes", "Colaboracion ciudadana", "Bandos"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +48,16 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
                 switch (arg2) {
                     case 0:
-                        irSitios(null);
-                        break;
-                    case 1:
-                        verGoogleMapa(null);
-                        break;
-                    case 2:
                         iniciarRadio(null);
                         break;
-                    case 3:
+                    case 1:
+                        irSitios(null);
+                        break;
+                    case 2:
                         irBuzonCiudadano(null);
                         break;
-                    case 4:
+                    case 3:
                         irNotificaciones(null);
-                        break;
-                    case 5:
-                        irPreferencias();
                         break;
                 }
             }

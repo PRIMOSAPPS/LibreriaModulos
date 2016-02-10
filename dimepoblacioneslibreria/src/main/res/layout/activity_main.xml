@@ -109,15 +109,32 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listMenuLateral"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMenuLateral"
+        android:orientation="vertical"
         android:layout_gravity="start"
-        android:background="@color/opcion_menu_lateral"
-        android:choiceMode="singleChoice"
-        android:divider="@color/separador_menu_lateral"
-        android:dividerHeight="2dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:background="@color/opcion_menu_lateral"
+            android:src="@drawable/escudo_monesterio"/>
+
+        <ListView
+            android:id="@+id/listMenuLateral"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/opcion_menu_lateral"
+            android:choiceMode="singleChoice"
+            android:divider="@color/separador_menu_lateral"
+            android:dividerHeight="2dp" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
 
