@@ -79,6 +79,8 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         long idSitio = (long) getIntent().getExtras().get(ID_SITIO);
         this.sitio = dataSource.getById(idSitio);
 
+        setTitle(sitio.getNombre());
+
         Gallery myGallery = (Gallery) findViewById(R.id.gallery);
         myGallery.setAdapter(new ImageAdapter(this, this, sitio));
 
