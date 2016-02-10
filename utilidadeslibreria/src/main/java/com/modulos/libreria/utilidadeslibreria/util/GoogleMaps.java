@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 
 /**
  * Created by h on 11/10/15.
@@ -89,19 +90,21 @@ public class GoogleMaps {
         }
     }
 
-    public Intent getUrlMapsApps(double latitud, double longitud, String etiqueta, int zoom) {
+    public Intent getUrlMapsApps(Double latitud, Double longitud, String etiqueta, Integer zoom) {
         return getUrlMapsApps(latitud, longitud, zoom, etiqueta, "");
     }
 
-    public Intent getUrlMapsApps(double latitud, double longitud, int zoom, String etiqueta, String query) {
+    public Intent getUrlMapsApps(Double latitud, Double longitud, Integer zoom, String etiqueta, String query) {
         String paqueteMapa = "com.google.android.apps.maps";
-        String parteUrlPatron = "geo:0,0?q={0,number,###.#######},{1,number,###.#######}&z={2}&mid=zUB3AjgrW0uo.k54AXa3v4U6I";
-        //String parteUrl = MessageFormat.format(parteUrlPatron, latitud, longitud, zoom);
-        String parteUrl = "geo:0,0?q="+latitud+","+longitud+"&z="+zoom+"&mid=zUB3AjgrW0uo.k54AXa3v4U6I";
+        String parteUrlPatron = "geo:0,0?q={0,number,###.#######},{1,number,###.#######}({2})&z={3}&mid=zUB3AjgrW0uo.k54AXa3v4U6I";
+
+        MessageFormat msgFormat = new MessageFormat(parteUrlPatron);
+        msgFormat.setLocale(Locale.US);
+        Object[] arrParams = {latitud, longitud, etiqueta, zoom};
+        String parteUrl = msgFormat.format(arrParams);
         if(query != null && !query.equals("")) {
             parteUrl = parteUrl + "&" + query;
         }
-        //parteUrl = "https://www.google.com/maps/d/viewer?mid=zUB3AjgrW0uo.k54AXa3v4U6I";
         Uri gmmIntentURi = Uri.parse(parteUrl);
 
         Intent resul = new Intent(Intent.ACTION_VIEW, gmmIntentURi);
