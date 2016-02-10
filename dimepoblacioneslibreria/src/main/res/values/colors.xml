@@ -2,5 +2,7 @@
 <resources>
 
     <item name="texto_principal" type="color">#000000</item>
+    <item name="separador_menu_lateral" type="color">#c3a100</item>
+    <item name="opcion_menu_lateral" type="color">#fdd100</item>
 
 </resources>
