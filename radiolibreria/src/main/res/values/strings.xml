@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RadioLibreria</string>
-    <string name="title_activity_stream_player">StreamPlayerActivity</string>
+    <string name="title_activity_stream_player">Radio</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
