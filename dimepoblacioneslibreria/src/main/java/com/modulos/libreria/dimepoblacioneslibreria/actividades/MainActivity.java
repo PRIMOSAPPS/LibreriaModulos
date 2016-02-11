@@ -15,6 +15,8 @@ import android.widget.ListView;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
+import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
+import com.modulos.libreria.dimepoblacioneslibreria.menulateral.ConfigMenuLateral;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
@@ -35,33 +37,9 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listMenuLateral);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        listView.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1,
-                opciones));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ConfigMenuLateral cml = new ConfigMenuLateral(this);
+        cml.iniciarMenuLateral();
 
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-//                Toast.makeText(MainActivity.this, "Item: " + opciones[arg2],
-//                        Toast.LENGTH_SHORT).show();
-                drawerLayout.closeDrawers();
-                switch (arg2) {
-                    case 0:
-                        iniciarRadio(null);
-                        break;
-                    case 1:
-                        irSitios(null);
-                        break;
-                    case 2:
-                        irBuzonCiudadano(null);
-                        break;
-                    case 3:
-                        irNotificaciones(null);
-                        break;
-                }
-            }
-        });
     }
 
     @Override
@@ -150,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void irSitios(View view) {
         Intent i = new Intent(this, ListaSitiosActivity.class);
-        i.putExtra("categoria", "SITIO");
+        i.putExtra(Constantes.categoria, Constantes.SITIO);
         startActivity(i);
     }
 
