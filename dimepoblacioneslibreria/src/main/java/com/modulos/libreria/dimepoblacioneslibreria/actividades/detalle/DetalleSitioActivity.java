@@ -162,7 +162,7 @@ public class DetalleSitioActivity extends AppCompatActivity implements
 
         int i = boton_pulsado.getId();
         if (i == R.id.botonTelefono) {
-            realizarLlamada(sitio.getTelefonosFijos());
+            realizarLlamada(sitio);
 
         } else if (i == R.id.botonLocalizar) {
             localizarSitio(lugar, latitud, longitud);
@@ -341,26 +341,32 @@ public class DetalleSitioActivity extends AppCompatActivity implements
     // aparte que había que modificar permisos en el manifest qu eno me gustan
     // ni a la gente tampoco, me parecía
     // demasiado atrevido.
-    private void realizarLlamada(String numero) {
-        // TODO Auto-generated method stub
-        numero = numero.trim();
+    private void realizarLlamada(SitioDTO sitio) {
+        String numeroFijo = sitio.getTelefonosFijos();
+        String numeroMoviles = sitio.getTelefonosMoviles();
+        numeroFijo = numeroFijo.trim();
+        numeroMoviles = numeroMoviles.trim();
         // Toast.makeText(getBaseContext(),numero,Toast.LENGTH_SHORT).show();
         try {
-            if (numero.length() > 0) {
+            if (numeroFijo.length() == 0 && numeroMoviles.length() == 0) {
+                // si el sitio no tiene numero
+                Toast.makeText(getBaseContext(),
+                        R.string.sin_telefono_asociado, Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                String numero = numeroFijo;
+                if (numeroMoviles.length() > 0) {
+                    numero = numeroMoviles;
+                }
                 // realiza la llamada
                 Uri marcarnumero = Uri.parse("tel:" + numero.toString());
                 Intent intent = new Intent(Intent.ACTION_DIAL, marcarnumero);
                 startActivity(intent);
-            } else {
-                // si el sitio no tiene numero
-                Toast.makeText(getBaseContext(),
-                        "Sin Numero de Telefono Asociado", Toast.LENGTH_SHORT)
-                        .show();
             }
 
         } catch (ActivityNotFoundException activityException) {
             // si se produce un error, se muestra en el LOGCAT
-            Toast.makeText(getBaseContext(), R.string.lib_dime_no_pudo_llamar,
+            Toast.makeText(getBaseContext(), "No se pudo realizar la llamada",
                     Toast.LENGTH_SHORT).show();
             // Log.e("ET", "No se pudo realizar la llamada.",
             // activityException);
