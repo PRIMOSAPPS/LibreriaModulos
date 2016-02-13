@@ -6,6 +6,8 @@
     <string name="pref_description_vibracion_notificacion">Activar para vibrar al recibir una notifiacción</string>
     <string name="pref_title_sonido_notificacion">Sonar</string>
     <string name="pref_description_sonido_notificacion">Activar para emitir sonido al recibir una notifiacción</string>
+    <string name="pref_title_led_notificacion">Led</string>
+    <string name="pref_description_led_notificacion">Activar la luz led al recibir una notifiacción</string>
 
     <!-- Strings related to Settings -->
 
