@@ -2,7 +2,6 @@ package com.modulos.libreria.dimepoblacioneslibreria.menulateral;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.actividades.ListaNotificacionesActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.actividades.ListaSitiosActivity;
+import com.modulos.libreria.dimepoblacioneslibreria.actividades.PreferenciasActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.adaptadores.MenuLateralAdaptador;
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
@@ -27,6 +27,7 @@ public class ConfigMenuLateral {
 	private static int IND_PUNTOS_INTERES = 1;
 	private static int IND_COLABORACION_CIUDADANA = 2;
 	private static int IND_BANDOS = 3;
+	private static int IND_PREFERENCIAS = 4;
 	
 	private Activity actividad;
 
@@ -49,6 +50,9 @@ public class ConfigMenuLateral {
 		listaItemsMenu.add(datosItem);
 
 		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_bandos, R.mipmap.ml_home_bandos_moviles);
+		listaItemsMenu.add(datosItem);
+
+		datosItem = new DatosItemMenuLateral(R.string.action_settings, android.R.drawable.ic_menu_manage);
 		listaItemsMenu.add(datosItem);
 
 		ListView mDrawerOptions = (ListView) actividad.findViewById(R.id.listMenuLateral);
@@ -75,6 +79,9 @@ public class ConfigMenuLateral {
 					actividad.startActivity(i);
 				} else if (indice == IND_BANDOS) {
 					Intent i = new Intent(actividad, ListaNotificacionesActivity.class);
+					actividad.startActivity(i);
+				} else if (indice == IND_PREFERENCIAS) {
+					Intent i = new Intent(actividad, PreferenciasActivity.class);
 					actividad.startActivity(i);
 				}
 				mDrawer.closeDrawers();
