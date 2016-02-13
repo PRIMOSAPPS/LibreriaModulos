@@ -144,7 +144,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
 
             Log.d(TAG, "Recibida una notificacion: " + notificacion.getTexto());
 
-            long[] patronVibracion = {500};
+            long[] patronVibracion = {1000, 1000};
             //Esto hace posible crear la notificación
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context);
