@@ -169,7 +169,6 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             int idIconoNotificacion = SingletonDimePoblaciones.getInstance().getIdIconoNotificacion();
             mBuilder.setSmallIcon(idIconoNotificacion)
                     .setContentTitle(notificacion.getTitulo())
-                    .setContentText(notificacion.getTexto())
 					.setContentIntent(resultPendingIntent)
                     .setGroup(GRUPO_NOTIFICACIONES_DIME_MONESTERIO)
                     .setAutoCancel(true);
