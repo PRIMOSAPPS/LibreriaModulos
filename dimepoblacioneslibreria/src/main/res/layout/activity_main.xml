@@ -38,7 +38,8 @@
             android:textColor="@color/texto_principal"
             android:layout_below="@+id/mainIniciarRadio"
             android:layout_alignLeft="@+id/mainIniciarRadio"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30dp" />
 
         <ImageButton
             android:id="@+id/mainSitios"
