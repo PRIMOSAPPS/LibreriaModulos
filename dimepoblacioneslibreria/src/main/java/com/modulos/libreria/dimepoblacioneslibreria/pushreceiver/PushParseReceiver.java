@@ -139,7 +139,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
                             context,
                             0,
                             resultIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT
+                            PendingIntent.FLAG_UPDATE_CURRENT
                     );
 
             Log.d(TAG, "Recibida una notificacion: " + notificacion.getTexto());
@@ -172,6 +172,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
                     .setContentTitle(notificacion.getTitulo())
 					.setContentIntent(resultPendingIntent)
                     .setGroup(GRUPO_NOTIFICACIONES_DIME_MONESTERIO)
+                    .setGroupSummary(true)
                     .setAutoCancel(true);
             PreferenciasDime prefDime = new PreferenciasDime(context);
             if(prefDime.isSonarVibracion()) {
