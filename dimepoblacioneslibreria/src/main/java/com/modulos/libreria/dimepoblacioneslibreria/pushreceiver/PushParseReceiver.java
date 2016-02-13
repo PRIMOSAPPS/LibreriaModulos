@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.support.v7.app.NotificationCompat;
 import android.text.Html;
@@ -178,6 +179,9 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             }
             if(prefDime.isVibrarVibracion()) {
                 mBuilder.setVibrate(patronVibracion);
+            }
+            if(prefDime.isLedRecibirNotificacion(context)) {
+                mBuilder.setLights(Color.YELLOW, 2000, 1500);
             }
 
             ///////////////////////////////////////////////
