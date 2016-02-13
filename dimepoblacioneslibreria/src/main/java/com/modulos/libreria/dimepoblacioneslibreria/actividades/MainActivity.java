@@ -1,10 +1,16 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +21,11 @@ import android.widget.ListView;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
+import com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle.DetalleNotificacionActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
 import com.modulos.libreria.dimepoblacioneslibreria.menulateral.ConfigMenuLateral;
+import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasDime;
+import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
@@ -26,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ListView listView;
-    private String[] opciones = {"Radio", "Puntos de interes", "Colaboracion ciudadana", "Bandos"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
