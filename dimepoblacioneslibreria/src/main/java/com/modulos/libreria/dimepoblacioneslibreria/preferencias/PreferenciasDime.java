@@ -3,6 +3,7 @@ package com.modulos.libreria.dimepoblacioneslibreria.preferencias;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.modulos.libreria.utilidadeslibreria.preferencias.Preferencias;
 
@@ -12,6 +13,7 @@ import com.modulos.libreria.utilidadeslibreria.preferencias.Preferencias;
 public class PreferenciasDime extends Preferencias {
     public final static String VIBRACION_NOTIFICACION = "vibracion_notificacion";
     public final static String SONIDO_NOTIFICACION = "sonido_notificacion";
+    public final static String LED_NOTIFICACION = "led_notificacion";
 
     public PreferenciasDime(Context contexto) {
         super(contexto);
@@ -25,11 +27,7 @@ public class PreferenciasDime extends Preferencias {
     }
 
     public void setSonarVibracion(boolean valor) {
-        SharedPreferences ratePrefs = PreferenceManager
-                .getDefaultSharedPreferences(contexto);
-        SharedPreferences.Editor edit = ratePrefs.edit();
-        edit.putBoolean(SONIDO_NOTIFICACION, valor);
-        edit.commit();
+        setValor(SONIDO_NOTIFICACION, valor);
     }
 
     public boolean isVibrarVibracion() {
@@ -39,10 +37,24 @@ public class PreferenciasDime extends Preferencias {
     }
 
     public void setVibrarVibracion(boolean valor) {
+        setValor(VIBRACION_NOTIFICACION, valor);
+    }
+
+    public boolean isLedRecibirNotificacion(Context contexto) {
+        SharedPreferences ratePrefs = PreferenceManager
+                .getDefaultSharedPreferences(contexto);
+        return ratePrefs.getBoolean(LED_NOTIFICACION, true);
+    }
+
+    public void setLedRecibirNotificacion(boolean valor) {
+        setValor(LED_NOTIFICACION, valor);
+    }
+
+    private void setValor(String pref, boolean valor) {
         SharedPreferences ratePrefs = PreferenceManager
                 .getDefaultSharedPreferences(contexto);
         SharedPreferences.Editor edit = ratePrefs.edit();
-        edit.putBoolean(VIBRACION_NOTIFICACION, valor);
+        edit.putBoolean(pref, valor);
         edit.commit();
     }
 }
