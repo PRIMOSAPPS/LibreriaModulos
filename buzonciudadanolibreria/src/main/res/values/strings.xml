@@ -2,7 +2,7 @@
     <string name="app_name">BuzonCiudadanoLibreria</string>
     <string name="title_activity_buzon_ciudadano">Colaboración ciudadana</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Preferencias</string>
     <string name="comentario">Comentario</string>
     <string name="lblDialogoEnvioTelefono">Teléfono</string>
     <string name="lblDialogoEnvioCorreo">Correo</string>
