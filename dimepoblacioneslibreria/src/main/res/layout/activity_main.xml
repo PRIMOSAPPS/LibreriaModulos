@@ -4,111 +4,154 @@
     android:layout_height="match_parent"
     android:layout_gravity="left"
     >
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="@drawable/imagen_fondo_con_titulo"
-        tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity"
+        android:gravity="center"
+        android:paddingTop="@dimen/activity_vertical_margin"
         >
 
-        <ImageButton
-            android:id="@+id/mainIniciarRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="iniciarRadio"
-            android:src="@mipmap/home_radio_monesterio"
-            android:background="@null"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".08"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical|clip_vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_radio"
-            android:id="@+id/textIniciarRadio"
-            android:textColor="@color/texto_principal"
-            android:layout_below="@+id/mainIniciarRadio"
-            android:layout_alignLeft="@+id/mainIniciarRadio"
+            <ImageButton
+                android:id="@+id/mainBtnMenuLateral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:onClick="mostrarMenuLateral"
+                android:src="@android:drawable/ic_media_play"
+                android:background="#f9b619"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".46"
+            android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp" />
+            >
 
-        <ImageButton
-            android:id="@+id/mainSitios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="irSitios"
-            android:src="@mipmap/home_puntos_interes"
-            android:background="@null"
-            android:layout_marginLeft="40dp"
-            android:layout_alignTop="@+id/mainIniciarRadio"
-            android:layout_toRightOf="@+id/mainIniciarRadio" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".16"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_puntos_interes"
-            android:id="@+id/textPuntosInteres"
-            android:textColor="@color/texto_principal"
-            android:layout_alignTop="@+id/textIniciarRadio"
-            android:gravity="center_horizontal"
-            android:layout_alignLeft="@+id/mainSitios" />
+            <ImageButton
+                android:id="@+id/mainIniciarRadio"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".36"
+                android:scaleType="fitXY"
+                android:onClick="iniciarRadio"
+                android:src="@mipmap/home_radio_monesterio"
+                android:background="@null"
+                />
 
-        <ImageButton
-            android:id="@+id/mainBuzonCiudadno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="irBuzonCiudadano"
-            android:src="@mipmap/home_colaboracion_ciudadana"
-            android:background="@null"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/textIniciarRadio"
-            android:layout_alignLeft="@+id/mainIniciarRadio" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".06"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/lib_dime_lbl_radio"
+                android:id="@+id/textIniciarRadio"
+                android:textColor="@color/texto_principal"
+                android:gravity="center_horizontal"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_colaboracion_ciudadana"
-            android:id="@+id/textBuzonCiudadano"
-            android:layout_below="@+id/mainBuzonCiudadno"
-            android:layout_toLeftOf="@+id/mainSitios"
-            android:layout_toStartOf="@+id/mainSitios"
-            android:textColor="@color/texto_principal"
-            android:gravity="center_horizontal"/>
+            <ImageButton
+                android:id="@+id/mainBuzonCiudadno"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".36"
+                android:scaleType="fitXY"
+                android:onClick="irBuzonCiudadano"
+                android:src="@mipmap/home_colaboracion_ciudadana"
+                android:background="@null"
+                />
 
-        <ImageButton
-            android:id="@+id/mainNotificaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="irNotificaciones"
-            android:background="@null"
-            android:src="@mipmap/home_bandos_moviles"
-            android:layout_toRightOf="@+id/mainBuzonCiudadno"
-            android:layout_alignLeft="@+id/mainSitios"
-            android:layout_alignTop="@+id/mainBuzonCiudadno" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".06"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/lib_dime_lbl_colaboracion_ciudadana"
+                android:id="@+id/textBuzonCiudadano"
+                android:textColor="@color/texto_principal"
+                android:gravity="center_horizontal"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/lib_dime_lbl_bandos"
-            android:id="@+id/textBandos"
-            android:textColor="@color/texto_principal"
-            android:layout_alignTop="@+id/textBuzonCiudadano"
-            android:layout_alignLeft="@+id/mainNotificaciones"
-            android:gravity="center_horizontal"/>
+        </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".46"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".16"/>
+
+            <ImageButton
+                android:id="@+id/mainSitios"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".36"
+                android:scaleType="fitXY"
+                android:onClick="irSitios"
+                android:src="@mipmap/home_puntos_interes"
+                android:background="@null"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".06"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/lib_dime_lbl_puntos_interes"
+                android:id="@+id/textPuntosInteres"
+                android:textColor="@color/texto_principal"
+                android:gravity="center_horizontal"
+                />
+
+
+            <ImageButton
+                android:id="@+id/mainNotificaciones"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".36"
+                android:scaleType="fitXY"
+                android:onClick="irNotificaciones"
+                android:background="@null"
+                android:src="@mipmap/home_bandos_moviles"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".06"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/lib_dime_lbl_bandos"
+                android:id="@+id/textBandos"
+                android:textColor="@color/texto_principal"
+                android:gravity="center_horizontal"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <LinearLayout
