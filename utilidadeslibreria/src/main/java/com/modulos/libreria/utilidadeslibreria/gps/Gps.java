@@ -69,7 +69,7 @@ public class Gps implements LocationListener {
 
     private LocationManager locationManager;
 
-    private String proveedor;
+    private String[] proveedores = {LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER, LocationManager.PASSIVE_PROVIDER};
 
     private List<GpsListener> lstListeners = new ArrayList<>();
 
@@ -86,7 +86,6 @@ public class Gps implements LocationListener {
 
         locationManager = (LocationManager)actividadContext.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
-        proveedor = locationManager.getBestProvider(criteria, false);
         registrarLocationManager();
     }
 
@@ -120,11 +119,15 @@ public class Gps implements LocationListener {
     }
 
     public void pausarRegistro() {
-        locationManager.removeUpdates(this);
+        for(String proveedor : proveedores) {
+            locationManager.removeUpdates(this);
+        }
     }
 
     public void registrarLocationManager() {
-        locationManager.requestLocationUpdates(proveedor, TIEMPO_MIN_ACTUALIZAR_LOCATION, DISTANCIA_MIN_DISTANCIA_MIN, this);
+        for(String proveedor : proveedores) {
+            locationManager.requestLocationUpdates(proveedor, TIEMPO_MIN_ACTUALIZAR_LOCATION, DISTANCIA_MIN_DISTANCIA_MIN, this);
+        }
     }
 
     @Override
