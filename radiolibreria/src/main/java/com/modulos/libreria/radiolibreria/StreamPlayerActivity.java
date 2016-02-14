@@ -73,20 +73,38 @@ public class StreamPlayerActivity extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setVolumen();
         try {
+            setTextoAviso(R.string.lib_radio_conectando);
             mediaPlayer.setDataSource(urlRadio);
             mediaPlayer.prepareAsync();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     play();
+                    setTextoAviso("");
+                }
+            });
+            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    setTextoAviso(R.string.lib_radio_error_conexion);
+                    return true;
                 }
             });
         } catch (IOException e) {
             Log.d(TAG, "Error al preparar media player", e);
             Log.e(TAG, "Error inicializando MediaPlayer para la radio.", e);
-            TextView textoAviso = (TextView)findViewById(R.id.libRadioTextoAviso);
-            textoAviso.setText(R.string.lib_radio_error_conexion);
+            setTextoAviso(R.string.lib_radio_error_conexion);
         }
+    }
+
+    private void setTextoAviso(int idTexto) {
+        TextView textoAviso = (TextView)findViewById(R.id.libRadioTextoAviso);
+        textoAviso.setText(idTexto);
+    }
+
+    private void setTextoAviso(String texto) {
+        TextView textoAviso = (TextView)findViewById(R.id.libRadioTextoAviso);
+        textoAviso.setText(texto);
     }
 
     public void reset(View view) {
