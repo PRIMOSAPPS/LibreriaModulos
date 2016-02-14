@@ -1,31 +1,20 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
-import com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle.DetalleNotificacionActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
 import com.modulos.libreria.dimepoblacioneslibreria.menulateral.ConfigMenuLateral;
-import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasDime;
-import com.modulos.libreria.dimepoblacioneslibreria.singleton.SingletonDimePoblaciones;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
@@ -34,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
 
     private DrawerLayout drawerLayout;
-    private ListView listView;
+    private LinearLayout linearLayoutMenuLateral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "iniciar()");
 
-        listView = (ListView) findViewById(R.id.listMenuLateral);
+        linearLayoutMenuLateral = (LinearLayout) findViewById(R.id.linearLayoutMenuLateral);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ConfigMenuLateral cml = new ConfigMenuLateral(this);
@@ -69,11 +58,7 @@ public class MainActivity extends AppCompatActivity {
             irPreferencias();
             return true;
         } else if (id == android.R.id.home) {
-            if (drawerLayout.isDrawerOpen(listView)) {
-                drawerLayout.closeDrawers();
-            } else {
-                drawerLayout.openDrawer(listView);
-            }
+            mostrarOcultarMenuLateral();
         }
 
         return super.onOptionsItemSelected(item);
@@ -114,6 +99,18 @@ public class MainActivity extends AppCompatActivity {
 //        i.setPackage(paqueteMapa);
 //        startActivity(i);
 //    }
+
+    private void mostrarOcultarMenuLateral() {
+        if (drawerLayout.isDrawerOpen(linearLayoutMenuLateral)) {
+            drawerLayout.closeDrawers();
+        } else {
+            drawerLayout.openDrawer(linearLayoutMenuLateral);
+        }
+    }
+
+    public void mostrarMenuLateral(View view) {
+        mostrarOcultarMenuLateral();
+    }
 
     public void iniciarRadio(View view) {
         Intent i = new Intent(this, StreamPlayerActivity.class);

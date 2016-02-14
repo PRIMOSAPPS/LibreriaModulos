@@ -5,13 +5,15 @@
     android:layout_gravity="left"
     >
     
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/imagen_fondo_con_titulo"
         android:gravity="center"
         android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity"
         >
 
         <LinearLayout
@@ -51,7 +53,7 @@
                 android:id="@+id/mainIniciarRadio"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".36"
+                android:layout_weight=".34"
                 android:scaleType="fitXY"
                 android:onClick="iniciarRadio"
                 android:src="@mipmap/home_radio_monesterio"
@@ -61,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".06"
+                android:layout_weight=".08"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/lib_dime_lbl_radio"
                 android:id="@+id/textIniciarRadio"
@@ -73,7 +75,7 @@
                 android:id="@+id/mainBuzonCiudadno"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".36"
+                android:layout_weight=".34"
                 android:scaleType="fitXY"
                 android:onClick="irBuzonCiudadano"
                 android:src="@mipmap/home_colaboracion_ciudadana"
@@ -83,7 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight=".06"
+                android:layout_weight=".08"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/lib_dime_lbl_colaboracion_ciudadana"
                 android:id="@+id/textBuzonCiudadano"
@@ -109,7 +111,7 @@
                 android:id="@+id/mainSitios"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".36"
+                android:layout_weight=".34"
                 android:scaleType="fitXY"
                 android:onClick="irSitios"
                 android:src="@mipmap/home_puntos_interes"
@@ -119,7 +121,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight=".06"
+                android:layout_weight=".08"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/lib_dime_lbl_puntos_interes"
                 android:id="@+id/textPuntosInteres"
@@ -132,7 +134,7 @@
                 android:id="@+id/mainNotificaciones"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".36"
+                android:layout_weight=".34"
                 android:scaleType="fitXY"
                 android:onClick="irNotificaciones"
                 android:background="@null"
@@ -142,7 +144,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight=".06"
+                android:layout_weight=".08"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/lib_dime_lbl_bandos"
                 android:id="@+id/textBandos"
