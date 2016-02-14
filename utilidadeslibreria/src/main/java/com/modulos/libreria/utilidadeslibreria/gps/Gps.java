@@ -120,13 +120,21 @@ public class Gps implements LocationListener {
 
     public void pausarRegistro() {
         for(String proveedor : proveedores) {
-            locationManager.removeUpdates(this);
+            try {
+                locationManager.removeUpdates(this);
+            } catch(Exception e) {
+                Log.e(TAG, "Error al deregistrar un proveedor de localización.", e);
+            }
         }
     }
 
     public void registrarLocationManager() {
         for(String proveedor : proveedores) {
-            locationManager.requestLocationUpdates(proveedor, TIEMPO_MIN_ACTUALIZAR_LOCATION, DISTANCIA_MIN_DISTANCIA_MIN, this);
+            try {
+                locationManager.requestLocationUpdates(proveedor, TIEMPO_MIN_ACTUALIZAR_LOCATION, DISTANCIA_MIN_DISTANCIA_MIN, this);
+            } catch(Exception e) {
+                Log.e(TAG, "Error al registrar un proveedor de localización.", e);
+            }
         }
     }
 
