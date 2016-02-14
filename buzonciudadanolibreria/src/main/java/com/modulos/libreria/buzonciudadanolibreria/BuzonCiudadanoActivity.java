@@ -20,6 +20,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -45,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.GpsListener, GoogleMaps.GoogleMapsGeocodeListener {
+public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.GpsListener, GoogleMaps.GoogleMapsGeocodeListener, AsyncTaskMailSender.MailSenderListener {
     private final static String TAG = "BuzonCiudadanoActivity";
     public final static String DIRECTORIO = "DIRECTORIO_BUZON_CIUDADANO";
     public final static String NUM_FOTOS = "NUM_FOTOS_BUZON_CIUDADANO";
@@ -372,6 +374,10 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
     }
 
+    private void pantallaAnterior() {
+        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+    }
+
     public void enviar(View view) {
 
         if(direccionIncidencia == null) {
@@ -389,5 +395,43 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void visibilidadBarraProgreso(final int visibilidad) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ProgressBar rbTipo = (ProgressBar) findViewById(R.id.barraProgreso);
+                rbTipo.setVisibility(visibilidad);
+            }
+        });
+    }
+
+    private void mostrarToast(final int idMensaje, final int tiempo) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(BuzonCiudadanoActivity.this, idMensaje, tiempo);
+            }
+        });
+    }
+
+    @Override
+    public void inicioEnvio() {
+        visibilidadBarraProgreso(View.VISIBLE);
+    }
+
+    @Override
+    public void envioCorrecto() {
+        visibilidadBarraProgreso(View.GONE);
+        mostrarToast(R.string.txtCiuMsjOK, Toast.LENGTH_SHORT);
+        pantallaAnterior();
+    }
+
+    @Override
+    public void envioErroneo() {
+        visibilidadBarraProgreso(View.GONE);
+        mostrarToast(R.string.txtCiuMsjKO, Toast.LENGTH_SHORT);
+        pantallaAnterior();
     }
 }

@@ -224,4 +224,12 @@
         android:background="#7eff4f4d"
         android:visibility="gone" />
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/barraProgreso"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
 </RelativeLayout>
