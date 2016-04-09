@@ -41,11 +41,16 @@ public class StreamPlayerActivity extends AppCompatActivity {
             urlRadio = (String) extras.get(URL_RADIO);
         }
 
+
+        initMediaPlayer();
+    }
+
+    protected void initSeekBarrVolumen() {
         seekBarVolumen = (SeekBar)findViewById(R.id.libRadioSeekBarVolumen);
         seekBarVolumen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                volumenActual = ((float)progress)/100;
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                volumenActual = ((float) progress) / 100;
                 setVolumen();
             }
 
@@ -57,8 +62,6 @@ public class StreamPlayerActivity extends AppCompatActivity {
                 Log.d(TAG, "Nuevo volumen: " + volumenActual);
             }
         });
-
-        initMediaPlayer();
     }
 
     @Override
@@ -179,7 +182,7 @@ public class StreamPlayerActivity extends AppCompatActivity {
         stop();
     }
 
-    private void updateProgressBar() {
+    protected void updateProgressBar() {
         int progreso = (int)(volumenActual * 100);
         seekBarVolumen.setProgress(progreso);
     }
@@ -200,6 +203,13 @@ public class StreamPlayerActivity extends AppCompatActivity {
             setVolumen();
             updateProgressBar();
         }
+    }
+
+    @Override
+       protected void onPause() {
+        super.onPause();
+
+        pause();
     }
 
     @Override
