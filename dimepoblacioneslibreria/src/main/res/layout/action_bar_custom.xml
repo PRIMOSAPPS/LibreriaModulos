@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/fondo_action_bar">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuSuperiorIzquierda"
+        android:src="@drawable/menu_superior_izquierda"
+        android:onClick="mostrarMenuLateral"
+        />
+</LinearLayout>

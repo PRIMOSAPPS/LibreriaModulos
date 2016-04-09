@@ -105,20 +105,21 @@ public class InicioActivity extends AppCompatActivity {
 
                     Log.d(TAG, "Se lanza MainActivity.");
 
-                    Intent intent = new Intent(InicioActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-                    InicioActivity.this.finish();
+                    finInicioActivity();
                 }
 
             };
             // Se lanza la carga inicial de los datos en segundo plano para que se pinte la pantalla
             thrInicio.start();
         } else {
-            Intent intent = new Intent(InicioActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            finInicioActivity();
         }
+    }
+
+    protected void finInicioActivity() {
+        Intent intent = new Intent(InicioActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

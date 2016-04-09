@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.modulos.libreria.dimepoblacioneslibreria.R;
-import com.modulos.libreria.dimepoblacioneslibreria.menulateral.DatosItemMenuLateral;
+import com.modulos.libreria.utilidadeslibreria.menulateral.DatosItemMenuLateral;
 
 import java.util.List;
 

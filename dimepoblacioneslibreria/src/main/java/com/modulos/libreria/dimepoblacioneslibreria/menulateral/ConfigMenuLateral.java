@@ -18,45 +18,40 @@ import com.modulos.libreria.dimepoblacioneslibreria.adaptadores.MenuLateralAdapt
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
 import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
+import com.modulos.libreria.utilidadeslibreria.menulateral.DatosItemMenuLateral;
+import com.modulos.libreria.utilidadeslibreria.menulateral.IConfigMenuLateral;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigMenuLateral {
-	private static int IND_RADIO = 0;
-	private static int IND_PUNTOS_INTERES = 1;
-	private static int IND_COLABORACION_CIUDADANA = 2;
-	private static int IND_BANDOS = 3;
-	private static int IND_PREFERENCIAS = 4;
-	
-	private Activity actividad;
+public class ConfigMenuLateral implements IConfigMenuLateral {
+	private static int IND_PUNTOS_INTERES = 0;
+	private static int IND_COLABORACION_CIUDADANA = 1;
+	private static int IND_BANDOS = 2;
+	private static int IND_RADIO = 3;
 
-	public ConfigMenuLateral(Activity actividad) {
+	public ConfigMenuLateral() {
 		super();
-		this.actividad = actividad;
 	}
 
-	public void iniciarMenuLateral() {
+	public void configurarMenuLateral(final Activity actividad, int idLinearLayoutMenuLateral, int idDrawerLayout) {
 
 		List<DatosItemMenuLateral> listaItemsMenu = new ArrayList<>();
 
-		DatosItemMenuLateral datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_radio, R.mipmap.ml_home_radio_monesterio);
+		DatosItemMenuLateral datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_puntos_interes, R.mipmap.puntos_de_interes);
 		listaItemsMenu.add(datosItem);
 
-		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_puntos_interes, R.mipmap.ml_home_puntos_interes);
+		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_colaboracion_ciudadana, R.mipmap.colaboracion_ciudadana);
 		listaItemsMenu.add(datosItem);
 
-		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_colaboracion_ciudadana, R.mipmap.ml_home_colaboracion_ciudadana);
+		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_bandos, R.mipmap.bandos);
 		listaItemsMenu.add(datosItem);
 
-		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_bandos, R.mipmap.ml_home_bandos_moviles);
+		datosItem = new DatosItemMenuLateral(R.string.lib_dime_lbl_radio, R.mipmap.radio_monesterio);
 		listaItemsMenu.add(datosItem);
 
-		datosItem = new DatosItemMenuLateral(R.string.action_settings, android.R.drawable.ic_menu_manage);
-		listaItemsMenu.add(datosItem);
-
-		ListView mDrawerOptions = (ListView) actividad.findViewById(R.id.listMenuLateral);
-		final DrawerLayout mDrawer = (DrawerLayout) actividad.findViewById(R.id.drawer_layout);
+		ListView mDrawerOptions = (ListView) actividad.findViewById(idLinearLayoutMenuLateral);
+		final DrawerLayout mDrawer = (DrawerLayout) actividad.findViewById(idDrawerLayout);
 		mDrawerOptions.setAdapter(new MenuLateralAdaptador(actividad, listaItemsMenu));
 
 		mDrawerOptions.setOnItemClickListener(new OnItemClickListener() {
@@ -79,9 +74,6 @@ public class ConfigMenuLateral {
 					actividad.startActivity(i);
 				} else if (indice == IND_BANDOS) {
 					Intent i = new Intent(actividad, ListaNotificacionesActivity.class);
-					actividad.startActivity(i);
-				} else if (indice == IND_PREFERENCIAS) {
-					Intent i = new Intent(actividad, PreferenciasActivity.class);
 					actividad.startActivity(i);
 				}
 				mDrawer.closeDrawers();

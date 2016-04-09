@@ -132,7 +132,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             Log.d(TAG, "Recibida una notificacion.");
             notificacionToBD(context, notificacion);
 
-            Intent resultIntent = new Intent(context, DetalleNotificacionActivity.class);
+            Intent resultIntent = createResultIntent(context);
             resultIntent.putExtra(DetalleNotificacionActivity.ID_NOTIFICACION, notificacion.getId());
             PendingIntent resultPendingIntent =
                     PendingIntent.getActivity(
@@ -204,6 +204,11 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
         } catch (ParseException e) {
             Log.e(TAG, "Error de parse al leer la notificacion.", e);
         }
+    }
+
+    protected Intent createResultIntent(Context context) {
+        Intent resultIntent = new Intent(context, DetalleNotificacionActivity.class);
+        return resultIntent;
     }
 
     @Override

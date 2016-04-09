@@ -2,173 +2,43 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="left"
-    >
-    
+    android:layout_gravity="left">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/imagen_fondo_con_titulo"
         android:gravity="center"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity"
-        >
+        android:orientation="horizontal"
+        tools:context="com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".08"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical|clip_vertical">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center">
 
-            <ImageButton
-                android:id="@+id/mainBtnMenuLateral"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:onClick="mostrarMenuLateral"
-                android:src="@android:drawable/ic_media_play"
-                android:background="#f9b619"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".46"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            >
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".16"/>
-
-            <ImageButton
-                android:id="@+id/mainIniciarRadio"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".34"
-                android:scaleType="fitXY"
-                android:onClick="iniciarRadio"
-                android:src="@mipmap/home_radio_monesterio"
-                android:background="@null"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".08"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/lib_dime_lbl_radio"
-                android:id="@+id/textIniciarRadio"
-                android:textColor="@color/texto_principal"
-                android:gravity="center_horizontal"
-                />
-
-            <ImageButton
-                android:id="@+id/mainBuzonCiudadno"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".34"
-                android:scaleType="fitXY"
-                android:onClick="irBuzonCiudadano"
-                android:src="@mipmap/home_colaboracion_ciudadana"
-                android:background="@null"
-                />
-
-            <TextView
+            <ImageSwitcher
+                android:id="@+id/imageSlider"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight=".08"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/lib_dime_lbl_colaboracion_ciudadana"
-                android:id="@+id/textBuzonCiudadano"
-                android:textColor="@color/texto_principal"
-                android:gravity="center_horizontal"
-                />
+                android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".46"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".16"/>
-
-            <ImageButton
-                android:id="@+id/mainSitios"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".34"
-                android:scaleType="fitXY"
-                android:onClick="irSitios"
-                android:src="@mipmap/home_puntos_interes"
-                android:background="@null"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight=".08"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/lib_dime_lbl_puntos_interes"
-                android:id="@+id/textPuntosInteres"
-                android:textColor="@color/texto_principal"
-                android:gravity="center_horizontal"
-                />
-
-
-            <ImageButton
-                android:id="@+id/mainNotificaciones"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".34"
-                android:scaleType="fitXY"
-                android:onClick="irNotificaciones"
-                android:background="@null"
-                android:src="@mipmap/home_bandos_moviles"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight=".08"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/lib_dime_lbl_bandos"
-                android:id="@+id/textBandos"
-                android:textColor="@color/texto_principal"
-                android:gravity="center_horizontal"
-                />
         </LinearLayout>
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linearLayoutMenuLateral"
-        android:orientation="vertical"
-        android:layout_gravity="start"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical">
 
         <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
             android:background="@color/opcion_menu_lateral"
-            android:src="@drawable/escudo_monesterio"/>
+            android:src="@drawable/img_sup_menulateral" />
 
         <ListView
             android:id="@+id/listMenuLateral"

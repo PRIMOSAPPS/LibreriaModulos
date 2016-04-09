@@ -23,6 +23,6 @@
         android:layout_alignBaseline="@+id/imagen_menu_lateral"
         android:layout_marginLeft="8dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/texto_principal"
+        android:textColor="@color/opcion_menu_lateral"
         />
 </RelativeLayout>
