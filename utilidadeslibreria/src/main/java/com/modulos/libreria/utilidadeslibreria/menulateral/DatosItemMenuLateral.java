@@ -1,4 +1,4 @@
-package com.modulos.libreria.dimepoblacioneslibreria.menulateral;
+package com.modulos.libreria.utilidadeslibreria.menulateral;
 
 public class DatosItemMenuLateral {
 	private int textoMenu;

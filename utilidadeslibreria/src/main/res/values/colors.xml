@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="separador_menu_lateral" type="color">#222222</item>
+    <item name="opcion_menu_lateral" type="color">#FFFFFF</item>
+    <item name="texto_menu_lateral" type="color">#000000</item>
+    <item name="fondo_action_bar" type="color">#222222</item>
+
+</resources>
