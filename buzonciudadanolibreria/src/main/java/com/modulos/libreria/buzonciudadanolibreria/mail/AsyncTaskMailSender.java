@@ -35,7 +35,7 @@ public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSend
             Log.d(TAG, "Correo enviado, quizas correctamente.");
             return ResultadoEnvioMail.OK;
         } catch(Exception e) {
-            Log.e("[AsyncTaskMailSender]", "Error enviando el correo.", e);
+            Log.e(TAG, "Error enviando el correo.", e);
             return ResultadoEnvioMail.KO;
         }
     }
@@ -43,10 +43,14 @@ public class AsyncTaskMailSender extends AsyncTask<Void, Void, AsyncTaskMailSend
     @Override
     protected void onPostExecute(ResultadoEnvioMail result) {
 
-        if(result == ResultadoEnvioMail.OK) {
-            mailSenderListener.envioCorrecto();
-        } else {
-            mailSenderListener.envioErroneo();
+        try {
+            if (result == ResultadoEnvioMail.OK) {
+                mailSenderListener.envioCorrecto();
+            } else {
+                mailSenderListener.envioErroneo();
+            }
+        } catch(Exception e) {
+            Log.e(TAG, "Error onPostExecute.", e);
         }
     }
 

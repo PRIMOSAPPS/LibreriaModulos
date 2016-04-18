@@ -8,6 +8,7 @@ public class SingletonDimePoblaciones {
 
     private int idLogoPoblacion;
     private int idIconoNotificacion;
+    private int idIconoListaSitios;
     //private String videoPromocion;
     //private String urlRadio;
 
@@ -34,6 +35,13 @@ public class SingletonDimePoblaciones {
         this.idIconoNotificacion = idIconoNotificacion;
     }
 
+    public int getIdIconoListaSitios() {
+        return idIconoListaSitios;
+    }
+
+    public void setIdIconoListaSitios(int idIconoListaSitios) {
+        this.idIconoListaSitios = idIconoListaSitios;
+    }
     /*
     public String getVideoPromocion() {
         return videoPromocion;

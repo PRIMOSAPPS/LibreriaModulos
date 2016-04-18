@@ -379,11 +379,14 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     }
 
     public void enviar(View view) {
-
-        if(direccionIncidencia == null) {
-            consultaDireccionUsuario();
-        } else {
-            enviar();
+        try {
+            if (direccionIncidencia == null) {
+                consultaDireccionUsuario();
+            } else {
+                enviar();
+            }
+        } catch(Exception e) {
+            Log.e(TAG, "Error al enviar el correo.", e);
         }
     }
 
@@ -401,8 +404,12 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ProgressBar rbTipo = (ProgressBar) findViewById(R.id.barraProgreso);
-                rbTipo.setVisibility(visibilidad);
+                try {
+                    ProgressBar rbTipo = (ProgressBar) findViewById(R.id.barraProgreso);
+                    rbTipo.setVisibility(visibilidad);
+                } catch (Exception e) {
+                    Log.e(TAG, "Error al ocultar la barra de progreso.", e);
+                }
             }
         });
     }
@@ -411,27 +418,39 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(BuzonCiudadanoActivity.this, idMensaje, tiempo);
+                Toast.makeText(BuzonCiudadanoActivity.this, idMensaje, tiempo).show();
             }
         });
     }
 
     @Override
     public void inicioEnvio() {
-        visibilidadBarraProgreso(View.VISIBLE);
+        try {
+            visibilidadBarraProgreso(View.VISIBLE);
+        } catch(Exception e) {
+            Log.e(TAG, "Error al actuar por el inicio del envio.", e);
+        }
     }
 
     @Override
     public void envioCorrecto() {
-        visibilidadBarraProgreso(View.GONE);
-        mostrarToast(R.string.txtCiuMsjOK, Toast.LENGTH_SHORT);
-        pantallaAnterior();
+        try {
+            visibilidadBarraProgreso(View.GONE);
+            mostrarToast(R.string.txtCiuMsjOK, Toast.LENGTH_LONG);
+            pantallaAnterior();
+        } catch(Exception e) {
+            Log.e(TAG, "Error al confirmar el envio correcto.", e);
+        }
     }
 
     @Override
     public void envioErroneo() {
-        visibilidadBarraProgreso(View.GONE);
-        mostrarToast(R.string.txtCiuMsjKO, Toast.LENGTH_SHORT);
-        pantallaAnterior();
+        try {
+            visibilidadBarraProgreso(View.GONE);
+            mostrarToast(R.string.txtCiuMsjKO, Toast.LENGTH_LONG);
+            pantallaAnterior();
+        } catch(Exception e) {
+            Log.e(TAG, "Error al confirmar el envio erroneo.", e);
+        }
     }
 }

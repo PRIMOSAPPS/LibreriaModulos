@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//apply plugin: "java"
 apply plugin: 'maven-publish'
 
 group = 'com.modulos.libreria'
