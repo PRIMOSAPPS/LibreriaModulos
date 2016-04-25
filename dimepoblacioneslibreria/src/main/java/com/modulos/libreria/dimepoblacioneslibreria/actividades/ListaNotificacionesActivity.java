@@ -40,6 +40,7 @@ public class ListaNotificacionesActivity extends AppCompatActivity {
             idCategoriaSeleccionada = new Long(intent.getExtras().getLong(ID_CATEGORIA));
         }
 
+        dataSource.eliminarPasadas();
         cargarNotificaciones();
     }
 
