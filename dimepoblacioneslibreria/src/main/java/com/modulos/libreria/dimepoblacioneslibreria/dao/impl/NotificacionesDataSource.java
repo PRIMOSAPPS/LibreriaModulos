@@ -123,6 +123,17 @@ public class NotificacionesDataSource extends AbstractDataSource {
 	}
 
 	/**
+	 * Elimina las notificaciones cuya fecha de fin de validez es anterior a la actual
+	 * @return
+	 */
+	public void eliminarPasadas() {
+		long fechaHoy = new Date().getTime();
+		String whereClause = NotificacionesSQLite.COLUMNA_FECHA_FIN_VALIDEZ + " < ?";
+		String[] whereArgs = {Long.toString(fechaHoy)};
+		database.delete(NotificacionesSQLite.TABLE_NAME, whereClause, whereArgs);
+	}
+
+	/**
 	 * Convierte un cursor recibido de una consulta a la base de datos en un objeto NotificacionDTO.
 	 * @param cursor
 	 * @return
