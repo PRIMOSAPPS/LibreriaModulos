@@ -26,7 +26,7 @@
     <string name="lblCiuOpcSenalizacionVial_Trafico">Señalización Vial / Tráfico</string>
     <string name="lblCiuOpcAceradosPavimentos">Acerados / Pavimentos</string>
     <string name="lblCiuOpcFachadasPintadas">Fachadas y pintadas</string>
-    <string name="lblCiuOpcMobiliarioUrbano">Moviliario Urbano</string>
+    <string name="lblCiuOpcMobiliarioUrbano">Mobiliario Urbano</string>
     <string name="lblCiuOpcFeriasFiestas">Ferias y fiestas</string>
     <string name="lblCiuOpcionOtras">Otras incidencias</string>
 
