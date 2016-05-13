@@ -13,13 +13,13 @@ import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.actividades.ListaNotificacionesActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.actividades.ListaSitiosActivity;
-import com.modulos.libreria.dimepoblacioneslibreria.actividades.PreferenciasActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.adaptadores.MenuLateralAdaptador;
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
-import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
+import com.modulos.libreria.dimepoblacioneslibreria.util.Propiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
 import com.modulos.libreria.utilidadeslibreria.menulateral.DatosItemMenuLateral;
 import com.modulos.libreria.utilidadeslibreria.menulateral.IConfigMenuLateral;
+import com.modulos.libreria.utilidadeslibreria.util.UtilPropiedades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class ConfigMenuLateral implements IConfigMenuLateral {
 									long arg3) {
 				if (indice == IND_RADIO) {
 					Intent i = new Intent(actividad, StreamPlayerActivity.class);
-					String urlRadio = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_RADIO);
+					String urlRadio = UtilPropiedades.getInstance().getProperty(Propiedades.PROP_URL_RADIO);
 					i.putExtra(StreamPlayerActivity.URL_RADIO, urlRadio);
 					actividad.startActivity(i);
 				} else if (indice == IND_PUNTOS_INTERES) {
@@ -70,7 +70,7 @@ public class ConfigMenuLateral implements IConfigMenuLateral {
 					actividad.startActivity(i);
 				} else if (indice == IND_COLABORACION_CIUDADANA) {
 					Intent i = new Intent(actividad, BuzonCiudadanoActivity.class);
-					i.putExtra(BuzonCiudadanoActivity.DIRECTORIO, Environment.DIRECTORY_PICTURES);
+					//i.putExtra(BuzonCiudadanoActivity.DIRECTORIO, Environment.DIRECTORY_PICTURES);
 					actividad.startActivity(i);
 				} else if (indice == IND_BANDOS) {
 					Intent i = new Intent(actividad, ListaNotificacionesActivity.class);

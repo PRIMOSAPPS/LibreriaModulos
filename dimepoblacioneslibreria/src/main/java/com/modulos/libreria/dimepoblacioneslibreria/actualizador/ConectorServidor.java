@@ -7,8 +7,9 @@ import android.util.Log;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
-import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
+import com.modulos.libreria.dimepoblacioneslibreria.util.Propiedades;
 import com.modulos.libreria.dimepoblacioneslibreria.xml.EventosXML_SAX;
+import com.modulos.libreria.utilidadeslibreria.util.UtilPropiedades;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -37,9 +38,9 @@ public class ConectorServidor {
 		if(URL_GET_LISTA_CATEGORIAS == null) {
 			UtilPropiedades propiedades = UtilPropiedades.getInstance();
 
-			String servidor = propiedades.getProperty(UtilPropiedades.PROP_SERVIDOR);
-			String rutaCategorias = propiedades.getProperty(UtilPropiedades.PROP_RUTA_CATEGORIAS_XML);
-			String rutaSitios = propiedades.getProperty(UtilPropiedades.PROP_RUTA_SITIOS_XML);
+			String servidor = propiedades.getProperty(Propiedades.PROP_SERVIDOR);
+			String rutaCategorias = propiedades.getProperty(Propiedades.PROP_RUTA_CATEGORIAS_XML);
+			String rutaSitios = propiedades.getProperty(Propiedades.PROP_RUTA_SITIOS_XML);
 
 			URL_GET_LISTA_CATEGORIAS = servidor + rutaCategorias;
 			URL_GET_LISTA_SITIOS = servidor + rutaSitios;
@@ -150,7 +151,7 @@ public class ConectorServidor {
 //			//ANADIR PARAMETROS
 //			List<NameValuePair> params = new ArrayList<NameValuePair>();
 //			params.add(new BasicNameValuePair("ultima_actualizacion", Long.toString(ultimaActualizacion) ) );
-//			String idPoblacion = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_ID_POBLACION);
+//			String idPoblacion = UtilPropiedadesBuzonCiudadano.getInstance().getProperty(UtilPropiedadesBuzonCiudadano.PROP_ID_POBLACION);
 //			params.add(new BasicNameValuePair("id_poblacion", idPoblacion ) );
 //			if(idsCategoriasActualizacion != null) {
 //				params.add(new BasicNameValuePair("ids_categorias", idsCategoriasActualizacion ) );

@@ -43,7 +43,7 @@ public class SitioAdaptador extends ListaAdaptador<SitioDTO> {
 		
 		ImageView imagen = (ImageView)view.findViewById(R.id.imagenListaEventos);
 		imagen.setImageResource(SingletonDimePoblaciones.getInstance().getIdIconoListaSitios());
-//		ItfAlmacenamiento almacenamiento = AlmacenamientoFactory.getAlmacenamiento(actividad);
+//		ItfAlmacenamiento almacenamiento = AlmacenamientoUtilFactory.getAlmacenamiento(actividad);
 //		Bitmap bitmap = almacenamiento.getImagenSitio(sitio.getId(), sitio.getNombreLogotipo());
 //		imagen.setImageBitmap(bitmap);
 		

@@ -3,33 +3,24 @@ package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ViewSwitcher;
 
 import com.modulos.libreria.buzonciudadanolibreria.BuzonCiudadanoActivity;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.constantes.Constantes;
-import com.modulos.libreria.dimepoblacioneslibreria.menulateral.ConfigMenuLateral;
-import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
+import com.modulos.libreria.dimepoblacioneslibreria.util.Propiedades;
 import com.modulos.libreria.radiolibreria.StreamPlayerActivity;
-import com.modulos.libreria.utilidadeslibreria.menulateral.ConfigMenuLateralFactory;
 import com.modulos.libreria.utilidadeslibreria.menulateral.ControlMenuLateral;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
+import com.modulos.libreria.utilidadeslibreria.util.UtilPropiedades;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
@@ -138,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
 //        i.setPackage(paqueteMapa);
         GoogleMaps gm = new GoogleMaps();
         UtilPropiedades utilProp = UtilPropiedades.getInstance();
-        String strLatitud = utilProp.getProperty(UtilPropiedades.PROP_LATITUD_PUEBLO);
-        String strLongtitud = utilProp.getProperty(UtilPropiedades.PROP_LONGITUD_PUEBLO);
+        String strLatitud = utilProp.getProperty(Propiedades.PROP_LATITUD_PUEBLO);
+        String strLongtitud = utilProp.getProperty(Propiedades.PROP_LONGITUD_PUEBLO);
         double doubleLatitud = Double.parseDouble(strLatitud);
         double doubleLongitud = Double.parseDouble(strLongtitud);
         startActivity(gm.getUrlMapsApps(doubleLatitud, doubleLongitud, "Monesterio", 13));
@@ -172,14 +163,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniciarRadio(View view) {
         Intent i = new Intent(this, StreamPlayerActivity.class);
-        String urlRadio = UtilPropiedades.getInstance().getProperty(UtilPropiedades.PROP_URL_RADIO);
+        String urlRadio = UtilPropiedades.getInstance().getProperty(Propiedades.PROP_URL_RADIO);
         i.putExtra(StreamPlayerActivity.URL_RADIO, urlRadio);
         startActivity(i);
     }
 
     public void irBuzonCiudadano(View view) {
         Intent i = new Intent(this, BuzonCiudadanoActivity.class);
-        i.putExtra(BuzonCiudadanoActivity.DIRECTORIO, Environment.DIRECTORY_PICTURES);
+        //i.putExtra(BuzonCiudadanoActivity.DIRECTORIO, Environment.DIRECTORY_PICTURES);
         startActivity(i);
     }
 

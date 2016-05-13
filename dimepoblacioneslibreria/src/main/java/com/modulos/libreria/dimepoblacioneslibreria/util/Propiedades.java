@@ -15,8 +15,8 @@ import java.util.Properties;
  * @author h
  *
  */
-public class UtilPropiedades {
-	private final static String TAG = "UtilPropiedades";
+public class Propiedades {
+	private final static String TAG = "UtilPropiedadesDime";
 	/**
 	 * Nombre del fichero de propiedades.
 	 */
@@ -46,10 +46,6 @@ public class UtilPropiedades {
 	 */
 	public final static String PROP_PARSE_CLIENT_KEY = "parseClientKey";
 	/**
-	 * Nombre de la apicacion para almacenamiento externo
-	 */
-	public static final String PROP_NOMBRE_APLICACION = "NombreAplicacion";
-	/**
 	 * Url de registro de la aplicación
 	 */
 	public static final String PROP_URL_REGISTRO = "UrlRegistro";
@@ -73,51 +69,5 @@ public class UtilPropiedades {
 	 * Longitud en la que se abre el mapa
 	 */
 	public static final String PROP_LONGITUD_PUEBLO = "longitudPueblo";
-
-	private static UtilPropiedades instancia = null;
-	
-	/**
-	 * Las propiedades leidas del fichero.
-	 */
-	private Properties properties;
-
-	private UtilPropiedades() {
-	}
-	
-	public static UtilPropiedades getInstance() {
-		if(instancia == null) {
-			instancia = new UtilPropiedades();
-		}
-		return instancia;
-	}
-	
-	/**
-	 * Realiza la lectura del fichero de propiedades;
-	 */
-	public void inicializar(Context contexto) {
-		Log.d(TAG, "Inicializando las propiedades.");
-		AssetManager assetManager = contexto.getAssets();
-		InputStream is = null;
-		properties = new Properties();
-		try {
-			is = assetManager.open(NOMBRE_FICHERO_CONEXION);
-			properties.load(is);
-		} catch (IOException e) {
-			Log.e(TAG, "Error al leer las propiedades de la aplicacion", e);
-		} finally {
-			if(is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					Log.e(TAG, "Error al cerrar InputStream del fichero de propiedades", e);
-				}
-			}
-		}
-		
-	}
-	
-	public String getProperty(String property) {
-		return properties.getProperty(property);
-	}
 
 }

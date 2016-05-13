@@ -2,17 +2,19 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 group = 'com.modulos.libreria'
-version = '1.0.0'
+def versionLibrerias = "1.0.4"
+version = versionLibrerias
+def versionCodeLibreria=4
 
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.1'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName '1.0.0'
+        targetSdkVersion 22
+        versionCode versionCodeLibreria
+        versionName versionLibrerias
     }
     buildTypes {
         release {

@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
-import com.modulos.libreria.dimepoblacioneslibreria.util.UtilPropiedades;
+import com.modulos.libreria.utilidadeslibreria.util.UtilPropiedades;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

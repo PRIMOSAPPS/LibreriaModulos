@@ -2,10 +2,12 @@ package com.modulos.libreria.buzonciudadanolibreria.mail;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
+
+import com.modulos.libreria.buzonciudadanolibreria.util.UtilPropiedadesBuzonCiudadano;
+import com.modulos.libreria.utilidadeslibreria.util.UtilImagenes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,11 +20,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
-import javax.mail.MessagingException;
 
 /**
  * Created by h on 12/10/15.
@@ -53,7 +52,7 @@ public class MailSender {
         //String fichero = "/home/h/Imágenes/redim/El cubo de rubik.jpg";
 
         //String strUrl = "http://localhost/dime/buzonciudadano/RecepcionAvisoCiudadano.php";
-        String strUrl = "http://www.jamondemonesterio.org/dime/buzonciudadano/RecepcionAvisoCiudadano.php";
+        String strUrl = UtilPropiedadesBuzonCiudadano.getInstance().getProperty(UtilPropiedadesBuzonCiudadano.PROP_URL_ENVIO_CORREO);
         String charset = "UTF-8";
 
         URL url;
@@ -67,7 +66,7 @@ public class MailSender {
             BufferedWriter osw = new BufferedWriter(new OutputStreamWriter(os));
 
             //////////////////////////////////////////
-//            char[] imgBase64 = getFileCharArray(fichero);
+//            char[] imgBase64 = getCharArray(fichero);
             //////////////////////////////////////////
 
             // telefono
@@ -112,10 +111,10 @@ public class MailSender {
             for(Uri uriFoto : lstUrisFotos) {
                 osw.write(dataTagIniImagen);
                 osw.write(dataTagIniNombreImagen);
-                osw.write(uriFoto.toString().toCharArray());
+                osw.write(uriFoto.getLastPathSegment().toCharArray());
                 osw.write(dataTagFinNombreImagen);
                 osw.write(dataTagIniContenidoImagen);
-                osw.write(getFileCharArray(uriFoto));
+                osw.write(getCharArray(uriFoto));
                 osw.write(dataTagFinContenidoImagen);
                 osw.write(dataTagFinImagen);
             }
@@ -161,15 +160,14 @@ public class MailSender {
 
             Log.d(TAG, "Fin enviar correo, response: " + sb.toString());
 
-        } catch (MalformedURLException e) {
-            Log.e(TAG, "Error enviando correo.", e);
         } catch (IOException e) {
             Log.e(TAG, "Error enviando correo.", e);
         }
     }
 
-    //private char[] getFileCharArray(String nombreFichero) throws IOException {
-    private char[] getFileCharArray(Uri uriFoto) throws IOException {
+    //private char[] getCharArray(String nombreFichero) throws IOException {
+    /*
+    private char[] getCharArray(Uri uriFoto) throws IOException {
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -178,55 +176,33 @@ public class MailSender {
         FileInputStream fis = new FileInputStream(file);
 
         Bitmap bm = BitmapFactory.decodeStream(fis);
-        /*
-        Bitmap bm1 = BitmapFactory.decodeStream(fis, null, options);
 
+        return getCharArray(bm);
+    }
+    */
 
-        int sampleSize = options.outHeight * options.outWidth;// * 2;
-        options = new BitmapFactory.Options();
-        options.inSampleSize = sampleSize;
-        options.inJustDecodeBounds = false;
-        fis = new FileInputStream(file);
-        Bitmap bm = BitmapFactory.decodeStream(fis, null, options);
-        */
+    private char[] getCharArray(Uri uriFoto) throws IOException {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
 
+        File file = new File(uriFoto.getPath());
+        FileInputStream fis = new FileInputStream(file);
+
+        Bitmap bm = BitmapFactory.decodeStream(fis);
+
+        UtilImagenes utilImagenes = new UtilImagenes();
+        bm = utilImagenes.escalar(bm, 600);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if(bm.getWidth() > 800) {
-            float escala = ((float)(bm.getWidth()) / 800);
-            int ancho = (int)(bm.getWidth() / escala);
-            int alto = (int)(bm.getHeight() / escala);
-            bm = Bitmap.createScaledBitmap(bm, ancho, alto, false);
-        }
         bm.compress(Bitmap.CompressFormat.JPEG, 100 , baos);
         byte[] b = baos.toByteArray();
 
         String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
 
-        return encodedImage.toCharArray();
-
-
-
-
-        /*
-        File file = new File(nombreFichero);
-
-        ByteArrayOutputStream baos=new ByteArrayOutputStream(1000);
-        BufferedImage img=ImageIO.read(file);
-        ImageIO.write(img, "jpg", baos);
-        baos.flush();
-
-        String base64String= Base64.encode(baos.toByteArray());
         baos.close();
+        fis.close();
 
-        //////////////////////////////////////////////
-//		byte[] bytearray = Base64.decode(base64String);
-//
-//		BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bytearray));
-//		ImageIO.write(imag, "jpg", new File("/home/h/Descargas","BORRAR.jpg"));
-
-        return base64String.toCharArray();
-        */
+        return encodedImage.toCharArray();
     }
 
     public void setCorreo(String correo) {

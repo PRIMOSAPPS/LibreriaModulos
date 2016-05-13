@@ -43,5 +43,6 @@
 
     <string name="txtCiuMsjOK">Mensaje enviado correctamente al buzón ciudadano.</string>
     <string name="txtCiuMsjKO">Error enviando el mensaje al buzón ciudadano.</string>
+    <string name="txtCiuMsjRevisaTarjeta">Revisa la tarjeta SD, no es posible sacar la foto.</string>
 
 </resources>

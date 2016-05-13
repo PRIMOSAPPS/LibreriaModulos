@@ -9,10 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,11 +38,14 @@ import android.widget.Toast;
 import com.modulos.libreria.buzonciudadanolibreria.adaptador.GalleryPagerAdapter;
 import com.modulos.libreria.buzonciudadanolibreria.mail.AsyncTaskMailSender;
 import com.modulos.libreria.buzonciudadanolibreria.mail.MailSender;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.AlmacenamientoUtilFactory;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.utilidadeslibreria.gps.Gps;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
-import com.modulos.libreria.utilidadeslibreria.util.TelefonoInfoUtil;
+import com.modulos.libreria.utilidadeslibreria.util.UtilImagenes;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,17 +58,34 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     private final static int FOTO_PARA_BUZON_CIUDADANO = 1;
     private Uri fotoUri;
     private int contadorFotos = 0;
-    private int indiceFotoSacada = -1;
     private Gps gps;
     private int numFotosPermitidas = 3;
+    private List<Bitmap> lstFotos;
     private List<Uri> lstUrisFotos;
-    private String directorioFotos = Environment.DIRECTORY_PICTURES;
 
     // mainLayout is the child of the HorizontalScrollView ...
     private LinearLayout mainLayout;
     private View cell;
     private ViewPager viewPager;
     private String direccionIncidencia;
+
+    class ParBitmapUri {
+        private Bitmap bitmap;
+        private Uri uriFoto;
+
+        ParBitmapUri(Bitmap bitmap, Uri uriFoto) {
+            this.bitmap = bitmap;
+            this.uriFoto = uriFoto;
+        }
+
+        Bitmap getBitmap() {
+            return bitmap;
+        }
+
+        Uri getUriFoto() {
+            return uriFoto;
+        }
+    }
 
 
     @Override
@@ -77,14 +98,13 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            directorioFotos = (String) extras.get(DIRECTORIO);
-
             Integer numeroFotos = (Integer) getIntent().getExtras().get(NUM_FOTOS);
             if (numeroFotos != null) {
                 numFotosPermitidas = numeroFotos;
             }
         }
 
+        lstFotos = new ArrayList<>();
         lstUrisFotos = new ArrayList<>();
 
         viewPager = (ViewPager) findViewById(R.id.libCiuViewPager);
@@ -134,11 +154,11 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     }
 
     private boolean isSacarFotoPermitido() {
-        return lstUrisFotos.size() < numFotosPermitidas;
+        return lstFotos.size() < numFotosPermitidas;
     }
 
     private String getNombreFoto() {
-        String resul = "FotoBuzonCiudadano_{0}.jpg";
+        String resul = "FotoBuzonCiudadano_{0}";
 
         return MessageFormat.format(resul,contadorFotos++);
     }
@@ -150,52 +170,77 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         }
 
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                directorioFotos), getNombreFoto());
-        //File file = new File(getCacheDir().getAbsolutePath(), getNombreFoto());
-        fotoUri = Uri.fromFile(file);
+        if (i.resolveActivity(getPackageManager()) != null) {
+            File photo;
+            try {
+                ItfAlmacenamiento almacenamiento = AlmacenamientoUtilFactory.getAlmacenamiento(this);
+                String nombreFichero = getNombreFoto();
+                // place where to store camera taken picture
+                photo = almacenamiento.crearFicheroTemporal(nombreFichero, ".jpg");
+                photo.delete();
+                fotoUri = Uri.fromFile(photo);
+                i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+            } catch(Exception e) {
+                Log.v(TAG, "No se ha podido crear fichero para sacar la foto");
+                Toast.makeText(this, R.string.txtCiuMsjRevisaTarjeta, Toast.LENGTH_LONG).show();
+            }
 
-        lstUrisFotos.add(fotoUri);
-
-        //Toast.makeText(this, "El directorio temporal es: " + getCacheDir().getAbsolutePath(), Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
-
-        i.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
-        startActivityForResult(i, FOTO_PARA_BUZON_CIUDADANO);
+            startActivityForResult(i, FOTO_PARA_BUZON_CIUDADANO);
+        }
     }
 
-    private void addFotoGaleria() {
-        cell = getLayoutInflater().inflate(R.layout.celda_galeria, null);
-        final ImageView imageView = (ImageView) cell.findViewById(R.id.libCiuImagen);
-        imageView.setOnClickListener(new View.OnClickListener() {
+    private void addFotoGaleria(Intent data) {
 
-            @Override
-            public void onClick(View v) {
+        //Bundle extras = data.getExtras();
+        //Bitmap imageBitmap = (Bitmap) extras.get("data");
+        File file = new File(fotoUri.getPath());
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            Bitmap imageBitmap = BitmapFactory.decodeStream(fis);
+            UtilImagenes utilImagenes = new UtilImagenes();
+            imageBitmap = utilImagenes.escalar(imageBitmap, 600);
 
-                viewPager.setVisibility(View.VISIBLE);
-                viewPager.setAdapter
-                        (new GalleryPagerAdapter(BuzonCiudadanoActivity.this, lstUrisFotos));
-                viewPager.setCurrentItem(v.getId());
-            }
-        });
+        //mImageView.setImageBitmap(imageBitmap);
+            lstFotos.add(imageBitmap);
+            lstUrisFotos.add(fotoUri);
 
-        final ImageView imageViewBorrar = (ImageView) cell.findViewById(R.id.libCiuBorrarImagen);
-        Pair<View, Uri> celdaUri = new Pair<>(cell, fotoUri);
-        imageViewBorrar.setTag(celdaUri);
+            cell = getLayoutInflater().inflate(R.layout.celda_galeria, null);
+            final ImageView imageView = (ImageView) cell.findViewById(R.id.libCiuImagen);
+            imageView.setOnClickListener(new View.OnClickListener() {
 
-        imageView.setFitsSystemWindows(true);
-        imageView.setImageURI(fotoUri);
+                @Override
+                public void onClick(View v) {
 
-        mainLayout.addView(cell);
+                    viewPager.setVisibility(View.VISIBLE);
+                    viewPager.setAdapter
+                            (new GalleryPagerAdapter(BuzonCiudadanoActivity.this, lstFotos));
+                    viewPager.setCurrentItem(v.getId());
+                }
+            });
+
+            final ImageView imageViewBorrar = (ImageView) cell.findViewById(R.id.libCiuBorrarImagen);
+            ParBitmapUri bitmapUri = new ParBitmapUri(imageBitmap, fotoUri);
+            Pair<View, ParBitmapUri> celdaUri = new Pair<>(cell, bitmapUri);
+            imageViewBorrar.setTag(celdaUri);
+
+            imageView.setFitsSystemWindows(true);
+            imageView.setImageBitmap(imageBitmap);
+
+            mainLayout.addView(cell);
+        } catch(Exception e) {
+            Toast.makeText(this, "Problema al sacar la foto.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void borrarImagen(View view) {
-        Pair<View, Uri> celdaUri = (Pair) view.getTag();
+        Pair<View, ParBitmapUri> celdaUri = (Pair) view.getTag();
         View celda = celdaUri.first;
-        Uri fotoUri = celdaUri.second;
+        ParBitmapUri bitmapUri = celdaUri.second;
+        Bitmap bitmap = bitmapUri.getBitmap();
         mainLayout.removeView(celda);
-        lstUrisFotos.remove(fotoUri);
-        borrarFoto(fotoUri);
+        lstFotos.remove(bitmap);
+        Uri fotoUriTmp = bitmapUri.getUriFoto();
+        borrarFoto(fotoUriTmp);;
     }
 
     @Override
@@ -204,7 +249,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == FOTO_PARA_BUZON_CIUDADANO) {
                 //Toast.makeText(this, "Imagen guardada en: " + fotoUri.toString(), Toast.LENGTH_LONG).show();
-                addFotoGaleria();
+                addFotoGaleria(data);
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             Toast.makeText(this, R.string.acionCanceladaUsuario, Toast.LENGTH_LONG).show();
@@ -226,7 +271,6 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     }
 
     private void borrarFoto(Uri strFoto) {
-        if(true)return;
         if (strFoto != null) {
             File fich = new File(strFoto.getPath());
             fich.delete();
