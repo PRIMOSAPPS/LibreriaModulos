@@ -6,8 +6,10 @@ import android.util.Log;
 import com.modulos.libreria.dimepoblacioneslibreria.almacenamiento.AlmacenamientoFactory;
 import com.modulos.libreria.dimepoblacioneslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.CategoriasDataSource;
+import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.SitiosDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
+import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
 
@@ -85,6 +87,35 @@ public class Actualizador {
 				almacenamiento.addImagenSitio(sitio.getImagen2(), sitio.getNombreImagen2(), idSitio);
 				almacenamiento.addImagenSitio(sitio.getImagen3(), sitio.getNombreImagen3(), idSitio);
 				almacenamiento.addImagenSitio(sitio.getImagen4(), sitio.getNombreImagen4(), idSitio);
+			}
+		} finally {
+			dataSource.close();
+		}
+	}
+
+	/**
+	 * Realiza la insercion/actualizacion de las notificaciones segun la lista de notificaciones recibidas.
+	 *
+	 * @param lst
+	 * @throws DimeException
+	 */
+	public void actualizarNotificaciones(List<NotificacionDTO> lst) throws DimeException {
+		ItfAlmacenamiento almacenamiento = AlmacenamientoFactory.getAlmacenamiento(contexto);
+
+		NotificacionesDataSource dataSource = new NotificacionesDataSource(contexto);
+		try {
+			dataSource.open();
+
+			Log.d("Notificaciones", lst.toString());
+			for(NotificacionDTO notificacion : lst) {
+				long id = notificacion.getId();
+				NotificacionDTO existente = dataSource.getById(id);
+				if(existente == null) {
+					long resulInsercion = dataSource.insertar(notificacion);
+					System.out.println("Resultado de la insecion de la notficacion: " + resulInsercion);
+				} else {
+					dataSource.actualizar(notificacion);
+				}
 			}
 		} finally {
 			dataSource.close();

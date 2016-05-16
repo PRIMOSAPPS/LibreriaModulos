@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.Date;
-
 /**
  * Crea la tabla categorias en la base de datos
  * @author h
@@ -20,12 +18,14 @@ public class NotificacionesSQLite extends SQLiteOpenHelper {
 	public final static String COLUMNA_TEXTO = "texto";
 	public final static String COLUMNA_FECHA_INICIO_VALIDEZ = "fecha_inicio_validez";
 	public final static String COLUMNA_FECHA_FIN_VALIDEZ = "fecha_fin_validez";
+	public final static String COLUMNA_ULTIMA_ACTUALIZACION = "ultima_actualizacion";
 
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private final static String CREATE_TABLA = "CREATE TABLE " + TABLE_NAME +
 			" (id INTEGER PRIMARY KEY, id_categoria INTEGER, titulo TEXT, texto TEXT, " +
-			"fecha_inicio_validez NUMERIC, fecha_fin_validez NUMERIC )";
+			"fecha_inicio_validez NUMERIC, fecha_fin_validez NUMERIC, ultima_actualizacion NUMERIC )";
+	private final static String ADD_COLUMN_ULTIMA_ACTUALIZACION = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + COLUMNA_ULTIMA_ACTUALIZACION + " NUMERIC";
 
 	public NotificacionesSQLite(Context context) {
 		super(context, TABLE_NAME, null, DATABASE_VERSION);
@@ -42,8 +42,14 @@ public class NotificacionesSQLite extends SQLiteOpenHelper {
 		Log.w(NotificacionesSQLite.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will destroy all old data");
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-		onCreate(db);
+		if(oldVersion == 1 && newVersion == 2) {
+			addColumnUltimaActualizacion(db);
+		}
+		//db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		//onCreate(db);
+	}
+	private void addColumnUltimaActualizacion(SQLiteDatabase db) {
+		db.execSQL(ADD_COLUMN_ULTIMA_ACTUALIZACION);
 	}
 
 }

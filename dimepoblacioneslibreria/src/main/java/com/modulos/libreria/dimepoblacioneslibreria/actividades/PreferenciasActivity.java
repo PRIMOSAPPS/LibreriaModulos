@@ -39,7 +39,7 @@ public class PreferenciasActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new DimePreferenceFragment()).commit();
+        addPreferencesFromResource(R.xml.pref_dime);
     }
 
 
@@ -58,22 +58,5 @@ public class PreferenciasActivity extends PreferenceActivity {
     private static boolean isXLargeTablet(Context context) {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-    }
-
-    @Override
-    protected boolean isValidFragment(String fragmentName) {
-        return fragmentName.equals(DimePreferenceFragment.class.getName());
-    }
-
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    public static class DimePreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_dime);
-        }
     }
 }

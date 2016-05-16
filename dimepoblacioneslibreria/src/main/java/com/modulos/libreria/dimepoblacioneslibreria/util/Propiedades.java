@@ -38,6 +38,14 @@ public class Propiedades {
 	 */
 	public final static String PROP_RUTA_SITIOS_XML = "RutaSitiosXML";
 	/**
+	 * Ruta en el servidor para pedir los datos de actualizacion de los sitios.
+	 */
+	public final static String PROP_RUTA_NOTIFICACIONES_XML = "RutaNotificacionesXML";
+	/**
+	 * Ruta en el servidor para pedir los datos de actualizacion de los sitios.
+	 */
+	public final static String PROP_RUTA_NOTIFICACIONES_ACTUALIZABLES_XML = "RutaNotificacionesActualizablesXML";
+	/**
 	 * ApplicationId para registrarse en Parse y recibir las notificaciones push
 	 */
 	public final static String PROP_PARSE_APPLICATION_ID = "parseApplicationId";

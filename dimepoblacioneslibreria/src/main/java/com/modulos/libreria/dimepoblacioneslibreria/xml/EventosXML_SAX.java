@@ -1,6 +1,7 @@
 package com.modulos.libreria.dimepoblacioneslibreria.xml;
 
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
+import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 
 import org.xml.sax.InputSource;
@@ -52,4 +53,29 @@ public class EventosXML_SAX {
 		return manejador.getLstElements();
 	}
 
+	public List<NotificacionDTO> leerNotificacionesActualizablesXML(InputStream is) throws ParserConfigurationException, SAXException, IOException {
+
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser parser = factory.newSAXParser();
+		XMLReader reader = parser.getXMLReader();
+
+		ManejadorNotificacionesDescargablesXML manejador = new ManejadorNotificacionesDescargablesXML();
+		reader.setContentHandler(manejador);
+		reader.parse(new InputSource(is));
+
+		return manejador.getLstElements();
+	}
+
+	public List<NotificacionDTO> leerNotificacionesXML(InputStream is) throws ParserConfigurationException, SAXException, IOException {
+
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser parser = factory.newSAXParser();
+		XMLReader reader = parser.getXMLReader();
+
+		ManejadorNotificacionesXML manejador = new ManejadorNotificacionesXML();
+		reader.setContentHandler(manejador);
+		reader.parse(new InputSource(is));
+
+		return manejador.getLstElements();
+	}
 }

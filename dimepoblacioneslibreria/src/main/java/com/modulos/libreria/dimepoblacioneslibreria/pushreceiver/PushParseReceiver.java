@@ -1,5 +1,6 @@
 package com.modulos.libreria.dimepoblacioneslibreria.pushreceiver;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -30,7 +31,6 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
     private static final String TAG = "PushParseReceiver";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    private final static String GRUPO_NOTIFICACIONES_DIME_MONESTERIO = "GRUPO_NOTIFICACIONES_DIME_MONESTERIO";
     private static int idNotificaciones = 0;
 
 	/*
@@ -132,6 +132,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             Log.d(TAG, "Recibida una notificacion.");
             notificacionToBD(context, notificacion);
 
+            /*
             Intent resultIntent = createResultIntent(context);
             resultIntent.putExtra(DetalleNotificacionActivity.ID_NOTIFICACION, notificacion.getId());
             PendingIntent resultPendingIntent =
@@ -148,6 +149,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             //Esto hace posible crear la notificación
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context);
+                    */
 
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
@@ -167,6 +169,7 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
+            /*
             int idIconoNotificacion = SingletonDimePoblaciones.getInstance().getIdIconoNotificacion();
             mBuilder.setSmallIcon(idIconoNotificacion)
                     .setContentTitle(notificacion.getTitulo())
@@ -184,6 +187,9 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
             if(prefDime.isLedRecibirNotificacion(context)) {
                 mBuilder.setLights(Color.YELLOW, 2000, 1500);
             }
+            */
+            NotificationFactory notifFact = new NotificationFactory();
+            NotificationCompat.Builder mBuilder = notifFact.crearNotificationBuilder(context, notificacion, getClassNotificacion());
 
             ///////////////////////////////////////////////
             ///////////////////////////////////////////////
@@ -206,10 +212,16 @@ public class PushParseReceiver extends ParsePushBroadcastReceiver {
         }
     }
 
+    protected Class getClassNotificacion() {
+        return DetalleNotificacionActivity.class;
+    }
+
+    /*
     protected Intent createResultIntent(Context context) {
         Intent resultIntent = new Intent(context, DetalleNotificacionActivity.class);
         return resultIntent;
     }
+    */
 
     @Override
     protected void onPushDismiss(Context context, Intent intent) {

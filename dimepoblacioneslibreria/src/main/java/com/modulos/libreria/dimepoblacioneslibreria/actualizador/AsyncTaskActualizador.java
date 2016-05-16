@@ -7,8 +7,10 @@ import android.widget.Toast;
 
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.CategoriasDataSource;
+import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.SitiosDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
+import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
 import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasPoblaciones;
@@ -16,6 +18,7 @@ import com.modulos.libreria.utilidadeslibreria.util.UtilConexion;
 import com.modulos.libreria.utilidadeslibreria.util.UtilFechas;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -145,16 +148,47 @@ public class AsyncTaskActualizador extends AsyncTask<Void, Void, AsyncTaskActual
 //	}
 
 	/**
+	 * Realiza la actualizacion de las categorias, comprobando primero la mayor fecha de ultima actualizacion de las
+	 * categorias almacenadas en la base de datos. Usa el ConectorServidor para conseguir la lista de categorias con
+	 * una fecha de ultima actualizacion mas nueva y los pasa al Actualizador para que las almacene en la base de datos
+	 * y las imagenes en el almacenamiento correspondiente.
+	 * @throws DimeException
+	 */
+	private void actualizarNotificaciones() throws DimeException {
+		ConectorServidor cs = new ConectorServidor(contexto);
+		NotificacionesDataSource dataSource = new NotificacionesDataSource(contexto);
+		try {
+			dataSource.open();
+
+			long ultimaActualizacion = dataSource.getUltimaActualizacion();
+
+			List<NotificacionDTO> lstActualizables = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+			List<NotificacionDTO> lst = new ArrayList<>();
+			for(NotificacionDTO notificacionActualizable : lstActualizables) {
+				List<NotificacionDTO> lstNotificacion = cs.getNotificacion(notificacionActualizable);
+				lst.addAll(lstNotificacion);
+			}
+			Actualizador actualizador = new Actualizador(contexto);
+			actualizador.actualizarNotificaciones(lst);
+		} finally {
+			dataSource.close();
+		}
+	}
+
+	/**
 	 * Estas son las acciones que por heredar de la clase AsyncTask se ejecutara en segundo plano.
 	 */
 	@Override
 	protected ResultadoActualizacion doInBackground(Void... arg0) {
 		try {
 			if(UtilConexion.estaConectado(contexto)) {
+				/*
 				PreferenciasPoblaciones preferencias = new PreferenciasPoblaciones(contexto);
 				String idsCategoriasActualizacion = preferencias.getActualizacionPorCategorias();
 				actualizarCategorias();
 				actualizarSitios(idsCategoriasActualizacion);
+				*/
+				actualizarNotificaciones();
 			}
 		} catch (DimeException e) {
 			Log.e(TAG, "Error leyendo la ultima actualizacion.", e);

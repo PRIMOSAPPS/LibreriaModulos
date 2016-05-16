@@ -4,9 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import com.modulos.libreria.buzonciudadanolibreria.util.UtilPropiedadesBuzonCiudadano;
-import com.modulos.libreria.dimepoblacioneslibreria.actividades.MainActivity;
-import com.modulos.libreria.dimepoblacioneslibreria.util.Propiedades;
-import com.modulos.libreria.parselibreria.registro.RegistroParse;
 import com.modulos.libreria.parselibreria.util.ParsePropiedades;
 import com.modulos.libreria.utilidadeslibreria.util.UtilPropiedades;
 
@@ -30,8 +27,6 @@ public class DimeApplication extends Application {
         ParsePropiedades.getInstance().inicializar(this);
         UtilPropiedadesBuzonCiudadano.getInstance().inicializar(this);
 
-        RegistroParse registroParse = new RegistroParse();
-        registroParse.registraParse(this, MainActivity.class);
     }
 
 }

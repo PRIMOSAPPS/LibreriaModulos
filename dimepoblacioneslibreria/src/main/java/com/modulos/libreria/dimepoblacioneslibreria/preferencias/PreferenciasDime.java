@@ -14,6 +14,7 @@ public class PreferenciasDime extends Preferencias {
     public final static String VIBRACION_NOTIFICACION = "vibracion_notificacion";
     public final static String SONIDO_NOTIFICACION = "sonido_notificacion";
     public final static String LED_NOTIFICACION = "led_notificacion";
+    public final static String FECHA_ULTIMA_COMPROBACION_NOTIFICACIONES = "fechaUltimaComprobacionNotificaciones";
 
     public PreferenciasDime(Context contexto) {
         super(contexto);
@@ -56,5 +57,19 @@ public class PreferenciasDime extends Preferencias {
         SharedPreferences.Editor edit = ratePrefs.edit();
         edit.putBoolean(pref, valor);
         edit.commit();
+    }
+
+    public static void setFechaUltimaComprobacionActualizaciones(Context contexto, long millisUltimaComprobacion) {
+        SharedPreferences ratePrefs = PreferenceManager
+                .getDefaultSharedPreferences(contexto);
+        SharedPreferences.Editor edit = ratePrefs.edit();
+        edit.putLong(FECHA_ULTIMA_COMPROBACION_NOTIFICACIONES, millisUltimaComprobacion);
+        edit.commit();
+    }
+
+    public static long getFechaUltimaComprobacionActualizaciones(Context contexto) {
+        SharedPreferences ratePrefs = PreferenceManager
+                .getDefaultSharedPreferences(contexto);
+        return ratePrefs.getLong(FECHA_ULTIMA_COMPROBACION_NOTIFICACIONES, 0);
     }
 }

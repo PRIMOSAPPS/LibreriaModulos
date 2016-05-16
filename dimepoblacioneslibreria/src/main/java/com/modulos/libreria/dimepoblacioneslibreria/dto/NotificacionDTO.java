@@ -20,6 +20,7 @@ public class NotificacionDTO implements Serializable {
     private String texto;
     private Date fechaInicioValidez;
     private Date fechaFinValidez;
+    private Date ultimaActualizacion;
 
     public NotificacionDTO() {
     }
@@ -70,6 +71,14 @@ public class NotificacionDTO implements Serializable {
 
     public void setFechaFinValidez(Date fechaFinValidez) {
         this.fechaFinValidez = fechaFinValidez;
+    }
+
+    public void setUltimaActualizacion(Date ultimaActualizacion) {
+        this.ultimaActualizacion = ultimaActualizacion;
+    }
+
+    public Date getUltimaActualizacion() {
+        return ultimaActualizacion;
     }
 
     public boolean isActiva() {

@@ -23,7 +23,9 @@ public class NotificacionesDataSource extends AbstractDataSource {
 			NotificacionesSQLite.COLUMNA_TITULO,
 			NotificacionesSQLite.COLUMNA_TEXTO,
 			NotificacionesSQLite.COLUMNA_FECHA_INICIO_VALIDEZ,
-			NotificacionesSQLite.COLUMNA_FECHA_FIN_VALIDEZ};
+			NotificacionesSQLite.COLUMNA_FECHA_FIN_VALIDEZ,
+			NotificacionesSQLite.COLUMNA_ULTIMA_ACTUALIZACION
+	};
 
 	public NotificacionesDataSource(Context context) {
 		super(context);
@@ -67,7 +69,7 @@ public class NotificacionesDataSource extends AbstractDataSource {
 		List<NotificacionDTO> resul = new ArrayList<>();
 		String where = NotificacionesSQLite.COLUMNA_ID_CATEGORIA + " = '" + idCategoria + "'";
 		Cursor cursor = database.query(NotificacionesSQLite.TABLE_NAME,
-				allColumns, where, null, null, null, null);
+				allColumns, where, null, null, null, NotificacionesSQLite.COLUMNA_FECHA_INICIO_VALIDEZ + " DESC");
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			NotificacionDTO categoria = cursorToObject(cursor);
@@ -88,7 +90,7 @@ public class NotificacionesDataSource extends AbstractDataSource {
 		List<NotificacionDTO> resul = new ArrayList<>();
 
 		Cursor cursor = database.query(NotificacionesSQLite.TABLE_NAME,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, NotificacionesSQLite.COLUMNA_FECHA_INICIO_VALIDEZ + " DESC");
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -148,6 +150,8 @@ public class NotificacionesDataSource extends AbstractDataSource {
 		resul.setFechaInicioValidez(new Date(fechaInicioValidez));
 		long fechaFinValidez = cursor.getLong(cursor.getColumnIndex(NotificacionesSQLite.COLUMNA_FECHA_FIN_VALIDEZ));
 		resul.setFechaFinValidez(new Date(fechaFinValidez));
+		long ultimaActualizacion = cursor.getLong(cursor.getColumnIndex(NotificacionesSQLite.COLUMNA_ULTIMA_ACTUALIZACION));
+		resul.setUltimaActualizacion(new Date(ultimaActualizacion));
 
 		return resul;
 	}
@@ -170,7 +174,27 @@ public class NotificacionesDataSource extends AbstractDataSource {
 				categoria.getFechaInicioValidez().getTime());
 		valores.put(NotificacionesSQLite.COLUMNA_FECHA_FIN_VALIDEZ, categoria
 				.getFechaFinValidez().getTime());
+		valores.put(NotificacionesSQLite.COLUMNA_ULTIMA_ACTUALIZACION, categoria
+				.getUltimaActualizacion().getTime());
 		return valores;
 	}
 
+	/**
+	 * Devuelve la fecha de la ultima actualizacion de la tabla
+	 * @return
+	 */
+	public long getUltimaActualizacion() {
+		String sql = "SELECT MAX(" + NotificacionesSQLite.COLUMNA_ULTIMA_ACTUALIZACION + ") FROM " +
+				NotificacionesSQLite.TABLE_NAME;
+		String[] bindVars = {};
+		Cursor cursor = database.rawQuery(sql, bindVars);
+
+		long ultimaActualizacion = 0;
+		cursor.moveToFirst();
+		if(!cursor.isAfterLast()) {
+			ultimaActualizacion = cursor.getLong(0);
+		}
+		cursor.close();
+		return ultimaActualizacion;
+	}
 }
