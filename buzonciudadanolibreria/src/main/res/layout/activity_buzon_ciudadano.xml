@@ -192,7 +192,6 @@
         android:background="@android:color/holo_orange_light"
         android:singleLine="false"
         android:lines="5"
-        android:visibility="gone"
         android:editable="true"
         android:gravity="top|left"
         android:text="" />

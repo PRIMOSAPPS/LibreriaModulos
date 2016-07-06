@@ -110,20 +110,15 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         viewPager = (ViewPager) findViewById(R.id.libCiuViewPager);
         mainLayout = (LinearLayout) findViewById(R.id.libCiudLinearGallery);
 
-        final EditText editorComentario = (EditText)findViewById(R.id.libCiuTextComentario);
         final RadioGroup opcionesRecogidaResiduos = (RadioGroup)findViewById(R.id.libCiuRadioGroupOpcionesRecogidaResiduos);
         RadioGroup grupoOpciones = (RadioGroup)findViewById(R.id.libCiuRadioGroupOpciones);
         grupoOpciones.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int visibilidadEditorComentario = View.GONE;
                 int visibilidadOpcionesRecogidaResiduos = View.GONE;
-                if(checkedId == R.id.libCiuOpcionOtras || checkedId == R.id.libCiuOpcionFeriasFiestas) {
-                    visibilidadEditorComentario = View.VISIBLE;
-                } else if(checkedId == R.id.libCiuOpcRecogidaResiduos) {
+                if(checkedId == R.id.libCiuOpcRecogidaResiduos) {
                     visibilidadOpcionesRecogidaResiduos = View.VISIBLE;
                 }
-                editorComentario.setVisibility(visibilidadEditorComentario);
                 opcionesRecogidaResiduos.setVisibility(visibilidadOpcionesRecogidaResiduos);
             }
         });

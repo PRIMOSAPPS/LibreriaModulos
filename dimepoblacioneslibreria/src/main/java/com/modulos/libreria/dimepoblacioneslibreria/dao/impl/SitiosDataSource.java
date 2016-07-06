@@ -126,6 +126,10 @@ public class SitiosDataSource extends AbstractDataSource {
 				+ " = " + id, null);
 	}
 
+	public void deleteAll() {
+		database.delete(SitiosSQLite.TABLE_NAME, null, null);
+	}
+
 	public SitioDTO getById(long id) {
 		SitioDTO resul = null;
 		String where = SitiosSQLite.COLUMNA_ID + " = " + id;
