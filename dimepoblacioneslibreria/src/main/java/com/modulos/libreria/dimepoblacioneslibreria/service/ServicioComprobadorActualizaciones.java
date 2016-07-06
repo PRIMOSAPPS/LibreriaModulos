@@ -63,7 +63,7 @@ public abstract class ServicioComprobadorActualizaciones extends Service {
 
     class RunnableComprobador implements Runnable {
         public void run() {
-
+            Log.d(TAG, "RunnableComprobador.run()");
             ThreadComprobador tc = new ThreadComprobador(ServicioComprobadorActualizaciones.this);
             tc.start();
             mHandler.postDelayed(this, ComprobadorActualizacionNotificaciones.INTERVALO_EJECUCION);
@@ -74,11 +74,13 @@ public abstract class ServicioComprobadorActualizaciones extends Service {
         private Context contexto;
 
         ThreadComprobador(Context contexto) {
+            super("ServicioComprobadorActualizaciones");
             this.contexto = contexto;
         }
 
         @Override
         public void run() {
+            Log.d(TAG, "ThreadComprobador.run()");
             ComprobadorActualizacionNotificaciones comprobador = new ComprobadorActualizacionNotificaciones(contexto, getClassNotificacion());
             comprobador.comprobar();
         }

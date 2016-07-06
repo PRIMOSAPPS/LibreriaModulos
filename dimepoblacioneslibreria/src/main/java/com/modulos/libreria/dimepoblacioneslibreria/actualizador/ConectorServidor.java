@@ -215,7 +215,7 @@ public class ConectorServidor {
 	 * @return
 	 * @throws DimeException
 	 */
-	public List<NotificacionDTO> getListaNotificacionesActualizables(long ultimaActualizacion) throws DimeException {
+	public ResultadoServidor<NotificacionDTO> getListaNotificacionesActualizables(long ultimaActualizacion) throws DimeException {
 		try {
 			Log.w(TAG, "Pidiendo la actualizacion de notificaciones para la ultimaActualizacion: " + ultimaActualizacion);
 			HttpClient httpclient = new DefaultHttpClient();
@@ -244,7 +244,10 @@ public class ConectorServidor {
 			InputStream is = new ByteArrayInputStream(text.getBytes());
 
 			EventosXML_SAX meXml = new EventosXML_SAX();
-			return meXml.leerNotificacionesActualizablesXML(is);
+			List<NotificacionDTO> notificaciones = meXml.leerNotificacionesActualizablesXML(is);
+			Long horaServidor = meXml.getHoraServidor();
+			ResultadoServidor resul = new ResultadoServidor<NotificacionDTO>(horaServidor, notificaciones);
+			return resul;
 		} catch (Exception e) {
 			throw new DimeException("Error al realizar la peticion al servidor: " + e.getMessage(), e);
 		}
@@ -259,7 +262,7 @@ public class ConectorServidor {
 	 * @return Devuelve una lista, aunque solo tendra un sitio, por necesidades de tiempo
 	 * @throws DimeException
 	 */
-	public List<NotificacionDTO> getNotificacion(NotificacionDTO notificacion) throws DimeException {
+	public ResultadoServidor<NotificacionDTO> getNotificacion(NotificacionDTO notificacion) throws DimeException {
 		try {
 			long idNotificacion = notificacion.getId();
 			Log.w(TAG, "Pidiendo la actualizacion de notificacion para id: " + idNotificacion);
@@ -290,7 +293,10 @@ public class ConectorServidor {
 			InputStream is = new ByteArrayInputStream(text.getBytes());
 
 			EventosXML_SAX meXml = new EventosXML_SAX();
-			return meXml.leerNotificacionesXML(is);
+			List<NotificacionDTO> notificaciones = meXml.leerNotificacionesXML(is);
+			Long horaServidor = meXml.getHoraServidor();
+			ResultadoServidor resul = new ResultadoServidor<NotificacionDTO>(horaServidor, notificaciones);
+			return resul;
 		} catch (Exception e) {
 			throw new DimeException("Error al realizar la peticion al servidor: " + e.getMessage(), e);
 		}

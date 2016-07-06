@@ -10,8 +10,7 @@ android {
     defaultConfig {
         applicationId "com.modulos.libreria.libreriamodulos"
         minSdkVersion 8
-        targetSdkVersion 22
-        versionCode versionCodeLibreria
+        targetSdkVersion 23
         versionName versionLibrerias
     }
     buildTypes {

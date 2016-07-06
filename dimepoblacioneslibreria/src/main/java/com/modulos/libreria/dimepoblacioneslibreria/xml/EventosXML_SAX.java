@@ -24,6 +24,8 @@ import javax.xml.parsers.SAXParserFactory;
  *
  */
 public class EventosXML_SAX {
+	private Long horaServidor = null;
+
 	public EventosXML_SAX() {
 	}
 	
@@ -63,6 +65,7 @@ public class EventosXML_SAX {
 		reader.setContentHandler(manejador);
 		reader.parse(new InputSource(is));
 
+		horaServidor = manejador.getHoraServidor();
 		return manejador.getLstElements();
 	}
 
@@ -76,6 +79,12 @@ public class EventosXML_SAX {
 		reader.setContentHandler(manejador);
 		reader.parse(new InputSource(is));
 
+		horaServidor = manejador.getHoraServidor();
 		return manejador.getLstElements();
 	}
+
+	public Long getHoraServidor() {
+		return horaServidor;
+	}
+
 }

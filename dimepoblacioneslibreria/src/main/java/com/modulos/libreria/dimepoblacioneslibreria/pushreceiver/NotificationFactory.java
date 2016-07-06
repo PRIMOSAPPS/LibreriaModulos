@@ -25,10 +25,11 @@ public class NotificationFactory {
 
         Intent resultIntent = createResultIntent(context, clase);
         resultIntent.putExtra(DetalleNotificacionActivity.ID_NOTIFICACION, notificacion.getId());
+        int requestCode = (int)notificacion.getId();
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         context,
-                        0,
+                        requestCode,
                         resultIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );

@@ -11,6 +11,8 @@ import com.modulos.libreria.dimepoblacioneslibreria.actividades.detalle.DetalleS
 import com.modulos.libreria.dimepoblacioneslibreria.adaptadores.SitioAdaptador;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.SitiosDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
+import com.modulos.libreria.utilidadeslibreria.permisos.Permisos;
 
 import java.util.List;
 
@@ -35,8 +37,23 @@ public class ListaSitiosActivity extends AppCompatActivity {
         // Se asigna el titulo del action bar
 //        setTitulo(strParaTitulo);
 
-        cargarSitios();
+        Permisos permisosUtil = new Permisos();
+        if(!permisosUtil.preguntarPermisos(this, ItfAlmacenamiento.permisosNecesarios)) {
+            cargarSitios();
+        }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Permisos.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+                cargarSitios();
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     public void mostrarDetalle(View view) {

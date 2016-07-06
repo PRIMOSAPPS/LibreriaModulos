@@ -12,8 +12,7 @@ android {
     buildToolsVersion '23.0.1'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 22
-        versionCode versionCodeLibreria
+        targetSdkVersion 23
         versionName versionLibrerias
     }
     buildTypes {

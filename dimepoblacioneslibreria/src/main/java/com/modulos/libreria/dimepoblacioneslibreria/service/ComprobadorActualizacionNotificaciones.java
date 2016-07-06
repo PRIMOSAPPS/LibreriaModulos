@@ -6,11 +6,13 @@ import android.content.Context;
 import android.util.Log;
 
 import com.modulos.libreria.dimepoblacioneslibreria.actualizador.ConectorServidor;
+import com.modulos.libreria.dimepoblacioneslibreria.actualizador.ResultadoServidor;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
 import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasDime;
 import com.modulos.libreria.dimepoblacioneslibreria.pushreceiver.NotificationFactory;
+import com.modulos.libreria.dimepoblacioneslibreria.util.UltimaActualizacion;
 import com.modulos.libreria.utilidadeslibreria.util.UtilConexion;
 
 import java.util.Calendar;
@@ -22,8 +24,8 @@ import java.util.List;
 public class ComprobadorActualizacionNotificaciones {
     private final  static String TAG = "[ComprActualNotificaci]";
 
-    public static final long INTERVALO_EJECUCION = 15 * 60 * 1000;
-    //public static final long INTERVALO_EJECUCION = 30 * 1000;
+    //public static final long INTERVALO_EJECUCION = 15 * 60 * 1000;
+    public static final long INTERVALO_EJECUCION = 3 * 60 * 1000;
 
     private Context contexto;
     private Class classNotificacion;
@@ -39,47 +41,45 @@ public class ComprobadorActualizacionNotificaciones {
     public void comprobar() {
         long ahora = Calendar.getInstance().getTimeInMillis();
         if (intervaloCumplido(ahora) && UtilConexion.estaConectado(contexto)) {
-            realizarComprobacion();
-            PreferenciasDime.setFechaUltimaComprobacionActualizaciones(contexto, ahora);
+            Long horaServidor = realizarComprobacion();
+            if(horaServidor != null) {
+                PreferenciasDime.setFechaUltimaComprobacionActualizaciones(contexto, horaServidor);
+            }
         }
     }
 
-    private long getUltimaActualizacionNotificaciones() {
-        long ultimaActualizacion = PreferenciasDime.getFechaUltimaComprobacionActualizaciones(contexto);
-        if(ultimaActualizacion == 0) {
-            dataSource.open();
-            ultimaActualizacion = dataSource.getUltimaActualizacion();
-            dataSource.close();
-        }
-        return ultimaActualizacion;
-    }
+    private Long realizarComprobacion() {
 
-    private void realizarComprobacion() {
-
+        Long horaServidor = null;
         ConectorServidor cs = new ConectorServidor(contexto);
         try {
             dataSource.open();
-            long ultimaActualizacion = getUltimaActualizacionNotificaciones();
-            List<NotificacionDTO> lstActualizables = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+            UltimaActualizacion ua = new UltimaActualizacion();
+            long ultimaActualizacion = ua.getUltimaActualizacionNotificaciones(contexto);
+            ResultadoServidor<NotificacionDTO> resulNotifActualizables = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+            List<NotificacionDTO> lstActualizables = resulNotifActualizables.getResultados();
+            horaServidor = resulNotifActualizables.getHoraServidor();
             if(!lstActualizables.isEmpty()) {
                 for(NotificacionDTO notificacion : lstActualizables) {
-                    List<NotificacionDTO> lstCompletas = cs.getNotificacion(notificacion);
+                    ResultadoServidor<NotificacionDTO> resulNotificacion = cs.getNotificacion(notificacion);
+                    List<NotificacionDTO> lstCompletas = resulNotificacion.getResultados();
+                    //List<NotificacionDTO> lstCompletas = cs.getNotificacion(notificacion);
                     if(!lstCompletas.isEmpty()) {
-                        notificacion = lstCompletas.get(0);
+                        NotificacionDTO notificacionCompleta = lstCompletas.get(0);
 
                         NotificacionDTO notificacionBD = dataSource.getById(notificacion.getId());
                         if(notificacionBD == null) {
-                            dataSource.insertar(notificacion);
+                            dataSource.insertar(notificacionCompleta);
 
                             NotificationFactory notifFact = new NotificationFactory();
-                            android.support.v7.app.NotificationCompat.Builder mBuilder = notifFact.crearNotificationBuilder(contexto, notificacion, classNotificacion);
+                            android.support.v7.app.NotificationCompat.Builder mBuilder = notifFact.crearNotificationBuilder(contexto, notificacionCompleta, classNotificacion);
 
                             NotificationManager mNotificationManager =
                                     (NotificationManager) contexto.getSystemService(Context.NOTIFICATION_SERVICE);
                             Notification notification = mBuilder.build();
-                            mNotificationManager.notify((int) notificacion.getId(), notification);
+                            mNotificationManager.notify((int) notificacionCompleta.getId(), notification);
                         } else {
-                            dataSource.actualizar(notificacion);
+                            dataSource.actualizar(notificacionCompleta);
                         }
                     }
                 }
@@ -89,6 +89,7 @@ public class ComprobadorActualizacionNotificaciones {
         } finally {
             dataSource.close();
         }
+        return horaServidor;
     }
 
     /**

@@ -23,6 +23,7 @@ import java.util.List;
 public class ManejadorNotificacionesDescargablesXML extends DefaultHandler {
 	private StringBuilder cadena;
 	private List<NotificacionDTO> lstNotificaciones = null;
+	private Long horaServidor = null;
 	private NotificacionDTO notificacion;
 	
 	@Override
@@ -57,6 +58,8 @@ public class ManejadorNotificacionesDescargablesXML extends DefaultHandler {
 				notificacion.setUltimaActualizacion(ultimaActualizacionDefault);
 			} else if(localName.equals("notificacion_actualizable")) {
 				lstNotificaciones.add(notificacion);
+			} else if(localName.equals("hora_servidor")) {
+				horaServidor = Long.parseLong(cadena.toString().trim());
 			}
 		} catch(Exception e) {
 			throw new SAXException("Error al leer una cadena #" + cadena.toString().trim() + "#", e);
@@ -83,5 +86,9 @@ public class ManejadorNotificacionesDescargablesXML extends DefaultHandler {
 		return lstNotificaciones;
 	}
 
+
+	public Long getHoraServidor() {
+		return horaServidor;
+	}
 
 }

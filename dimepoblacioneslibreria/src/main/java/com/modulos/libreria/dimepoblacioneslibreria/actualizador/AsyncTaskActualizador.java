@@ -14,6 +14,7 @@ import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
 import com.modulos.libreria.dimepoblacioneslibreria.preferencias.PreferenciasPoblaciones;
+import com.modulos.libreria.dimepoblacioneslibreria.util.UltimaActualizacion;
 import com.modulos.libreria.utilidadeslibreria.util.UtilConexion;
 import com.modulos.libreria.utilidadeslibreria.util.UtilFechas;
 
@@ -160,12 +161,15 @@ public class AsyncTaskActualizador extends AsyncTask<Void, Void, AsyncTaskActual
 		try {
 			dataSource.open();
 
-			long ultimaActualizacion = dataSource.getUltimaActualizacion();
+			UltimaActualizacion ua = new UltimaActualizacion();
+			long ultimaActualizacion = ua.getUltimaActualizacionNotificaciones(contexto);
 
-			List<NotificacionDTO> lstActualizables = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+			ResultadoServidor<NotificacionDTO> resulNotifActualizables = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+			List<NotificacionDTO> lstActualizables = resulNotifActualizables.getResultados();
 			List<NotificacionDTO> lst = new ArrayList<>();
 			for(NotificacionDTO notificacionActualizable : lstActualizables) {
-				List<NotificacionDTO> lstNotificacion = cs.getNotificacion(notificacionActualizable);
+				ResultadoServidor<NotificacionDTO> resulNotificacion = cs.getListaNotificacionesActualizables(ultimaActualizacion);
+				List<NotificacionDTO> lstNotificacion = resulNotificacion.getResultados();
 				lst.addAll(lstNotificacion);
 			}
 			Actualizador actualizador = new Actualizador(contexto);

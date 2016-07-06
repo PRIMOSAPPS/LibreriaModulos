@@ -27,7 +27,9 @@ import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.CategoriasDataSourc
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.SitiosDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.utilidadeslibreria.constantes.Constantes;
+import com.modulos.libreria.utilidadeslibreria.permisos.Permisos;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
 
 public class DetalleSitioActivity extends AppCompatActivity implements
@@ -46,6 +48,9 @@ public class DetalleSitioActivity extends AppCompatActivity implements
         dataSource = new SitiosDataSource(this);
         dataSource.open();
         setContentView(R.layout.activity_detalle_sitio);
+
+        Permisos permisosUtil = new Permisos();
+        permisosUtil.preguntarPermisos(this, ItfAlmacenamiento.permisosNecesarios);
 
         TextView textViewDireccion = (TextView) findViewById(R.id.textDireccion);
         final WebView webViewTextoLargo1 = (WebView) findViewById(R.id.wvSitioTextoLargo1);

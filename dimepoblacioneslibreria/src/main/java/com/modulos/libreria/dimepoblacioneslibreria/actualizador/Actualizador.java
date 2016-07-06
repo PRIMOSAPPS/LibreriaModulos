@@ -112,7 +112,6 @@ public class Actualizador {
 				NotificacionDTO existente = dataSource.getById(id);
 				if(existente == null) {
 					long resulInsercion = dataSource.insertar(notificacion);
-					System.out.println("Resultado de la insecion de la notficacion: " + resulInsercion);
 				} else {
 					dataSource.actualizar(notificacion);
 				}

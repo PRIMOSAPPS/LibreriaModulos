@@ -13,6 +13,8 @@ import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
 import com.modulos.libreria.dimepoblacioneslibreria.xml.EventosXML_SAX;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
+import com.modulos.libreria.utilidadeslibreria.permisos.Permisos;
 import com.modulos.libreria.utilidadeslibreria.preferencias.Preferencias;
 
 import org.xml.sax.SAXException;
@@ -101,7 +103,10 @@ public class InicioActivity extends AppCompatActivity {
                 public void run() {
                     Log.d(TAG, "Se lanza la carga inicial.");
 
-                    cargaInicial(preferencias);
+                    Permisos permisosUtil = new Permisos();
+                    if(!permisosUtil.preguntarPermisos(InicioActivity.this, ItfAlmacenamiento.permisosNecesarios)) {
+                        cargaInicial(preferencias);
+                    }
 
                     Log.d(TAG, "Se lanza MainActivity.");
 
@@ -113,6 +118,27 @@ public class InicioActivity extends AppCompatActivity {
             thrInicio.start();
         } else {
             finInicioActivity();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Permisos.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+
+                Permisos permisos = new Permisos();
+                boolean concedidos = permisos.checkSiPermisosConcedidos(permissions, grantResults);
+                if(concedidos) {
+                    final Preferencias preferencias = new Preferencias(this);
+                    cargaInicial(preferencias);
+                } else {
+                    Toast.makeText(this, R.string.permisos_necesarios, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

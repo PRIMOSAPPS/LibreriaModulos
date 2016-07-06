@@ -23,6 +23,7 @@ import java.util.List;
 public class ManejadorNotificacionesXML extends DefaultHandler {
 	private StringBuilder cadena;
 	private List<NotificacionDTO> lstNotificaciones = null;
+	private Long horaServidor = null;
 	private NotificacionDTO notificacion;
 	
 	@Override
@@ -93,5 +94,8 @@ public class ManejadorNotificacionesXML extends DefaultHandler {
 		return lstNotificaciones;
 	}
 
+	public Long getHoraServidor() {
+		return horaServidor;
+	}
 
 }

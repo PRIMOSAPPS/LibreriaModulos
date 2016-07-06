@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.NotificacionesDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.NotificacionDTO;
+import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.utilidadeslibreria.constantes.Constantes;
+import com.modulos.libreria.utilidadeslibreria.permisos.Permisos;
 
 public class DetalleNotificacionActivity extends AppCompatActivity {
     public final static String ID_NOTIFICACION = "ID_NOTIFICACION";
@@ -19,6 +21,9 @@ public class DetalleNotificacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_notificacion);
+
+        Permisos permisosUtil = new Permisos();
+        permisosUtil.preguntarPermisos(this, ItfAlmacenamiento.permisosNecesarios);
 
         TextView titulo = (TextView)findViewById(R.id.dimeNotifTitulo);
         WebView texto = (WebView)findViewById(R.id.dimeNotifTexto);
