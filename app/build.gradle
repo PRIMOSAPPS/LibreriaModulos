@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def versionLibrerias = "1.0.4"
+def versionLibrerias = "1.0.5"
 version = versionLibrerias
 def versionCodeLibreria=4
 
