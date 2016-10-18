@@ -99,7 +99,8 @@ public class ListaNotificacionesActivity extends AppCompatActivity {
 
 
     public void mostrarDetalle(View view) {
-        NotificacionDTO notificacion = (NotificacionDTO)view.getTag();
+        NotificacionAdaptador.ViewHolder viewHolder = (NotificacionAdaptador.ViewHolder)view.getTag();
+        NotificacionDTO notificacion = viewHolder.getNotificacion();
 
         Intent intent = new Intent(this, DetalleNotificacionActivity.class);
         intent.putExtra(DetalleNotificacionActivity.ID_NOTIFICACION, notificacion.getId());

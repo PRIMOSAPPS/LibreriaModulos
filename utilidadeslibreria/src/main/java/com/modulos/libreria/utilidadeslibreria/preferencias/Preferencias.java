@@ -10,7 +10,7 @@ import android.util.Log;
 public class Preferencias {
 	private final static String PREFERENCIA_ACTUALIZAR_AUTOMATICAMENTE = "pref_actualizar_automaticamente";
 	private final static String ALMACENAMIENTO = "tipoAlmacenamiento";
-	public final static String PRIMER_ARRANQUE = "primerArranque";
+	public final static String PRIMER_ARRANQUE = "primerArranque2";
 	private final static String ALMACENAMIENTO_INTERNO = "almacenamientoInterno";
 	private final static String ALMACENAMIENTO_EXTERNO = "almacenamientoExterno";
 

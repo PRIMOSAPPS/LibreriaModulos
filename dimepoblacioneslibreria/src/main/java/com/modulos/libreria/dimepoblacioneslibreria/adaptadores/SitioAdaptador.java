@@ -26,22 +26,60 @@ import java.util.List;
  */
 public class SitioAdaptador extends ListaAdaptador<SitioDTO> {
 
+	public static class ViewHolder {
+		public final ImageView imageView;
+		public final TextView textView;
+		private SitioDTO sitio;
+
+		public ViewHolder(ImageView imageView, TextView textView) {
+			this.imageView = imageView;
+			this.textView = textView;
+		}
+
+		public SitioDTO getSitio() {
+			return sitio;
+		}
+
+		public void setSitio(SitioDTO sitio) {
+			this.sitio = sitio;
+		}
+	}
+
 	public SitioAdaptador(Activity actividad, List<SitioDTO> listaSitios) {
 		super(actividad, listaSitios);
 	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = actividad.getLayoutInflater();
-		View view = inflater.inflate(R.layout.sitio_view_adapter, null, true);
+
+
+		ImageView imagen;
+		TextView textNombreSitio;
+		ViewHolder viewHolder;
+		if (convertView == null) {
+			LayoutInflater inflater = actividad.getLayoutInflater();
+			convertView = inflater.inflate(R.layout.sitio_view_adapter, null, true);
+
+			imagen = (ImageView) convertView.findViewById(R.id.imagenListaEventos);
+			textNombreSitio = (TextView) convertView.findViewById(R.id.textNombreSitio);
+			viewHolder = new ViewHolder(imagen, textNombreSitio);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+			imagen = viewHolder.imageView;
+			textNombreSitio = viewHolder.textView;
+		}
+
+		//LayoutInflater inflater = actividad.getLayoutInflater();
+		//View view = inflater.inflate(R.layout.sitio_view_adapter, null, true);
 
 		List<SitioDTO> listaSitios = (List<SitioDTO>)listaObjetos;
 		SitioDTO sitio = listaSitios.get(position);
-		
-		view.setTag(sitio);
-        TextView textNombreSitio = (TextView)view.findViewById(R.id.textNombreSitio);
+
+		viewHolder.setSitio(sitio);
+		//TextView textNombreSitio = (TextView)view.findViewById(R.id.textNombreSitio);
+		//ImageView imagen = (ImageView)view.findViewById(R.id.imagenListaEventos);
+
 		textNombreSitio.setText(sitio.getNombre());
-		
-		ImageView imagen = (ImageView)view.findViewById(R.id.imagenListaEventos);
 		imagen.setImageResource(SingletonDimePoblaciones.getInstance().getIdIconoListaSitios());
 //		ItfAlmacenamiento almacenamiento = AlmacenamientoUtilFactory.getAlmacenamiento(actividad);
 //		Bitmap bitmap = almacenamiento.getImagenSitio(sitio.getId(), sitio.getNombreLogotipo());
@@ -50,7 +88,7 @@ public class SitioAdaptador extends ListaAdaptador<SitioDTO> {
 //		LayoutParams params = new LayoutParams(LayoutParams.fill_parent,
 //				15 + (position * 5));
 //		view.setLayoutParams(params);
-		return view;
+		return convertView;
 	}
 
 }

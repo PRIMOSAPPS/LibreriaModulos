@@ -41,6 +41,8 @@ import com.modulos.libreria.buzonciudadanolibreria.mail.MailSender;
 import com.modulos.libreria.utilidadeslibreria.almacenamiento.AlmacenamientoUtilFactory;
 import com.modulos.libreria.utilidadeslibreria.almacenamiento.ItfAlmacenamiento;
 import com.modulos.libreria.utilidadeslibreria.gps.Gps;
+import com.modulos.libreria.utilidadeslibreria.permisos.Permisos;
+import com.modulos.libreria.utilidadeslibreria.preferencias.Preferencias;
 import com.modulos.libreria.utilidadeslibreria.util.GoogleMaps;
 import com.modulos.libreria.utilidadeslibreria.util.UtilImagenes;
 
@@ -48,11 +50,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.GpsListener, GoogleMaps.GoogleMapsGeocodeListener, AsyncTaskMailSender.MailSenderListener {
     private final static String TAG = "BuzonCiudadanoActivity";
+    private static List<String> permisosNecesarios;
     public final static String DIRECTORIO = "DIRECTORIO_BUZON_CIUDADANO";
     public final static String NUM_FOTOS = "NUM_FOTOS_BUZON_CIUDADANO";
     private final static int FOTO_PARA_BUZON_CIUDADANO = 1;
@@ -68,6 +72,7 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     private View cell;
     private ViewPager viewPager;
     private String direccionIncidencia;
+    private boolean conPermisosEnCamara = false;
 
     class ParBitmapUri {
         private Bitmap bitmap;
@@ -93,8 +98,18 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buzon_ciudadano);
 
-        gps = new Gps(this);
-        gps.registrarLocationManager(this);
+        Permisos permisosUtil = new Permisos();
+        if(permisosNecesarios == null) {
+            permisosNecesarios = new ArrayList<>();
+            permisosNecesarios.addAll(Arrays.asList(Permisos.PERMISOS_CAMARA));
+            permisosNecesarios.addAll(Arrays.asList(Permisos.PERMISOS_LOCALIZACION));
+            permisosNecesarios.addAll(Arrays.asList(Permisos.PERMISOS_CUENTAS_USUARIO));
+            permisosNecesarios.addAll(Arrays.asList(Permisos.PERMISOS_NUMERO_TELEFONO));
+        }
+        if(!permisosUtil.preguntarPermisos(this, permisosNecesarios)) {
+            iniciarGps();
+            conPermisosEnCamara = true;
+        }
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -124,6 +139,32 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
         });
 
         direccionIncidencia = null;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Permisos.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+
+                Permisos permisos = new Permisos();
+                boolean concedidos = permisos.checkSiPermisosConcedidos(permissions, grantResults);
+                if(concedidos) {
+                    iniciarGps();
+                    conPermisosEnCamara = true;
+                } else {
+                    Toast.makeText(this, R.string.permisos_necesarios, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void iniciarGps() {
+        gps = new Gps(this);
+        gps.registrarLocationManager(this);
     }
 
     @Override
@@ -159,6 +200,11 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     }
 
     public void sacarFoto(View view) {
+        if(!conPermisosEnCamara) {
+            Toast.makeText(this, R.string.permisos_necesarios, Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
         if (!isSacarFotoPermitido()) {
             Toast.makeText(this, R.string.numFotosMaxAlcanzado, Toast.LENGTH_LONG).show();
             return;
@@ -256,13 +302,17 @@ public class BuzonCiudadanoActivity extends AppCompatActivity implements Gps.Gps
     @Override
     protected void onPause() {
         super.onPause();
-        gps.pausarRegistro();
+        if(gps != null) {
+            gps.pausarRegistro();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        gps.registrarLocationManager();
+        if(gps != null) {
+            gps.registrarLocationManager();
+        }
     }
 
     private void borrarFoto(Uri strFoto) {

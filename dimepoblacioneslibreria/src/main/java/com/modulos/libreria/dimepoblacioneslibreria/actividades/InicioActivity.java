@@ -1,5 +1,6 @@
 package com.modulos.libreria.dimepoblacioneslibreria.actividades;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.modulos.libreria.dimepoblacioneslibreria.R;
 import com.modulos.libreria.dimepoblacioneslibreria.actualizador.Actualizador;
+import com.modulos.libreria.dimepoblacioneslibreria.dao.impl.SitiosDataSource;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.CategoriaDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.dto.SitioDTO;
 import com.modulos.libreria.dimepoblacioneslibreria.excepcion.DimeException;
@@ -41,6 +43,7 @@ public class InicioActivity extends AppCompatActivity {
         if(preferencias.isPrimerArranque()) {
             Log.d(TAG, "Aun no se ha realizado el primer arranque");
             try {
+                vaciarSitios(this);
                 // Se decide el modo de almacenamiento
                 preferencias.asignarModoAlmacenamiento(this);
 
@@ -80,6 +83,20 @@ public class InicioActivity extends AppCompatActivity {
                 Log.e(TAG, "Se ha producido un error durante la carga inicial de los datos.", e);
                 Toast.makeText(this, "Se ha producido un error durante la carga inicial de los datos.", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void vaciarSitios(Context context) {
+        SitiosDataSource dataSource = null;
+
+        try {
+            dataSource = new SitiosDataSource(context);
+            dataSource.open();
+
+            dataSource.deleteAll();
+            dataSource.close();
+        } finally {
+            dataSource.close();
         }
     }
 

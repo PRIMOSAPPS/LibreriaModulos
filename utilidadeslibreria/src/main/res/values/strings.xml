@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UtilidadesLibreria</string>
+    <string name="permisos_necesarios">La aplicación necesita más permisos de los concedidos para una correcta ejecución</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.modulos.libreria.utilidadeslibreria.permisos;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -15,6 +16,11 @@ import java.util.List;
 public class Permisos {
     public final static int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     public final static int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    public static String[] PERMISOS_CAMARA = {Manifest.permission.CAMERA};
+    public static String[] PERMISOS_LOCALIZACION = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    public static String[] PERMISOS_CUENTAS_USUARIO = {Manifest.permission.GET_ACCOUNTS};
+    public static String[] PERMISOS_NUMERO_TELEFONO = {Manifest.permission.READ_PHONE_STATE};
 
     public boolean preguntarPermisos(Activity actividad, String[] permisos) {
         return preguntarPermisos(actividad, Arrays.asList(permisos));
@@ -91,4 +97,24 @@ public class Permisos {
 
         return resul;
     }
+
+    public boolean coincidenPermisos(String[] permissions1, String[] permissions2) {
+        if(permissions1 == null || permissions2 == null) {
+            return false;
+        }
+        if(permissions1.length != permissions2.length) {
+            return false;
+        }
+        boolean resul = true;
+        List<String> permisos1 = Arrays.asList(permissions1);
+        List<String> permisos2 = Arrays.asList(permissions2);
+        for(String permiso1 : permisos1) {
+            if(!permisos2.contains(permiso1)) {
+                resul = false;
+                break;
+            }
+        }
+        return resul;
+    }
+
 }

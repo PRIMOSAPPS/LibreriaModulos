@@ -57,7 +57,8 @@ public class ListaSitiosActivity extends AppCompatActivity {
     }
 
     public void mostrarDetalle(View view) {
-        SitioDTO sitio = (SitioDTO)view.getTag();
+        SitioAdaptador.ViewHolder viewHolder = (SitioAdaptador.ViewHolder)view.getTag();
+        SitioDTO sitio = viewHolder.getSitio();
 
         Intent intent = new Intent(this, DetalleSitioActivity.class);
         intent.putExtra(DetalleSitioActivity.ID_SITIO, sitio.getId());

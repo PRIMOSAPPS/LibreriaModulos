@@ -18,6 +18,16 @@ import java.util.List;
 public class MenuLateralAdaptador extends BaseAdapter {
 	private final Activity actividad;
 	private final List<DatosItemMenuLateral> listaItems;
+
+	private static class ViewHolder {
+		public final ImageView imageView;
+		public final TextView textView;
+
+		public ViewHolder(ImageView imageView, TextView textView) {
+			this.imageView = imageView;
+			this.textView = textView;
+		}
+	}
 	
 	public MenuLateralAdaptador(Activity actividad,
 								List<DatosItemMenuLateral> listaItems) {
@@ -43,12 +53,22 @@ public class MenuLateralAdaptador extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = actividad.getLayoutInflater();
-		View view = inflater.inflate(R.layout.opcion_menu_lateral, null, true);
-		
-		ImageView imageView = (ImageView)view.findViewById(R.id.imagen_menu_lateral);
-		TextView textView = (TextView)view.findViewById(R.id.titulo_menu_lateral);
-		
+
+		ImageView imageView;
+		TextView textView;
+		if (convertView == null) {
+			LayoutInflater inflater = actividad.getLayoutInflater();
+			convertView = inflater.inflate(R.layout.opcion_menu_lateral, null, true);
+
+			imageView = (ImageView) convertView.findViewById(R.id.imagen_menu_lateral);
+			textView = (TextView) convertView.findViewById(R.id.titulo_menu_lateral);
+			convertView.setTag(new ViewHolder(imageView, textView));
+		} else {
+			ViewHolder viewHolder = (ViewHolder) convertView.getTag();
+			imageView = viewHolder.imageView;
+			textView = viewHolder.textView;
+		}
+
 		DatosItemMenuLateral datosItem = listaItems.get(position);
 		textView.setText(datosItem.getTextoMenu());
 		Resources resources = actividad.getResources();
@@ -56,7 +76,7 @@ public class MenuLateralAdaptador extends BaseAdapter {
 		int identificadorImagen = datosItem.getIdentificadorIcono();
 		Drawable drawable = resources.getDrawable(identificadorImagen);
 		imageView.setImageDrawable(drawable);
-		return view;
+		return convertView;
 	}
 
 }
