@@ -16,6 +16,7 @@ import com.modulos.libreria.dimepoblacioneslibreria.util.UltimaActualizacion;
 import com.modulos.libreria.utilidadeslibreria.util.UtilConexion;
 
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -65,21 +66,25 @@ public class ComprobadorActualizacionNotificaciones {
                     List<NotificacionDTO> lstCompletas = resulNotificacion.getResultados();
                     //List<NotificacionDTO> lstCompletas = cs.getNotificacion(notificacion);
                     if(!lstCompletas.isEmpty()) {
-                        NotificacionDTO notificacionCompleta = lstCompletas.get(0);
+                        Iterator<NotificacionDTO> it = lstCompletas.iterator();
+                        while(it.hasNext()) {
+                            //NotificacionDTO notificacionCompleta = lstCompletas.get(0);
+                            NotificacionDTO notificacionCompleta = it.next();
 
-                        NotificacionDTO notificacionBD = dataSource.getById(notificacion.getId());
-                        if(notificacionBD == null) {
-                            dataSource.insertar(notificacionCompleta);
+                            NotificacionDTO notificacionBD = dataSource.getById(notificacion.getId());
+                            if (notificacionBD == null) {
+                                dataSource.insertar(notificacionCompleta);
 
-                            NotificationFactory notifFact = new NotificationFactory();
-                            android.support.v7.app.NotificationCompat.Builder mBuilder = notifFact.crearNotificationBuilder(contexto, notificacionCompleta, classNotificacion);
+                                NotificationFactory notifFact = new NotificationFactory();
+                                android.support.v7.app.NotificationCompat.Builder mBuilder = notifFact.crearNotificationBuilder(contexto, notificacionCompleta, classNotificacion);
 
-                            NotificationManager mNotificationManager =
-                                    (NotificationManager) contexto.getSystemService(Context.NOTIFICATION_SERVICE);
-                            Notification notification = mBuilder.build();
-                            mNotificationManager.notify((int) notificacionCompleta.getId(), notification);
-                        } else {
-                            dataSource.actualizar(notificacionCompleta);
+                                NotificationManager mNotificationManager =
+                                        (NotificationManager) contexto.getSystemService(Context.NOTIFICATION_SERVICE);
+                                Notification notification = mBuilder.build();
+                                mNotificationManager.notify((int) notificacionCompleta.getId(), notification);
+                            } else {
+                                dataSource.actualizar(notificacionCompleta);
+                            }
                         }
                     }
                 }
